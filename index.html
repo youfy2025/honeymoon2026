@@ -5,25 +5,74 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<title>스페인·포르투갈 신혼여행</title>
+<title>Our Honeymoon · 스페인·포르투갈</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { margin: 0; padding: 0; }
   body {
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #faf8f5;
-    color: #2a2520;
-    line-height: 1.5;
+    background: #fdfaf6;
+    color: #3a2a28;
+    line-height: 1.55;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
   }
-  .serif { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
+  .serif { font-family: 'Fraunces', 'Cormorant Garamond', serif; font-optical-sizing: auto; }
+  .display { font-family: 'Cormorant Garamond', serif; }
   #root { min-height: 100vh; padding-bottom: 80px; }
   ::-webkit-scrollbar { display: none; }
+
+  /* 부드러운 등장 애니메이션 */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.5s ease-out both; }
+
+  /* 헤더 장식 점 패턴 */
+  @keyframes shimmer {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+  }
+  .shimmer { animation: shimmer 3s ease-in-out infinite; }
+
+  .map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: linear-gradient(135deg, #f5e8d8 0%, #ead5c0 100%);
+    color: #6b3838;
+    padding: 3px 9px;
+    border-radius: 12px;
+    font-size: 10.5px;
+    font-weight: 600;
+    text-decoration: none;
+    font-family: inherit;
+    transition: all 0.15s;
+    border: 1px solid rgba(107, 56, 56, 0.1);
+  }
+  .map-btn:active {
+    background: linear-gradient(135deg, #ead5c0 0%, #d4bba0 100%);
+    transform: scale(0.96);
+  }
+
+  /* 카드 곡선 장식 */
+  .card-decoration::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    background-image: radial-gradient(circle, rgba(155, 42, 56, 0.08) 1px, transparent 1px);
+    background-size: 4px 4px;
+    border-radius: 50%;
+    pointer-events: none;
+  }
 </style>
 </head>
 <body>
@@ -34,188 +83,218 @@
 <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <script type="text/babel" data-presets="react" data-type="module">
-const { useState, useEffect, useRef } = React;
+const { useState, useEffect } = React;
+
+const mapUrl = (query) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 
 const TRIP = {
-  title: "스페인 · 포르투갈",
-  subtitle: "신혼여행",
-  dates: "2026. 5. 15 ~ 6. 1",
-  duration: "16박 17일"
+  title: "Our Honeymoon",
+  subtitle: "España · Portugal",
+  korean: "스페인 · 포르투갈 신혼여행",
+  dates: "2026. 5. 15 — 6. 1",
+  duration: "16박 17일",
+  startDate: new Date('2026-05-15')
 };
 
 const SCHEDULE = [
   { date: "5/15", day: "금", city: "서울→기내", emoji: "✈️", main: "인천공항 출발", time: "23:55", transport: "비행기", stay: "기내",
-    details: ["여권·항공권 챙기기", "보조배터리 기내반입", "압박스타킹 착용", "기내용 가방: 목베개·귀마개·안대"] },
+    details: [
+      { text: "여권·항공권 챙기기" },
+      { text: "보조배터리 기내반입" },
+      { text: "압박스타킹 착용" },
+      { text: "기내용 가방: 목베개·귀마개·안대" },
+      { text: "인천공항 제2터미널", map: "인천국제공항 제2터미널" }
+    ] },
   { date: "5/16", day: "토", city: "바르셀로나", emoji: "🛬", main: "도착·박물관의밤·분수쇼", time: "13:25 도착", transport: "아에로버스 A1/A2", stay: "바르셀로나 1박",
     details: [
-      "13:25 공항 도착 (T1/T2 확인)",
-      "14:55 아에로버스 → Pl. Universitat",
-      "15:30 Hotel Cram 체크인 (도보 7분)",
-      "17:00 호텔 근처 저녁 (Eixample 타파스)",
-      "18:30 메트로로 Pl. Espanya",
-      "19:00 Fundació Joan Miró (박물관의밤·무료)",
-      "20:00 MNAC 계단 일몰+분수쇼 ⭐",
-      "20:55 일몰 / 21:00 분수쇼"
+      { text: "13:25 바르셀로나 공항 도착", map: "Barcelona El Prat Airport" },
+      { text: "14:55 아에로버스 → Pl. Universitat", map: "Plaça de la Universitat Barcelona" },
+      { text: "15:30 Hotel Cram 체크인", map: "Hotel Cram Barcelona Aribau 54" },
+      { text: "17:00 Eixample 타파스 저녁" },
+      { text: "19:00 Fundació Joan Miró (박물관의밤·무료)", map: "Fundació Joan Miró Barcelona" },
+      { text: "20:00 MNAC 계단 일몰+분수쇼 ⭐", map: "Museu Nacional d'Art de Catalunya" },
+      { text: "21:00 몬주익 매직 분수쇼", map: "Magic Fountain Montjuic" }
     ] },
   { date: "5/17", day: "일", city: "바르셀로나", emoji: "⛰️", main: "몬세라트 + 지로나 투어", time: "7:40-18:40", transport: "투어 차량", stay: "바르셀로나 2박",
     details: [
-      "투어업체: 투어펠리스 (마이리얼트립)",
-      "🗺️ 모이는 곳: 호텔 마제스틱(Majestic) 옆 샤넬(CHANEL) 매장 앞",
-      "준비물: 개인유선이어폰, 쿠키간식, 14유로",
-      "몬세라트 수도원·푸니쿨라",
-      "지로나 구시가지·돌길",
-      "코디: 블루가디건+화이트레이스롱스커트"
+      { text: "투어업체: 투어펠리스 (마이리얼트립)" },
+      { text: "🗺️ 모이는 곳: 호텔 마제스틱 옆 샤넬", map: "Hotel Majestic Barcelona Passeig de Gracia 68" },
+      { text: "준비물: 이어폰·쿠키간식·14유로" },
+      { text: "몬세라트 수도원", map: "Montserrat Monastery" },
+      { text: "지로나 구시가지", map: "Girona Old Town Spain" },
+      { text: "코디: 블루가디건+화이트레이스롱스커트" }
     ] },
   { date: "5/18", day: "월", city: "바르셀로나", emoji: "🏛️", main: "가우디 전일 투어", time: "7:50-16:10", transport: "버스/기차", stay: "바르셀로나 3박",
     details: [
-      "투어업체: 투어펠리스",
-      "🗺️ 모이는 곳: 카사 밀라 건너편 몽클레어(Moncler) 매장 앞",
-      "준비물: 개인유선이어폰, 쿠키간식",
-      "사그라다 파밀리아 + 바뜨요 + 구엘공원 + 사그라다성당",
-      "성당 입장: 어깨 가리기"
+      { text: "투어업체: 투어펠리스" },
+      { text: "🗺️ 모이는 곳: 카사 밀라 건너편 몽클레어", map: "Casa Mila La Pedrera Barcelona" },
+      { text: "준비물: 이어폰·쿠키간식" },
+      { text: "사그라다 파밀리아 (오픈전 소수관람)", map: "Sagrada Familia Barcelona" },
+      { text: "카사 바트요", map: "Casa Batlló Barcelona" },
+      { text: "구엘공원", map: "Park Güell Barcelona" },
+      { text: "성당 입장: 어깨 가리기" }
     ] },
   { date: "5/19", day: "화", city: "바르셀로나", emoji: "🚶", main: "바르셀로나 시내", time: "자유일정", transport: "도보·메트로", stay: "바르셀로나 4박",
-    details: ["고딕지구·람블라스 거리", "피카소 미술관 (예약 추천)", "보케리아 시장", "벙커 델 카르멜 (낮 방문 권장, 19:30 폐장)", "바르셀로네타 해변"] },
+    details: [
+      { text: "고딕지구·람블라스 거리", map: "Las Ramblas Barcelona" },
+      { text: "피카소 미술관 (예약 추천)", map: "Picasso Museum Barcelona" },
+      { text: "보케리아 시장", map: "La Boqueria Market Barcelona" },
+      { text: "벙커 델 카르멜 (낮 방문, 19:30 폐장)", map: "Bunkers del Carmel Barcelona" },
+      { text: "바르셀로네타 해변", map: "Barceloneta Beach" }
+    ] },
   { date: "5/20", day: "수", city: "바르셀로나→그라나다", emoji: "✈️", main: "그라나다 이동·시내", time: "7:00-8:40", transport: "Vueling YPC4QK", stay: "그라나다 1박 (에어비앤비)",
     details: [
-      "✈️ Vueling 항공 7:00-8:40 (BCN→GRX)",
-      "예약코드: YPC4QK",
-      "아에로버스 잔여 QR 사용",
-      "에어비앤비 체크인: 17:00-21:00",
-      "주소: Calle Huete 3, Granada",
-      "타파스 거리"
+      { text: "✈️ Vueling 7:00-8:40 (BCN→GRX, YPC4QK)" },
+      { text: "그라나다 공항 도착", map: "Granada Airport GRX" },
+      { text: "에어비앤비 체크인 17:00~21:00", map: "Calle Huete 3 Granada" },
+      { text: "그라나다 타파스 거리" }
     ] },
   { date: "5/21", day: "목", city: "그라나다", emoji: "🏰", main: "알람브라 가이드 투어", time: "8:15-13:15", transport: "도보", stay: "그라나다 2박",
     details: [
-      "투어업체: 오우영 공인가이드 (마이리얼트립)",
-      "🗺️ 모이는 곳: 알람브라 매표소 앞",
-      "준비물: 티켓PDF 출력본, 개인유선이어폰, 여권원본",
-      "20유로",
-      "나사리궁전·알카사바·헤네랄리페·까를궁전"
+      { text: "투어업체: 오우영 공인가이드" },
+      { text: "🗺️ 모이는 곳: 알람브라 매표소 앞", map: "Alhambra Ticket Office Granada" },
+      { text: "준비물: 티켓PDF, 이어폰, 여권원본, 20€" },
+      { text: "나사리궁전", map: "Nasrid Palaces Alhambra" },
+      { text: "알카사바·헤네랄리페", map: "Generalife Alhambra" }
     ] },
   { date: "5/22", day: "금", city: "그라나다", emoji: "🌅", main: "시내 + 알바이신 선셋 스냅", time: "낮 자유 / 19:30 스냅", transport: "도보", stay: "그라나다 3박",
+    highlight: true,
     details: [
-      "낮: 그라나다 시내 자유관광",
-      "📸 19:30-21:00 알바이신 선셋 스냅 ⭐",
-      "스냅업체: 비노마드스튜디오",
-      "🗺️ 모이는 곳: 호텔 그라나다 센터",
-      "준비물: 120유로",
-      "코디: 화이트 퍼프 롱드레스",
-      "헤어소품·메이크업 준비"
+      { text: "낮: 그라나다 시내 자유관광" },
+      { text: "그라나다 대성당", map: "Granada Cathedral" },
+      { text: "📸 19:30-21:00 알바이신 선셋 스냅 ⭐" },
+      { text: "스냅: 비노마드스튜디오 (120€)" },
+      { text: "🗺️ 모이는 곳: 호텔 그라나다 센터", map: "Hotel Granada Center Spain" },
+      { text: "촬영지: 미라도르 산 니콜라스", map: "Mirador San Nicolas Granada" },
+      { text: "코디: 화이트 퍼프 롱드레스" }
     ] },
-  { date: "5/23", day: "토", city: "그라나다→세비야", emoji: "🚌", main: "론다+프리힐리아나+네르하", time: "8:30-18:30", transport: "버스 (11.5h)", stay: "세비야 1박 (Only YOU Hotel)",
+  { date: "5/23", day: "토", city: "그라나다→세비야", emoji: "🚌", main: "론다+프리힐리아나+네르하", time: "8:30-18:30", transport: "버스 (11.5h)", stay: "세비야 1박 (Only YOU)",
     details: [
-      "투어업체: ESCOTRIP",
-      "🗺️ 모이는 곳: 그라나다 PLAZA DEL CAMPILLO 18009, FUENTE DE LAS BATALLAS 분수대 앞",
-      "준비물: 개인유선이어폰, 쿠키간식",
-      "⚠️ 11.5시간 장거리 버스",
-      "멀미약·간식·물 챙기기",
-      "론다 누에보 다리 / 프리힐리아나 / 네르하",
-      "20시 세비야 도착 (Only YOU Hotel 체크인)"
+      { text: "투어업체: ESCOTRIP" },
+      { text: "🗺️ 모이는 곳: PLAZA DEL CAMPILLO 분수대", map: "Plaza del Campillo Granada" },
+      { text: "준비물: 이어폰·쿠키간식" },
+      { text: "⚠️ 멀미약·간식·물 챙기기" },
+      { text: "론다 누에보 다리", map: "Puente Nuevo Ronda" },
+      { text: "프리힐리아나 화이트빌리지", map: "Frigiliana Spain" },
+      { text: "네르하 발코니 데 에우로파", map: "Balcón de Europa Nerja" },
+      { text: "20시 세비야 도착", map: "Only YOU Hotel Sevilla" }
     ] },
   { date: "5/24", day: "일", city: "세비야", emoji: "🕌", main: "스페인광장·대성당·야경", time: "8:30-23:00", transport: "도보", stay: "세비야 2박",
     details: [
-      "📍 시내투어 8:30-13:00",
-      "투어: 김호영&최경은공인가이드",
-      "🗺️ 모이는 곳: 스페인 광장, 중앙분수",
-      "스페인광장·세비야 대학교·대성당 (26유로)",
-      "📍 알카사르 오디오 가이드 15:00-17:00",
-      "투어업체: 투어라이브 (70,032원)",
-      "📍 야경투어 20:00-23:00",
-      "투어: 팔로우미투어, 산타크루즈 지구"
+      { text: "📍 시내투어 8:30-13:00 (김호영&최경은, 26€)" },
+      { text: "🗺️ 모이는 곳: 스페인 광장 중앙분수", map: "Plaza de España Sevilla" },
+      { text: "세비야 대학교", map: "Universidad de Sevilla" },
+      { text: "세비야 대성당", map: "Seville Cathedral" },
+      { text: "📍 알카사르 15:00-17:00 (오디오, 70,032원)", map: "Real Alcázar Sevilla" },
+      { text: "📍 야경투어 20:00-23:00 (팔로우미투어)" },
+      { text: "🗺️ 모이는 곳: 메트로폴 파라솔 앞 분수대", map: "Metropol Parasol Sevilla" },
+      { text: "산타크루즈 지구", map: "Barrio Santa Cruz Sevilla" }
     ] },
   { date: "5/25", day: "월", city: "세비야", emoji: "📸", main: "스냅 촬영 + 플라멩고", time: "8:00 스냅 / 19:00 공연", transport: "도보", stay: "세비야 3박",
+    highlight: true,
     details: [
-      "📸 8:00-9:00 세비야 스냅 촬영 ⭐",
-      "스냅업체: 노미준 스냅",
-      "🗺️ 촬영 안내 (미팅장소·시간 등 하루전)",
-      "준비물: 210유로",
-      "코디: 화이트셔츠+롱스커트 OR 와인+화이트",
-      "🎭 19:00-20:00 플라멩고 공연",
-      "박물관(Museo del Baile Flamenco)",
-      "준비물: 술마실 돈"
+      { text: "📸 8:00-9:00 세비야 스냅 ⭐ (노미준, 210€)" },
+      { text: "🗺️ 촬영 안내 (하루전 별도 안내)" },
+      { text: "코디: 화이트셔츠+롱스커트 OR 와인+화이트" },
+      { text: "메트로폴 파라솔 (전망)", map: "Metropol Parasol Sevilla" },
+      { text: "🎭 19:00-20:00 플라멩고 공연", map: "Museo del Baile Flamenco Sevilla" },
+      { text: "준비물: 술마실 돈" }
     ] },
   { date: "5/26", day: "화", city: "세비야", emoji: "🌳", main: "스페인광장·트리아나 지구", time: "자유일정", transport: "도보", stay: "세비야 4박",
-    details: ["스페인광장 재방문 (사진)", "트리아나 지구·도자기 마을", "과달키비르 강변 산책", "타파스 투어"] },
+    details: [
+      { text: "스페인광장 재방문", map: "Plaza de España Sevilla" },
+      { text: "트리아나 지구", map: "Triana Sevilla" },
+      { text: "트리아나 도자기 마을", map: "Centro Cerámica Triana" },
+      { text: "과달키비르 강변 산책", map: "Guadalquivir River Sevilla" },
+      { text: "타파스 투어" }
+    ] },
   { date: "5/27", day: "수", city: "세비야→포르투", emoji: "✈️", main: "포르투 이동·시내", time: "16:20-16:35", transport: "Ryanair FR5466", stay: "포르투 1박 (에어비앤비)",
     details: [
-      "오전 세비야 브런치",
-      "✈️ Ryanair FR5466 16:20-16:35 (1h 15m)",
-      "체크인 오픈: 5/26 16:20 (24시간 전)",
-      "액체류 위탁수하물 (100ml 규정)",
-      "에어비앤비 셀프체크인: 16:00~",
-      "주소: Rua da Vitória 152, Porto",
-      "도우루 강변 산책"
+      { text: "오전 세비야 브런치" },
+      { text: "✈️ Ryanair FR5466 16:20-16:35" },
+      { text: "체크인 오픈: 5/26 16:20 (24h 전)" },
+      { text: "세비야 공항", map: "Seville Airport SVQ" },
+      { text: "포르투 공항 도착", map: "Porto Airport OPO" },
+      { text: "에어비앤비 셀프체크인 16:00~", map: "Rua da Vitória 152 Porto" },
+      { text: "도우루 강변 산책", map: "Douro River Porto" }
     ] },
   { date: "5/28", day: "목", city: "포르투", emoji: "🚶", main: "포르투 시내투어", time: "13:30-21:00", transport: "도보 (7.5h)", stay: "포르투 2박",
     details: [
-      "투어업체: 나자르투어",
-      "🗺️ 모이는 곳: Torre dos Clérigos",
-      "준비물: 28유로",
-      "⚠️ 도보 많음 - 운동화",
-      "히베이라 지구·동 루이스 1세 다리",
-      "렐루 서점·포트와인 셀러"
+      { text: "투어업체: 나자르투어 (28€)" },
+      { text: "🗺️ 모이는 곳: Torre dos Clérigos", map: "Torre dos Clérigos Porto" },
+      { text: "⚠️ 도보 많음 - 운동화" },
+      { text: "히베이라 지구", map: "Ribeira Porto" },
+      { text: "동 루이스 1세 다리", map: "Dom Luís I Bridge Porto" },
+      { text: "렐루 서점", map: "Livraria Lello Porto" },
+      { text: "포트와인 셀러", map: "Vila Nova de Gaia Wine Cellars" }
     ] },
   { date: "5/29", day: "금", city: "포르투→리스본", emoji: "🚌", main: "포르투→리스본 이동투어", time: "8:30-19:30", transport: "버스", stay: "리스본 1박",
     details: [
-      "투어업체: 나자르투어 (이동투어)",
-      "🗺️ 모이는 곳: 바탈랴 광장(Batalha Squre), Herculano Stays Porto 호텔 앞 버스정류장",
-      "준비물: 개인유선이어폰, 쿠키간식",
-      "코임브라·아베이루·코스타노바",
-      "리스본 도착 (호텔 R. Castilho 149)",
-      "체크인: 15:00~"
+      { text: "투어업체: 나자르투어 (이동투어)" },
+      { text: "🗺️ 모이는 곳: 바탈랴 광장", map: "Praça da Batalha Porto" },
+      { text: "준비물: 이어폰·쿠키간식" },
+      { text: "코임브라", map: "Coimbra Portugal" },
+      { text: "아베이루", map: "Aveiro Portugal" },
+      { text: "코스타노바", map: "Costa Nova Portugal" },
+      { text: "리스본 도착 (15:00~ 체크인)", map: "R. Castilho 149 Lisboa" }
     ] },
   { date: "5/30", day: "토", city: "리스본", emoji: "🌊", main: "호카곶·나자레·오비두스·신트라", time: "7:40-18:40", transport: "투어 버스", stay: "리스본 2박",
     details: [
-      "투어업체: 투어펠리스 (근교투어)",
-      "🗺️ 모이는 곳: Restauradores 헤스타우라도레스 광장의 망고 매장 앞",
-      "준비물: 78유로",
-      "⭐ 호카곶 (유럽 대륙 최서단)",
-      "⚠️ 대서양 바람 강함 - 바람막이 필수",
-      "나자레·오비두스·신트라 페나 궁전"
+      { text: "투어업체: 투어펠리스 근교투어 (78€)" },
+      { text: "🗺️ 모이는 곳: Restauradores 광장 망고 매장", map: "Praça dos Restauradores Lisboa" },
+      { text: "⭐ 호카곶 (유럽 대륙 최서단)", map: "Cabo da Roca Portugal" },
+      { text: "⚠️ 대서양 바람 강함 - 바람막이 필수" },
+      { text: "나자레", map: "Nazaré Portugal" },
+      { text: "오비두스", map: "Óbidos Portugal" },
+      { text: "신트라 페나 궁전", map: "Pena Palace Sintra" }
     ] },
   { date: "5/31", day: "일", city: "리스본", emoji: "🚶", main: "리스본 시내투어", time: "14:30-21:20", transport: "도보", stay: "리스본 3박",
     details: [
-      "투어업체: 투어펠리스 (시내투어)",
-      "🗺️ 모이는 곳: 페드로 4세 광장(=호시우 광장) 페드로 4세 동상 아래",
-      "준비물: 4유로",
-      "벨렘 지구·제로니무스 수도원",
-      "에그타르트 (파스테이스 드 벨렘)"
+      { text: "투어업체: 투어펠리스 (4€)" },
+      { text: "🗺️ 모이는 곳: 페드로 4세 광장 (호시우 광장)", map: "Praça do Rossio Lisboa" },
+      { text: "벨렘 지구", map: "Belém Lisboa" },
+      { text: "제로니무스 수도원", map: "Jerónimos Monastery Lisbon" },
+      { text: "에그타르트", map: "Pastéis de Belém Lisboa" }
     ] },
   { date: "6/1", day: "월", city: "리스본→서울", emoji: "✈️", main: "리스본 출발 → 서울", time: "출발 (6/2 17:00 도착)", transport: "비행기", stay: "기내→집",
-    details: ["오전 호텔 체크아웃·짐 정리", "공항 도착 (3시간 전)", "면세 쇼핑·기내식", "6/2 17:00 인천 도착 🤍"] }
+    details: [
+      { text: "오전 호텔 체크아웃·짐 정리" },
+      { text: "리스본 공항 (3시간 전 도착)", map: "Lisbon Airport LIS" },
+      { text: "면세 쇼핑·기내식" },
+      { text: "6/2 17:00 인천 도착 🤍" }
+    ] }
 ];
 
 const FLIGHTS = [
-  { date: "5/15", from: "인천 (ICN)", to: "바르셀로나", time: "23:55 출발", airline: "—", code: "—", note: "장거리 비행" },
-  { date: "5/20", from: "바르셀로나 (BCN)", to: "그라나다 (GRX)", time: "7:00-8:40 (1h 40m)", airline: "Vueling", code: "YPC4QK", note: "VY2010 / 이메일: suho1991@naver.com" },
-  { date: "5/27", from: "세비야 (SVQ)", to: "포르투 (OPO)", time: "16:20-16:35 (1h 15m)", airline: "Ryanair", code: "FR5466", note: "체크인 오픈: 5/26 16:20" },
-  { date: "5/31", from: "리스본 (LIS)", to: "인천 (ICN)", time: "14:30 출발 → 6/2 17:00 도착", airline: "—", code: "—", note: "장거리 비행" }
+  { date: "5/15", from: "인천 (ICN)", to: "바르셀로나", time: "23:55 출발", airline: "—", code: "—", note: "장거리 비행", map: "인천국제공항 제2터미널" },
+  { date: "5/20", from: "바르셀로나 (BCN)", to: "그라나다 (GRX)", time: "7:00-8:40 (1h 40m)", airline: "Vueling", code: "YPC4QK", note: "VY2010", map: "Barcelona El Prat Airport" },
+  { date: "5/27", from: "세비야 (SVQ)", to: "포르투 (OPO)", time: "16:20-16:35 (1h 15m)", airline: "Ryanair", code: "FR5466", note: "체크인 오픈: 5/26 16:20", map: "Seville Airport SVQ" },
+  { date: "5/31", from: "리스본 (LIS)", to: "인천 (ICN)", time: "14:30 출발 → 6/2 17:00 도착", airline: "—", code: "—", note: "장거리 비행", map: "Lisbon Airport LIS" }
 ];
 
 const RESERVATIONS = [
-  { type: "투어", date: "5/17", title: "몬세라트 + 지로나", time: "7:40-18:40", company: "투어펠리스", meet: "호텔 마제스틱 옆 샤넬 매장 앞", item: "이어폰, 간식, 14€" },
-  { type: "투어", date: "5/18", title: "가우디 전일 (가우디투어)", time: "7:50-16:10", company: "투어펠리스", meet: "카사 밀라 건너편 몽클레어 매장 앞", item: "이어폰, 간식" },
-  { type: "투어", date: "5/21", title: "알람브라 가이드", time: "8:15-13:15", company: "오우영 공인가이드", meet: "알람브라 매표소 앞", item: "티켓PDF, 이어폰, 여권원본, 20€" },
-  { type: "스냅", date: "5/22", title: "알바이신 선셋 스냅", time: "19:30-21:00", company: "비노마드스튜디오", meet: "호텔 그라나다 센터", item: "120€", highlight: true },
-  { type: "투어", date: "5/23", title: "론다+프리힐리아나+네르하", time: "8:30-18:30", company: "ESCOTRIP", meet: "그라나다 PLAZA DEL CAMPILLO, FUENTE DE LAS BATALLAS 분수대 앞", item: "이어폰, 간식" },
-  { type: "투어", date: "5/24", title: "세비야 시내투어", time: "8:30-13:00", company: "김호영&최경은", meet: "스페인 광장, 중앙분수", item: "이어폰, 간식, 26€" },
-  { type: "투어", date: "5/24", title: "알카사르 (오디오)", time: "15:00-17:00", company: "투어라이브", meet: "알카사르 입장권", item: "이어폰, 70,032원" },
-  { type: "투어", date: "5/24", title: "야경 시티투어 (산타크루즈)", time: "20:00-23:00", company: "팔로우미투어", meet: "메트로폴 파라솔 앞 분수대", item: "이어폰" },
-  { type: "스냅", date: "5/25", title: "세비야 스냅 촬영", time: "8:00-9:00", company: "노미준", meet: "촬영 하루 전 안내", item: "210€", highlight: true },
-  { type: "공연", date: "5/25", title: "플라멩고 공연", time: "19:00-20:00", company: "Museo del Baile Flamenco", meet: "플라멩고박물관", item: "술마실 돈" },
-  { type: "투어", date: "5/28", title: "포르투 시내투어 (렐루서점 등)", time: "13:30-21:00", company: "나자르투어", meet: "Torre dos Clérigos", item: "28€" },
-  { type: "투어", date: "5/29", title: "포르투→리스본 이동투어 (코임브라/아베이루/코스타노바)", time: "8:30-19:30", company: "나자르투어", meet: "바탈랴 광장, Herculano Stays Porto 호텔 앞 버스정류장", item: "이어폰, 간식" },
-  { type: "투어", date: "5/30", title: "호카곶·나자레·오비두스·신트라 (근교)", time: "7:40-18:40", company: "투어펠리스", meet: "Restauradores 광장 망고 매장 앞", item: "78€" },
-  { type: "투어", date: "5/31", title: "리스본 시내투어", time: "14:30-21:20", company: "투어펠리스", meet: "페드로 4세 광장 (호시우 광장) 동상 아래", item: "4€" }
+  { type: "투어", date: "5/17", title: "몬세라트 + 지로나", time: "7:40-18:40", company: "투어펠리스", meet: "호텔 마제스틱 옆 샤넬 매장 앞", item: "이어폰, 간식, 14€", map: "Hotel Majestic Barcelona Passeig de Gracia 68" },
+  { type: "투어", date: "5/18", title: "가우디 전일", time: "7:50-16:10", company: "투어펠리스", meet: "카사 밀라 건너편 몽클레어", item: "이어폰, 간식", map: "Casa Mila La Pedrera Barcelona" },
+  { type: "투어", date: "5/21", title: "알람브라 가이드", time: "8:15-13:15", company: "오우영 공인가이드", meet: "알람브라 매표소 앞", item: "티켓PDF, 이어폰, 여권원본, 20€", map: "Alhambra Ticket Office Granada" },
+  { type: "스냅", date: "5/22", title: "알바이신 선셋 스냅", time: "19:30-21:00", company: "비노마드스튜디오", meet: "호텔 그라나다 센터", item: "120€", highlight: true, map: "Hotel Granada Center Spain" },
+  { type: "투어", date: "5/23", title: "론다+프리힐리아나+네르하", time: "8:30-18:30", company: "ESCOTRIP", meet: "PLAZA DEL CAMPILLO 분수대 앞", item: "이어폰, 간식", map: "Plaza del Campillo Granada" },
+  { type: "투어", date: "5/24", title: "세비야 시내투어", time: "8:30-13:00", company: "김호영&최경은", meet: "스페인 광장 중앙분수", item: "이어폰, 간식, 26€", map: "Plaza de España Sevilla" },
+  { type: "투어", date: "5/24", title: "알카사르 (오디오)", time: "15:00-17:00", company: "투어라이브", meet: "알카사르 입장권", item: "이어폰, 70,032원", map: "Real Alcázar Sevilla" },
+  { type: "투어", date: "5/24", title: "야경 시티투어 (산타크루즈)", time: "20:00-23:00", company: "팔로우미투어", meet: "메트로폴 파라솔 앞 분수대", item: "이어폰", map: "Metropol Parasol Sevilla" },
+  { type: "스냅", date: "5/25", title: "세비야 스냅", time: "8:00-9:00", company: "노미준", meet: "촬영 하루 전 안내", item: "210€", highlight: true },
+  { type: "공연", date: "5/25", title: "플라멩고 공연", time: "19:00-20:00", company: "Museo del Baile Flamenco", meet: "플라멩고박물관", item: "술마실 돈", map: "Museo del Baile Flamenco Sevilla" },
+  { type: "투어", date: "5/28", title: "포르투 시내투어", time: "13:30-21:00", company: "나자르투어", meet: "Torre dos Clérigos", item: "28€", map: "Torre dos Clérigos Porto" },
+  { type: "투어", date: "5/29", title: "포르투→리스본 이동투어", time: "8:30-19:30", company: "나자르투어", meet: "바탈랴 광장", item: "이어폰, 간식", map: "Praça da Batalha Porto" },
+  { type: "투어", date: "5/30", title: "호카곶·나자레·오비두스·신트라", time: "7:40-18:40", company: "투어펠리스", meet: "Restauradores 광장 망고 매장", item: "78€", map: "Praça dos Restauradores Lisboa" },
+  { type: "투어", date: "5/31", title: "리스본 시내투어", time: "14:30-21:20", company: "투어펠리스", meet: "페드로 4세 광장 (호시우 광장)", item: "4€", map: "Praça do Rossio Lisboa" }
 ];
 
 const HOTELS = [
-  { date: "5/16~5/20", city: "바르셀로나", type: "호텔", name: "Hotel Cram", ref: "16102397168", checkin: "오후 3:00", address: "Carrer d'Aribau 54, Eixample, 08011 Barcelona" },
-  { date: "5/20~5/23", city: "그라나다", type: "에어비앤비", name: "에어비앤비", ref: "-", checkin: "오후 5:00 - 오후 9:00", address: "Calle Huete 3, Granada, Andalucía 18009" },
-  { date: "5/23~5/27", city: "세비야", type: "호텔", name: "Only YOU Hotel Sevilla", ref: "17373661972", checkin: "오후 14:00", address: "Av. de Kansas City 7, 41018 Sevilla", note: "조식 포함" },
-  { date: "5/27~5/29", city: "포르투", type: "에어비앤비", name: "에어비앤비", ref: "-", checkin: "오후 4:00 (셀프체크인)", address: "Rua da Vitória 152, Porto 4050-139" },
-  { date: "5/29~6/1", city: "리스본", type: "호텔", name: "리스본 호텔", ref: "1726487752", checkin: "오후 3:00", address: "R. Castilho 149, 1070-050 Lisboa", note: "조식 포함" }
+  { date: "5/16~5/20", city: "바르셀로나", type: "호텔", name: "Hotel Cram", ref: "16102397168", checkin: "오후 3:00", address: "Carrer d'Aribau 54, Eixample, 08011 Barcelona", map: "Hotel Cram Barcelona Aribau 54" },
+  { date: "5/20~5/23", city: "그라나다", type: "에어비앤비", name: "에어비앤비", ref: "-", checkin: "오후 5:00 - 오후 9:00", address: "Calle Huete 3, Granada, Andalucía 18009", map: "Calle Huete 3 Granada" },
+  { date: "5/23~5/27", city: "세비야", type: "호텔", name: "Only YOU Hotel Sevilla", ref: "17373661972", checkin: "오후 14:00", address: "Av. de Kansas City 7, 41018 Sevilla", note: "조식 포함", map: "Only YOU Hotel Sevilla" },
+  { date: "5/27~5/29", city: "포르투", type: "에어비앤비", name: "에어비앤비", ref: "-", checkin: "오후 4:00 (셀프체크인)", address: "Rua da Vitória 152, Porto 4050-139", map: "Rua da Vitória 152 Porto" },
+  { date: "5/29~6/1", city: "리스본", type: "호텔", name: "리스본 호텔", ref: "1726487752", checkin: "오후 3:00", address: "R. Castilho 149, 1070-050 Lisboa", note: "조식 포함", map: "R. Castilho 149 Lisboa" }
 ];
 
 const OUTFITS = [
@@ -223,11 +302,11 @@ const OUTFITS = [
   { num: 2, date: "5/17", day: "일", desc: "블루가디건 + 화이트레이스롱스커트", note: "몬세라트·지로나 ⭐", topColor: "#1e3a8a", bottomColor: "#fafafa" },
   { num: 3, date: "5/18", day: "월", desc: "오프숄더 + 청바지 (+가디건)", note: "가우디 (성당입장 주의)", topColor: "#fff", bottomColor: "#4a6b9a" },
   { num: 4, date: "5/19", day: "화", desc: "화이트니트가디건 + 검정스커트", note: "시내", topColor: "#fafafa", bottomColor: "#1a1a1a" },
-  { num: 5, date: "5/20", day: "수", desc: "줄무늬T + 검정가디건 + 플리츠팬츠", note: "이동일 (편함 우선)", topColor: "#e8e4dc", bottomColor: "#1a1a1a" },
+  { num: 5, date: "5/20", day: "수", desc: "줄무늬T + 검정가디건 + 플리츠팬츠", note: "이동일", topColor: "#e8e4dc", bottomColor: "#1a1a1a" },
   { num: 6, date: "5/21", day: "목", desc: "블루셔츠 + 아이보리 롱원피스", note: "알람브라 ⭐", topColor: "#7ba4d4", bottomColor: "#f5ecd9" },
   { num: 7, date: "5/22 낮", day: "금", desc: "아이보리블라우스 + 데님숏팬츠", note: "그라나다 시내", topColor: "#f5ecd9", bottomColor: "#2a3f5f" },
   { num: 8, date: "5/22 밤", day: "금", desc: "화이트 퍼프 롱드레스", note: "📸 알바이신 스냅 ⭐⭐", topColor: "#fafafa", bottomColor: "#fafafa", highlight: true },
-  { num: 9, date: "5/23", day: "토", desc: "베이지 니트탑 + 화이트 버뮤다", note: "11.5h 버스 (편함)", topColor: "#c9b896", bottomColor: "#fafafa" },
+  { num: 9, date: "5/23", day: "토", desc: "베이지 니트탑 + 화이트 버뮤다", note: "11.5h 버스", topColor: "#c9b896", bottomColor: "#fafafa" },
   { num: 10, date: "5/24", day: "일", desc: "아이보리 셔츠 + 롱스커트 세트", note: "세비야 시내", topColor: "#f5ecd9", bottomColor: "#f5ecd9" },
   { num: 11, date: "5/25 아침", day: "월", desc: "와인반팔니트 + 화이트레이스롱", note: "📸 세비야 스냅 ⭐⭐", topColor: "#7a1f2e", bottomColor: "#fafafa", highlight: true },
   { num: 12, date: "5/25 저녁", day: "월", desc: "화이트반팔가디건 + 네이비롱스커트", note: "플라멩고 공연", topColor: "#fafafa", bottomColor: "#1a2845" },
@@ -236,91 +315,240 @@ const OUTFITS = [
   { num: 15, date: "5/28", day: "목", desc: "검정T + 카고팬츠", note: "포르투 도보 7.5h", topColor: "#1a1a1a", bottomColor: "#5a5e5a" },
   { num: 16, date: "5/29", day: "금", desc: "블루가디건 + 화이트나시 + 데님숏", note: "리스본 이동", topColor: "#1e3a8a", bottomColor: "#2a3f5f" },
   { num: 17, date: "5/30", day: "토", desc: "핑크셔츠 + 화이트나시 + 베이지롱", note: "호카곶 + 바람막이 ⭐", topColor: "#f0c6c6", bottomColor: "#c9b896" },
-  { num: 18, date: "5/31", day: "일", desc: "편한 옷 + 바람막이", note: "귀국 (장거리 비행)", topColor: "#d4cfc4", bottomColor: "#3a3a3a" }
+  { num: 18, date: "5/31", day: "일", desc: "편한 옷 + 바람막이", note: "귀국", topColor: "#d4cfc4", bottomColor: "#3a3a3a" }
 ];
 
-const styles = {
-  app: { background: '#faf8f5', minHeight: '100vh' },
-  header: {
-    background: 'linear-gradient(135deg, #1a1f3a 0%, #2d1b2e 100%)',
-    color: '#f5ecd9',
-    padding: '32px 20px 24px',
-    position: 'relative',
-    overflow: 'hidden'
-  },
-  headerOrnament: {
-    position: 'absolute',
-    top: '-20px',
-    right: '-20px',
-    width: '140px',
-    height: '140px',
-    border: '1px solid rgba(245, 236, 217, 0.15)',
-    borderRadius: '50%',
-    pointerEvents: 'none'
-  },
-  tab: {
-    flex: 1,
-    padding: '14px 4px',
-    background: 'none',
-    border: 'none',
-    fontSize: '13px',
-    fontWeight: 600,
-    cursor: 'pointer',
-    transition: 'all 0.2s',
-    fontFamily: 'inherit',
-    color: '#8a7e6c'
-  },
-  tabActive: {
-    color: '#1a1f3a',
-    borderBottom: '2px solid #7a1f2e'
-  }
+// ============ 색상 팔레트 ============
+// 와인 #7a1f2e, 더스티 로즈 #c4847c, 크림 #fdfaf6, 골드 #b58659, 다크 와인 #4a1822
+const COLORS = {
+  wine: '#7a1f2e',
+  darkWine: '#4a1822',
+  rose: '#c4847c',
+  rosePale: '#e8c8c2',
+  cream: '#fdfaf6',
+  creamDeep: '#f5e8d8',
+  gold: '#b58659',
+  ink: '#3a2a28',
+  inkLight: '#8a6b65'
 };
 
+// 카운트다운 계산
+function getDday(startDate) {
+  const now = new Date();
+  const diff = Math.ceil((startDate - now) / (1000 * 60 * 60 * 24));
+  return diff;
+}
+
+// 장식용 SVG 컴포넌트
+function Ornament({ size = 40, color = COLORS.gold, opacity = 0.5 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 40 40" style={{ opacity }}>
+      <path d="M20 4 Q24 12 32 16 Q24 20 20 28 Q16 20 8 16 Q16 12 20 4 Z"
+            fill={color} opacity="0.6" />
+      <circle cx="20" cy="20" r="1.5" fill={color} />
+    </svg>
+  );
+}
+
+function Divider({ color = COLORS.gold }) {
+  return (
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: '12px',
+      margin: '8px 0 16px',
+      opacity: 0.4
+    }}>
+      <div style={{ flex: 1, height: '1px', background: `linear-gradient(to right, transparent, ${color})` }}></div>
+      <Ornament size={14} color={color} opacity={1} />
+      <div style={{ flex: 1, height: '1px', background: `linear-gradient(to left, transparent, ${color})` }}></div>
+    </div>
+  );
+}
+
+function MapButton({ query }) {
+  if (!query) return null;
+  const handleClick = (e) => { e.stopPropagation(); };
+  return (
+    <a
+      href={mapUrl(query)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="map-btn"
+      onClick={handleClick}
+    >
+      🗺️ 지도
+    </a>
+  );
+}
+
 function Header({ tab, setTab }) {
+  const dday = getDday(TRIP.startDate);
   const tabs = [
-    { id: 'schedule', label: '일정' },
-    { id: 'reservations', label: '예약' },
-    { id: 'outfits', label: '코디' }
+    { id: 'schedule', label: 'Schedule', kor: '일정' },
+    { id: 'reservations', label: 'Bookings', kor: '예약' },
+    { id: 'outfits', label: 'Outfits', kor: '코디' }
   ];
 
   return (
     <div>
-      <div style={styles.header}>
-        <div style={styles.headerOrnament}></div>
-        <div style={{ fontSize: '11px', letterSpacing: '4px', opacity: 0.7, marginBottom: '8px' }}>
-          HONEYMOON · 2026
+      {/* 메인 헤더 */}
+      <div style={{
+        background: `linear-gradient(180deg, ${COLORS.darkWine} 0%, ${COLORS.wine} 50%, #8a2838 100%)`,
+        color: COLORS.cream,
+        padding: '40px 24px 32px',
+        position: 'relative',
+        overflow: 'hidden',
+        textAlign: 'center'
+      }}>
+        {/* 배경 장식 점 패턴 */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: `radial-gradient(circle, rgba(245, 232, 216, 0.08) 1px, transparent 1px)`,
+          backgroundSize: '20px 20px',
+          pointerEvents: 'none'
+        }}></div>
+
+        {/* 모서리 장식 */}
+        <div style={{ position: 'absolute', top: 16, left: 16 }}>
+          <Ornament size={20} color={COLORS.creamDeep} opacity={0.4} />
         </div>
-        <div className="serif" style={{ fontSize: '32px', fontWeight: 500, lineHeight: 1.1, marginBottom: '4px' }}>
-          {TRIP.title}
+        <div style={{ position: 'absolute', top: 16, right: 16 }}>
+          <Ornament size={20} color={COLORS.creamDeep} opacity={0.4} />
         </div>
-        <div className="serif" style={{ fontSize: '20px', fontStyle: 'italic', opacity: 0.85, marginBottom: '16px' }}>
-          {TRIP.subtitle}
-        </div>
-        <div style={{ display: 'flex', gap: '12px', fontSize: '12px', opacity: 0.8 }}>
-          <span>{TRIP.dates}</span>
-          <span>·</span>
-          <span>{TRIP.duration}</span>
+
+        <div style={{ position: 'relative' }}>
+          <div style={{
+            fontSize: '10px',
+            letterSpacing: '6px',
+            opacity: 0.7,
+            marginBottom: '12px',
+            fontWeight: 500
+          }}>
+            ⋆ 2026 ⋆
+          </div>
+
+          <div className="display" style={{
+            fontSize: '40px',
+            fontWeight: 400,
+            lineHeight: 1,
+            marginBottom: '4px',
+            fontStyle: 'italic',
+            letterSpacing: '-0.5px'
+          }}>
+            {TRIP.title}
+          </div>
+
+          <div className="serif" style={{
+            fontSize: '14px',
+            opacity: 0.85,
+            marginBottom: '20px',
+            letterSpacing: '4px',
+            fontWeight: 300
+          }}>
+            {TRIP.subtitle}
+          </div>
+
+          <Divider color={COLORS.creamDeep} />
+
+          <div style={{
+            fontSize: '12px',
+            opacity: 0.85,
+            marginBottom: '6px',
+            letterSpacing: '1px'
+          }}>
+            {TRIP.dates}
+          </div>
+          <div style={{
+            fontSize: '11px',
+            opacity: 0.7,
+            letterSpacing: '2px'
+          }}>
+            {TRIP.duration}
+          </div>
+
+          {dday > 0 && (
+            <div style={{
+              marginTop: '18px',
+              display: 'inline-block',
+              padding: '8px 20px',
+              background: 'rgba(253, 250, 246, 0.12)',
+              borderRadius: '50px',
+              border: '1px solid rgba(253, 250, 246, 0.2)',
+              backdropFilter: 'blur(10px)'
+            }}>
+              <span className="serif" style={{ fontSize: '11px', letterSpacing: '2px', opacity: 0.7 }}>D </span>
+              <span className="serif" style={{ fontSize: '18px', fontWeight: 500, fontStyle: 'italic' }}>− {dday}</span>
+            </div>
+          )}
+          {dday === 0 && (
+            <div style={{ marginTop: '18px', fontSize: '14px' }} className="serif">
+              ⋆ Today ⋆
+            </div>
+          )}
+          {dday < 0 && Math.abs(dday) <= 17 && (
+            <div style={{ marginTop: '18px', fontSize: '14px' }} className="serif">
+              Day {Math.abs(dday) + 1}
+            </div>
+          )}
         </div>
       </div>
+
+      {/* 탭 */}
       <div style={{
         display: 'flex',
-        background: '#fff',
-        borderBottom: '1px solid #e8e0d0',
+        background: COLORS.cream,
+        borderBottom: `1px solid ${COLORS.creamDeep}`,
         position: 'sticky',
         top: 0,
         zIndex: 100,
-        boxShadow: '0 1px 8px rgba(0,0,0,0.04)'
+        boxShadow: '0 2px 12px rgba(122, 31, 46, 0.06)'
       }}>
         {tabs.map(t => (
           <button
             key={t.id}
             onClick={() => setTab(t.id)}
             style={{
-              ...styles.tab,
-              ...(tab === t.id ? styles.tabActive : {})
+              flex: 1,
+              padding: '14px 4px 12px',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              fontFamily: 'inherit',
+              position: 'relative',
+              transition: 'all 0.2s'
             }}
           >
-            {t.label}
+            <div className="serif" style={{
+              fontSize: '14px',
+              fontWeight: tab === t.id ? 600 : 400,
+              color: tab === t.id ? COLORS.wine : COLORS.inkLight,
+              fontStyle: 'italic',
+              letterSpacing: '1px'
+            }}>
+              {t.label}
+            </div>
+            <div style={{
+              fontSize: '10px',
+              color: tab === t.id ? COLORS.wine : COLORS.inkLight,
+              opacity: 0.6,
+              marginTop: '2px'
+            }}>
+              {t.kor}
+            </div>
+            {tab === t.id && (
+              <div style={{
+                position: 'absolute',
+                bottom: 0,
+                left: '30%',
+                right: '30%',
+                height: '2px',
+                background: `linear-gradient(to right, transparent, ${COLORS.wine}, transparent)`,
+                borderRadius: '2px'
+              }}></div>
+            )}
           </button>
         ))}
       </div>
@@ -334,9 +562,9 @@ function DateNav({ schedule, onSelect, currentIdx }) {
       display: 'flex',
       gap: '6px',
       overflowX: 'auto',
-      padding: '12px 16px',
-      background: '#fff',
-      borderBottom: '1px solid #e8e0d0',
+      padding: '14px 16px',
+      background: COLORS.cream,
+      borderBottom: `1px solid ${COLORS.creamDeep}`,
       WebkitOverflowScrolling: 'touch'
     }}>
       {schedule.map((day, i) => (
@@ -345,21 +573,22 @@ function DateNav({ schedule, onSelect, currentIdx }) {
           onClick={() => onSelect(i)}
           style={{
             flexShrink: 0,
-            padding: '8px 12px',
-            background: currentIdx === i ? '#1a1f3a' : '#faf8f5',
-            color: currentIdx === i ? '#f5ecd9' : '#2a2520',
-            border: '1px solid ' + (currentIdx === i ? '#1a1f3a' : '#e8e0d0'),
+            padding: '8px 14px',
+            background: currentIdx === i
+              ? `linear-gradient(135deg, ${COLORS.wine} 0%, ${COLORS.darkWine} 100%)`
+              : '#fff',
+            color: currentIdx === i ? COLORS.cream : COLORS.ink,
+            border: currentIdx === i ? 'none' : `1px solid ${COLORS.creamDeep}`,
             borderRadius: '20px',
-            fontSize: '12px',
-            fontWeight: 600,
             cursor: 'pointer',
             fontFamily: 'inherit',
-            minWidth: '60px',
-            transition: 'all 0.2s'
+            minWidth: '62px',
+            transition: 'all 0.2s',
+            boxShadow: currentIdx === i ? '0 4px 12px rgba(122, 31, 46, 0.25)' : 'none'
           }}
         >
-          <div style={{ fontSize: '10px', opacity: 0.6 }}>{day.day}</div>
-          <div>{day.date}</div>
+          <div style={{ fontSize: '9px', opacity: 0.7, letterSpacing: '1px' }}>{day.day}</div>
+          <div className="serif" style={{ fontSize: '14px', fontWeight: 500, fontStyle: 'italic' }}>{day.date}</div>
         </button>
       ))}
     </div>
@@ -367,23 +596,33 @@ function DateNav({ schedule, onSelect, currentIdx }) {
 }
 
 function ScheduleCard({ day, index, isOpen, onToggle }) {
+  const isHighlight = day.highlight;
   return (
     <div
       id={`day-${index}`}
+      className="card-decoration"
       style={{
-        background: '#fff',
-        borderRadius: '16px',
-        marginBottom: '12px',
+        background: isHighlight
+          ? `linear-gradient(135deg, #fff 0%, ${COLORS.rosePale}40 100%)`
+          : '#fff',
+        borderRadius: '20px',
+        marginBottom: '14px',
         overflow: 'hidden',
-        boxShadow: '0 2px 12px rgba(42, 37, 32, 0.04)',
-        border: '1px solid #efe9dd'
+        boxShadow: isHighlight
+          ? '0 4px 20px rgba(196, 132, 124, 0.15)'
+          : '0 2px 12px rgba(58, 42, 40, 0.05)',
+        border: isHighlight
+          ? `1px solid ${COLORS.rosePale}`
+          : `1px solid ${COLORS.creamDeep}`,
+        position: 'relative',
+        transition: 'all 0.3s'
       }}
     >
       <button
         onClick={onToggle}
         style={{
           width: '100%',
-          padding: '16px',
+          padding: '18px 18px 16px',
           background: 'none',
           border: 'none',
           textAlign: 'left',
@@ -393,67 +632,123 @@ function ScheduleCard({ day, index, isOpen, onToggle }) {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px' }}>
+          {/* 날짜 박스 */}
           <div style={{
             flexShrink: 0,
-            width: '54px',
+            width: '56px',
             textAlign: 'center',
-            paddingTop: '2px'
+            paddingTop: '2px',
+            paddingRight: '14px',
+            borderRight: `1px solid ${COLORS.creamDeep}`
           }}>
-            <div style={{ fontSize: '10px', color: '#8a7e6c', fontWeight: 600, letterSpacing: '1px' }}>
+            <div style={{
+              fontSize: '9px',
+              color: COLORS.inkLight,
+              fontWeight: 500,
+              letterSpacing: '2px',
+              marginBottom: '2px'
+            }}>
               {day.day}
             </div>
-            <div className="serif" style={{ fontSize: '22px', fontWeight: 500, color: '#1a1f3a', lineHeight: 1 }}>
+            <div className="display" style={{
+              fontSize: '24px',
+              fontWeight: 400,
+              color: isHighlight ? COLORS.wine : COLORS.darkWine,
+              lineHeight: 1,
+              fontStyle: 'italic'
+            }}>
               {day.date}
             </div>
           </div>
+
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
-              <span style={{ fontSize: '16px' }}>{day.emoji}</span>
-              <span style={{ fontSize: '11px', color: '#7a1f2e', fontWeight: 700, letterSpacing: '0.5px' }}>
-                {day.city.toUpperCase()}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
+              <span style={{ fontSize: '15px' }}>{day.emoji}</span>
+              <span className="serif" style={{
+                fontSize: '10px',
+                color: COLORS.wine,
+                fontWeight: 600,
+                letterSpacing: '2px',
+                fontStyle: 'italic'
+              }}>
+                {day.city}
               </span>
+              {isHighlight && (
+                <span style={{ fontSize: '12px', marginLeft: 'auto' }}>✦</span>
+              )}
             </div>
-            <div style={{ fontSize: '15px', fontWeight: 600, color: '#2a2520', marginBottom: '4px' }}>
+            <div style={{
+              fontSize: '15px',
+              fontWeight: 600,
+              color: COLORS.ink,
+              marginBottom: '6px',
+              lineHeight: 1.3
+            }}>
               {day.main}
             </div>
-            <div style={{ display: 'flex', gap: '10px', fontSize: '11px', color: '#8a7e6c', flexWrap: 'wrap' }}>
-              <span>🕒 {day.time}</span>
-              <span>·</span>
+            <div style={{
+              display: 'flex',
+              gap: '8px',
+              fontSize: '10.5px',
+              color: COLORS.inkLight,
+              flexWrap: 'wrap',
+              alignItems: 'center'
+            }}>
+              <span>⌖ {day.time}</span>
+              <span style={{ opacity: 0.4 }}>·</span>
               <span>{day.stay}</span>
             </div>
           </div>
+
           <div style={{
             flexShrink: 0,
-            fontSize: '14px',
-            color: '#8a7e6c',
+            fontSize: '12px',
+            color: COLORS.gold,
             transform: isOpen ? 'rotate(180deg)' : 'rotate(0)',
-            transition: 'transform 0.2s'
+            transition: 'transform 0.3s ease'
           }}>
             ▾
           </div>
         </div>
       </button>
+
       {isOpen && (
-        <div style={{
-          padding: '0 16px 16px 84px',
-          borderTop: '1px dashed #e8e0d0',
-          paddingTop: '12px',
-          marginTop: '4px'
+        <div className="fade-up" style={{
+          padding: '4px 20px 20px 88px',
+          borderTop: `1px dashed ${COLORS.creamDeep}`,
+          paddingTop: '14px',
+          marginTop: '2px'
         }}>
-          <div style={{ fontSize: '11px', color: '#8a7e6c', marginBottom: '8px', fontWeight: 600 }}>
-            이동수단: {day.transport}
+          <div style={{
+            fontSize: '10px',
+            color: COLORS.inkLight,
+            marginBottom: '10px',
+            fontWeight: 500,
+            letterSpacing: '1px'
+          }}>
+            ✈ {day.transport}
           </div>
           {day.details.map((detail, i) => (
             <div key={i} style={{
               fontSize: '13px',
-              color: '#3a3530',
-              padding: '4px 0',
-              paddingLeft: '12px',
+              color: COLORS.ink,
+              padding: '6px 0',
+              paddingLeft: '14px',
               position: 'relative',
-              lineHeight: 1.6
+              lineHeight: 1.6,
+              display: 'flex',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: '6px'
             }}>
-              <span style={{ position: 'absolute', left: 0, color: '#7a1f2e' }}>·</span>
-              {detail}
+              <span style={{
+                position: 'absolute',
+                left: 0,
+                color: COLORS.rose,
+                fontSize: '12px'
+              }}>❀</span>
+              <span>{detail.text}</span>
+              {detail.map && <MapButton query={detail.map} />}
             </div>
           ))}
         </div>
@@ -477,10 +772,10 @@ function SchedulePage() {
 
   return (
     <div>
-      <div style={{ position: 'sticky', top: '46px', zIndex: 90 }}>
+      <div style={{ position: 'sticky', top: '52px', zIndex: 90 }}>
         <DateNav schedule={SCHEDULE} onSelect={handleSelect} currentIdx={currentIdx} />
       </div>
-      <div style={{ padding: '16px' }}>
+      <div style={{ padding: '20px 16px' }}>
         {SCHEDULE.map((day, i) => (
           <ScheduleCard
             key={i}
@@ -498,145 +793,229 @@ function SchedulePage() {
   );
 }
 
+function SectionTitle({ icon, title, subtitle }) {
+  return (
+    <div style={{ marginTop: '28px', marginBottom: '14px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2px' }}>
+        <span style={{ fontSize: '14px' }}>{icon}</span>
+        <div className="serif" style={{
+          fontSize: '18px',
+          fontWeight: 500,
+          color: COLORS.darkWine,
+          fontStyle: 'italic',
+          letterSpacing: '0.5px'
+        }}>
+          {title}
+        </div>
+      </div>
+      {subtitle && (
+        <div style={{
+          fontSize: '10px',
+          color: COLORS.inkLight,
+          letterSpacing: '2px',
+          paddingLeft: '24px'
+        }}>
+          {subtitle}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ReservationsPage() {
   const typeColors = {
-    "투어": { bg: '#f0e9d8', color: '#5a4720' },
-    "스냅": { bg: '#f3dbe0', color: '#7a1f2e' },
-    "공연": { bg: '#dde4f0', color: '#1a3a6e' }
+    "투어": { bg: '#f5e8d8', color: '#8a5a2a', label: '✈' },
+    "스냅": { bg: '#f3dde0', color: COLORS.wine, label: '✦' },
+    "공연": { bg: '#e2e0ea', color: '#5a4a8a', label: '♪' }
   };
 
   return (
     <div style={{ padding: '20px 16px' }}>
+      {/* 인트로 카드 */}
       <div style={{
-        background: 'linear-gradient(135deg, #fdf6e8 0%, #f5ecd9 100%)',
-        padding: '16px',
-        borderRadius: '12px',
-        marginBottom: '20px',
-        border: '1px solid #e8d9b8'
+        background: `linear-gradient(135deg, ${COLORS.creamDeep} 0%, ${COLORS.rosePale}60 100%)`,
+        padding: '20px',
+        borderRadius: '18px',
+        marginBottom: '8px',
+        border: `1px solid ${COLORS.rosePale}80`,
+        textAlign: 'center',
+        position: 'relative',
+        overflow: 'hidden'
       }}>
-        <div className="serif" style={{ fontSize: '18px', fontWeight: 600, marginBottom: '4px', color: '#1a1f3a' }}>
-          예약 체크리스트
+        <Ornament size={24} color={COLORS.gold} opacity={0.6} />
+        <div className="display" style={{
+          fontSize: '22px',
+          fontWeight: 500,
+          marginTop: '4px',
+          color: COLORS.darkWine,
+          fontStyle: 'italic'
+        }}>
+          Reservations
         </div>
-        <div style={{ fontSize: '12px', color: '#5a4720' }}>
-          예약 프린팅 / QR 캡쳐 미리 준비
+        <div style={{
+          fontSize: '11px',
+          color: COLORS.inkLight,
+          marginTop: '4px',
+          letterSpacing: '2px'
+        }}>
+          예약 정보 · 🗺️ 탭하면 지도
         </div>
       </div>
 
-      <div className="serif" style={{ fontSize: '14px', fontWeight: 600, color: '#1a1f3a', marginBottom: '10px', letterSpacing: '0.5px' }}>
-        ✈️ FLIGHTS
-      </div>
+      <SectionTitle icon="✈" title="Flights" subtitle="ALL FLIGHTS" />
       {FLIGHTS.map((f, i) => (
         <div key={i} style={{
           background: '#fff',
-          borderRadius: '12px',
-          padding: '14px',
+          borderRadius: '16px',
+          padding: '16px',
           marginBottom: '10px',
-          border: '1px solid #efe9dd'
+          border: `1px solid ${COLORS.creamDeep}`,
+          boxShadow: '0 2px 8px rgba(58, 42, 40, 0.04)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
             <span style={{
-              background: '#dde4f0',
-              color: '#1a3a6e',
+              background: '#e2e0ea',
+              color: '#5a4a8a',
               padding: '3px 10px',
               borderRadius: '10px',
               fontSize: '10px',
-              fontWeight: 700,
-              letterSpacing: '0.5px'
+              fontWeight: 600,
+              letterSpacing: '1px'
             }}>
               항공
             </span>
-            <span className="serif" style={{ fontSize: '14px', fontWeight: 600, color: '#1a1f3a' }}>
+            <span className="serif" style={{ fontSize: '14px', fontWeight: 500, color: COLORS.darkWine, fontStyle: 'italic' }}>
               {f.date}
             </span>
           </div>
-          <div style={{ fontSize: '14px', fontWeight: 600, marginBottom: '4px', color: '#2a2520' }}>
-            {f.from} → {f.to}
+          <div style={{
+            fontSize: '14px',
+            fontWeight: 600,
+            marginBottom: '6px',
+            color: COLORS.ink,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            flexWrap: 'wrap'
+          }}>
+            <span>{f.from} → {f.to}</span>
+            {f.map && <MapButton query={f.map} />}
           </div>
-          <div style={{ fontSize: '12px', color: '#8a7e6c', marginBottom: '2px' }}>
-            🕒 {f.time}
+          <div style={{ fontSize: '12px', color: COLORS.inkLight }}>
+            ⌖ {f.time}
           </div>
           {f.code !== '—' && (
-            <div style={{ fontSize: '11px', color: '#8a7e6c', fontFamily: 'monospace', marginTop: '4px' }}>
+            <div style={{ fontSize: '11px', color: COLORS.inkLight, fontFamily: 'monospace', marginTop: '4px' }}>
               {f.airline} · {f.code}
             </div>
           )}
-          <div style={{ fontSize: '11px', color: '#8a7e6c', marginTop: '2px' }}>
+          <div style={{ fontSize: '11px', color: COLORS.inkLight, marginTop: '2px' }}>
             {f.note}
           </div>
         </div>
       ))}
 
-      <div className="serif" style={{ fontSize: '14px', fontWeight: 600, color: '#1a1f3a', marginTop: '24px', marginBottom: '10px', letterSpacing: '0.5px' }}>
-        🎭 TOURS & SNAPS
-      </div>
+      <SectionTitle icon="✦" title="Tours & Snaps" subtitle="EXPERIENCES" />
       {RESERVATIONS.map((r, i) => {
         const tc = typeColors[r.type] || typeColors["투어"];
         return (
           <div key={i} style={{
-            background: '#fff',
-            borderRadius: '12px',
-            padding: '14px',
+            background: r.highlight
+              ? `linear-gradient(135deg, #fff 0%, ${COLORS.rosePale}30 100%)`
+              : '#fff',
+            borderRadius: '16px',
+            padding: '16px',
             marginBottom: '10px',
-            border: r.highlight ? '2px solid #7a1f2e' : '1px solid #efe9dd',
-            position: 'relative'
+            border: r.highlight ? `1.5px solid ${COLORS.rose}` : `1px solid ${COLORS.creamDeep}`,
+            boxShadow: r.highlight
+              ? `0 4px 16px ${COLORS.rosePale}80`
+              : '0 2px 8px rgba(58, 42, 40, 0.04)'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
               <span style={{
                 background: tc.bg,
                 color: tc.color,
                 padding: '3px 10px',
                 borderRadius: '10px',
                 fontSize: '10px',
-                fontWeight: 700,
-                letterSpacing: '0.5px'
+                fontWeight: 600,
+                letterSpacing: '1px'
               }}>
                 {r.type}
               </span>
-              <span className="serif" style={{ fontSize: '14px', fontWeight: 600, color: '#1a1f3a' }}>
+              <span className="serif" style={{ fontSize: '14px', fontWeight: 500, color: COLORS.darkWine, fontStyle: 'italic' }}>
                 {r.date}
               </span>
-              {r.highlight && <span style={{ fontSize: '12px' }}>⭐</span>}
+              {r.highlight && <span style={{ fontSize: '12px', marginLeft: 'auto', color: COLORS.wine }}>✦</span>}
             </div>
-            <div style={{ fontSize: '14px', fontWeight: 600, marginBottom: '6px', color: '#2a2520', lineHeight: 1.4 }}>
+            <div style={{
+              fontSize: '14px',
+              fontWeight: 600,
+              marginBottom: '8px',
+              color: COLORS.ink,
+              lineHeight: 1.4
+            }}>
               {r.title}
             </div>
-            <div style={{ fontSize: '12px', color: '#8a7e6c', marginBottom: '4px' }}>
-              🕒 {r.time}
+            <div style={{ fontSize: '12px', color: COLORS.inkLight, marginBottom: '4px' }}>
+              ⌖ {r.time}
             </div>
-            <div style={{ fontSize: '12px', color: '#5a4720', marginBottom: '4px' }}>
-              <strong>업체:</strong> {r.company}
+            <div style={{ fontSize: '12px', color: '#6b4838', marginBottom: '4px' }}>
+              <em style={{ color: COLORS.gold }}>업체</em> · {r.company}
             </div>
-            <div style={{ fontSize: '12px', color: '#5a4720', marginBottom: '4px', lineHeight: 1.5 }}>
-              📍 <strong>모이는 곳:</strong> {r.meet}
+            <div style={{
+              fontSize: '12px',
+              color: '#6b4838',
+              marginBottom: '8px',
+              lineHeight: 1.5,
+              display: 'flex',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: '6px'
+            }}>
+              <span><em style={{ color: COLORS.gold }}>모이는 곳</em> · {r.meet}</span>
+              {r.map && <MapButton query={r.map} />}
             </div>
-            <div style={{ fontSize: '11px', color: '#7a1f2e', fontWeight: 600 }}>
-              준비물: {r.item}
+            <div style={{
+              fontSize: '11px',
+              color: COLORS.wine,
+              fontWeight: 600,
+              borderTop: `1px dashed ${COLORS.creamDeep}`,
+              paddingTop: '6px',
+              marginTop: '6px'
+            }}>
+              ❀ 준비물 · {r.item}
             </div>
           </div>
         );
       })}
 
-      <div className="serif" style={{ fontSize: '14px', fontWeight: 600, color: '#1a1f3a', marginTop: '24px', marginBottom: '10px', letterSpacing: '0.5px' }}>
-        🏨 HOTELS
-      </div>
+      <SectionTitle icon="❀" title="Hotels & Stays" subtitle="ACCOMMODATIONS" />
       {HOTELS.map((h, i) => (
         <div key={i} style={{
           background: '#fff',
-          borderRadius: '12px',
-          padding: '14px',
+          borderRadius: '16px',
+          padding: '16px',
           marginBottom: '10px',
-          border: '1px solid #efe9dd'
+          border: `1px solid ${COLORS.creamDeep}`,
+          boxShadow: '0 2px 8px rgba(58, 42, 40, 0.04)'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
-                <span style={{ fontSize: '11px', color: '#7a1f2e', fontWeight: 700, letterSpacing: '1px' }}>
-                  {h.city.toUpperCase()}
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px', flexWrap: 'wrap' }}>
+                <span className="serif" style={{
+                  fontSize: '11px',
+                  color: COLORS.wine,
+                  fontWeight: 600,
+                  letterSpacing: '2px',
+                  fontStyle: 'italic'
+                }}>
+                  {h.city}
                 </span>
                 <span style={{
-                  background: h.type === '호텔' ? '#dde4f0' : '#f0e9d8',
-                  color: h.type === '호텔' ? '#1a3a6e' : '#5a4720',
-                  padding: '2px 6px',
+                  background: h.type === '호텔' ? '#e2e0ea' : '#f5e8d8',
+                  color: h.type === '호텔' ? '#5a4a8a' : '#8a5a2a',
+                  padding: '2px 7px',
                   borderRadius: '6px',
                   fontSize: '9px',
                   fontWeight: 600
@@ -644,28 +1023,51 @@ function ReservationsPage() {
                   {h.type}
                 </span>
               </div>
-              <div style={{ fontSize: '15px', fontWeight: 600, color: '#1a1f3a' }}>
-                {h.name}
+              <div style={{
+                fontSize: '15px',
+                fontWeight: 600,
+                color: COLORS.ink,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                flexWrap: 'wrap'
+              }}>
+                <span>{h.name}</span>
+                {h.map && <MapButton query={h.map} />}
               </div>
             </div>
-            <div style={{ fontSize: '11px', color: '#8a7e6c', textAlign: 'right', flexShrink: 0, marginLeft: '8px' }}>
+            <div style={{
+              fontSize: '10px',
+              color: COLORS.inkLight,
+              textAlign: 'right',
+              flexShrink: 0,
+              marginLeft: '8px',
+              letterSpacing: '0.5px'
+            }}>
               {h.date}
             </div>
           </div>
-          <div style={{ fontSize: '11px', color: '#5a4720', marginBottom: '4px' }}>
-            🔑 체크인: {h.checkin}
+          <div style={{ fontSize: '11px', color: '#6b4838', marginBottom: '4px' }}>
+            <em style={{ color: COLORS.gold }}>체크인</em> · {h.checkin}
           </div>
           {h.ref !== '-' && (
-            <div style={{ fontSize: '11px', color: '#8a7e6c', fontFamily: 'monospace', marginBottom: '4px' }}>
+            <div style={{ fontSize: '10px', color: COLORS.inkLight, fontFamily: 'monospace', marginBottom: '4px' }}>
               Ref. {h.ref}
             </div>
           )}
-          <div style={{ fontSize: '11px', color: '#8a7e6c', lineHeight: 1.5 }}>
-            📍 {h.address}
+          <div style={{ fontSize: '11px', color: COLORS.inkLight, lineHeight: 1.5 }}>
+            ⟜ {h.address}
           </div>
           {h.note && (
-            <div style={{ fontSize: '11px', color: '#7a1f2e', marginTop: '4px', fontWeight: 600 }}>
-              {h.note}
+            <div style={{
+              fontSize: '11px',
+              color: COLORS.wine,
+              marginTop: '6px',
+              fontWeight: 600,
+              borderTop: `1px dashed ${COLORS.creamDeep}`,
+              paddingTop: '6px'
+            }}>
+              ❀ {h.note}
             </div>
           )}
         </div>
@@ -678,69 +1080,107 @@ function OutfitsPage() {
   return (
     <div style={{ padding: '20px 16px' }}>
       <div style={{
-        background: 'linear-gradient(135deg, #f3dbe0 0%, #f5ecd9 100%)',
-        padding: '16px',
-        borderRadius: '12px',
+        background: `linear-gradient(135deg, ${COLORS.rosePale}80 0%, ${COLORS.creamDeep} 100%)`,
+        padding: '20px',
+        borderRadius: '18px',
         marginBottom: '20px',
-        border: '1px solid #e8c8d2'
+        border: `1px solid ${COLORS.rosePale}80`,
+        textAlign: 'center'
       }}>
-        <div className="serif" style={{ fontSize: '18px', fontWeight: 600, marginBottom: '4px', color: '#1a1f3a' }}>
-          데일리 코디 18
+        <Ornament size={24} color={COLORS.wine} opacity={0.6} />
+        <div className="display" style={{
+          fontSize: '22px',
+          fontWeight: 500,
+          marginTop: '4px',
+          color: COLORS.darkWine,
+          fontStyle: 'italic'
+        }}>
+          Daily Outfits
         </div>
-        <div style={{ fontSize: '12px', color: '#5a4720' }}>
-          매일 다른 룩 · 스냅 3회 강조
+        <div style={{
+          fontSize: '11px',
+          color: COLORS.inkLight,
+          marginTop: '4px',
+          letterSpacing: '2px'
+        }}>
+          18 LOOKS · 매일 다른 룩
         </div>
       </div>
 
       {OUTFITS.map((o, i) => (
         <div key={i} style={{
-          background: '#fff',
-          borderRadius: '12px',
+          background: o.highlight
+            ? `linear-gradient(135deg, #fff 0%, ${COLORS.rosePale}30 100%)`
+            : '#fff',
+          borderRadius: '16px',
           padding: '14px',
           marginBottom: '10px',
-          border: o.highlight ? '2px solid #7a1f2e' : '1px solid #efe9dd',
+          border: o.highlight ? `1.5px solid ${COLORS.rose}` : `1px solid ${COLORS.creamDeep}`,
           display: 'flex',
-          gap: '12px',
-          alignItems: 'center'
+          gap: '14px',
+          alignItems: 'center',
+          boxShadow: o.highlight ? `0 4px 14px ${COLORS.rosePale}60` : '0 2px 6px rgba(58, 42, 40, 0.03)'
         }}>
+          {/* 코디 컬러 프리뷰 */}
           <div style={{
             flexShrink: 0,
-            width: '44px',
+            width: '46px',
             display: 'flex',
             flexDirection: 'column',
-            gap: '2px'
+            gap: '3px'
           }}>
             <div style={{
               height: '28px',
               background: o.topColor,
-              borderRadius: '6px 6px 2px 2px',
-              border: '1px solid rgba(0,0,0,0.08)'
+              borderRadius: '6px 6px 3px 3px',
+              border: '1px solid rgba(0,0,0,0.06)',
+              boxShadow: 'inset 0 -2px 4px rgba(0,0,0,0.04)'
             }}></div>
             <div style={{
-              height: '32px',
+              height: '34px',
               background: o.bottomColor,
-              borderRadius: '2px 2px 6px 6px',
-              border: '1px solid rgba(0,0,0,0.08)'
+              borderRadius: '3px 3px 6px 6px',
+              border: '1px solid rgba(0,0,0,0.06)',
+              boxShadow: 'inset 0 -2px 4px rgba(0,0,0,0.04)'
             }}></div>
           </div>
 
           <div style={{ flex: 1, minWidth: 0 }}>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '4px', flexWrap: 'wrap' }}>
-              <span className="serif" style={{ fontSize: '11px', color: '#8a7e6c', fontWeight: 600 }}>
-                #{String(o.num).padStart(2, '0')}
+              <span className="display" style={{
+                fontSize: '14px',
+                color: COLORS.gold,
+                fontWeight: 500,
+                fontStyle: 'italic'
+              }}>
+                №{String(o.num).padStart(2, '0')}
               </span>
-              <span className="serif" style={{ fontSize: '14px', fontWeight: 600, color: '#1a1f3a' }}>
+              <span className="serif" style={{
+                fontSize: '13px',
+                fontWeight: 500,
+                color: COLORS.darkWine,
+                fontStyle: 'italic'
+              }}>
                 {o.date}
               </span>
-              <span style={{ fontSize: '11px', color: '#8a7e6c' }}>
+              <span style={{ fontSize: '10px', color: COLORS.inkLight }}>
                 ({o.day})
               </span>
-              {o.highlight && <span style={{ fontSize: '11px' }}>⭐</span>}
+              {o.highlight && <span style={{ fontSize: '10px', color: COLORS.wine }}>✦</span>}
             </div>
-            <div style={{ fontSize: '13px', color: '#2a2520', marginBottom: '3px', lineHeight: 1.4 }}>
+            <div style={{
+              fontSize: '13px',
+              color: COLORS.ink,
+              marginBottom: '3px',
+              lineHeight: 1.4
+            }}>
               {o.desc}
             </div>
-            <div style={{ fontSize: '11px', color: '#8a7e6c' }}>
+            <div style={{
+              fontSize: '10.5px',
+              color: COLORS.inkLight,
+              fontStyle: o.highlight ? 'italic' : 'normal'
+            }}>
               {o.note}
             </div>
           </div>
@@ -754,7 +1194,7 @@ function App() {
   const [tab, setTab] = useState('schedule');
 
   return (
-    <div style={styles.app}>
+    <div style={{ background: COLORS.cream, minHeight: '100vh' }}>
       <Header tab={tab} setTab={setTab} />
       <div>
         {tab === 'schedule' && <SchedulePage />}
@@ -766,16 +1206,29 @@ function App() {
         bottom: 0,
         left: 0,
         right: 0,
-        padding: '12px',
-        background: 'rgba(250, 248, 245, 0.95)',
+        padding: '14px',
+        background: 'rgba(253, 250, 246, 0.96)',
         backdropFilter: 'blur(10px)',
         textAlign: 'center',
-        fontSize: '10px',
-        color: '#8a7e6c',
-        letterSpacing: '1.5px',
-        borderTop: '1px solid #efe9dd'
+        borderTop: `1px solid ${COLORS.creamDeep}`
       }}>
-        🤍 MAY 15 — JUNE 1, 2026 🤍
+        <div className="display" style={{
+          fontSize: '12px',
+          color: COLORS.wine,
+          letterSpacing: '4px',
+          fontStyle: 'italic',
+          fontWeight: 500
+        }}>
+          ⋆ Forever Begins ⋆
+        </div>
+        <div style={{
+          fontSize: '9px',
+          color: COLORS.inkLight,
+          letterSpacing: '2px',
+          marginTop: '2px'
+        }}>
+          MAY 15 — JUNE 1, 2026
+        </div>
       </div>
     </div>
   );
