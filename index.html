@@ -15,8 +15,8 @@
   html, body { margin: 0; padding: 0; }
   body {
     font-family: 'DM Sans', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #f4f7f5;
-    color: #1a2826;
+    background: #fafffe;
+    color: #1f2e2a;
     line-height: 1.5;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
@@ -33,17 +33,12 @@
   }
   .fade-up { animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
 
-  @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-  }
-
   .map-pill {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    background: #e8f0eb;
-    color: #1a4d3e;
+    background: #e3f3ec;
+    color: #1d5d44;
     padding: 4px 10px;
     border-radius: 100px;
     font-size: 11px;
@@ -51,11 +46,11 @@
     text-decoration: none;
     font-family: inherit;
     transition: all 0.15s;
-    border: 1px solid rgba(26, 77, 62, 0.08);
+    border: 1px solid rgba(29, 93, 68, 0.1);
     white-space: nowrap;
   }
   .map-pill:active {
-    background: #d0e2d5;
+    background: #c5e6d4;
     transform: scale(0.95);
   }
 
@@ -64,24 +59,24 @@
     padding: 14px;
     background: #fff;
     border-radius: 14px;
-    border: 1px solid #e6ebe8;
-    box-shadow: 0 1px 2px rgba(26, 40, 38, 0.02);
+    border: 1px solid #e2efe8;
+    box-shadow: 0 1px 2px rgba(31, 46, 42, 0.02);
   }
 
   .notice-card {
     margin: 10px 0;
     padding: 12px 14px;
-    background: #fef9ef;
+    background: #fffae8;
     border-radius: 12px;
-    border: 1px solid #f5e6c9;
+    border: 1px solid #f7ebbf;
     font-size: 12.5px;
-    color: #7a5a1a;
+    color: #826410;
     line-height: 1.6;
   }
 
   .glass {
-    backdrop-filter: saturate(180%) blur(16px);
-    -webkit-backdrop-filter: saturate(180%) blur(16px);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
   }
 </style>
 </head>
@@ -93,7 +88,7 @@
 <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <script type="text/babel" data-presets="react" data-type="module">
-const { useState } = React;
+const { useState, useEffect } = React;
 
 const mapUrl = (query) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 
@@ -103,10 +98,11 @@ const TRIP = {
   subtitle: "España & Portugal",
   dates: "May 15 — June 1",
   duration: "16 nights · 17 days",
-  startDate: new Date('2026-05-15')
+  startDate: new Date('2026-05-15'),
+  mapList: "https://maps.app.goo.gl/iAFF5yaHtGr1NeJU7"
 };
 
-// ============ 데이터 (이전과 동일) ============
+// ============ 일정 데이터 ============
 const SCHEDULE = [
   { date: "5/15", day: "Fri", city: "서울", emoji: "✈", main: "인천공항 출발", time: "23:55", transport: "Flight", stay: "기내",
     details: [
@@ -135,21 +131,19 @@ const SCHEDULE = [
       { course: "MONTSERRAT", items: [
         { text: "이동중 카탈루냐·스페인 이야기 (1h)" },
         { text: "베니딕토 수도원", map: "Montserrat Benedictine Monastery" },
-        { text: "산조르디 조각 (죠셉마리아 수비라치)", map: "Montserrat Sant Jordi" },
+        { text: "산조르디 조각", map: "Montserrat Sant Jordi" },
         { text: "수도원 입장 + 검은 성모상 ⭐⭐", map: "Black Madonna Montserrat" },
         { text: "(전통주·전통빵·시식음료 포함 단체권)" },
         { text: "자유시간 2h 30m + 산미겔 전망대", map: "Sant Miguel Montserrat" }
       ] },
       { course: "GIRONA", items: [
         { text: "이동 1h 40m~2h" },
-        { text: "지로나 사자상 (엉덩이 키스→재방문 전설)", map: "Lleona de Girona" },
-        { text: "지로나 대성당 (1733년 완공)", map: "Girona Cathedral" },
-        { text: "유대인 지구 (13세기 석조건물)", map: "Girona Jewish Quarter" },
-        { text: "에펠다리 (구스타프 에펠 초기작) ⭐", map: "Pont de les Peixateries Velles Girona" },
+        { text: "지로나 사자상", map: "Lleona de Girona" },
+        { text: "지로나 대성당", map: "Girona Cathedral" },
+        { text: "유대인 지구", map: "Girona Jewish Quarter" },
+        { text: "에펠다리 ⭐", map: "Pont de les Peixateries Velles Girona" },
         { text: "자유시간 2h: 정원·강변·맛집" }
-      ] },
-      { text: "투어펠리스 바르셀로나 맛집·쇼핑 카톡 안내" },
-      { text: "코디: 블루가디건+화이트레이스롱스커트" }
+      ] }
     ] },
   { date: "5/18", day: "Mon", city: "Barcelona", emoji: "🏛", main: "가우디 VIP 전일투어", time: "7:50-16:10", transport: "Bus/Metro", stay: "Barcelona Night 3",
     details: [
@@ -159,10 +153,8 @@ const SCHEDULE = [
       { course: "GAUDÍ VIP COURSE", items: [
         { text: "카사 밀라 스페셜 선라이즈 입장 ⭐", map: "Casa Mila La Pedrera Barcelona" },
         { text: "카사 바트요 외부+내부투어 1h", map: "Casa Batlló Barcelona" },
-        { text: "혼돈의 블록 (Manzana de la discordia)" },
         { text: "중식/휴식 11:10~12:30" },
-        { text: "구엘공원 가이드 입장 + 자유시간 ⭐", map: "Park Güell Barcelona" },
-        { text: "성가족 성당 외부설명", map: "Sagrada Familia Barcelona" },
+        { text: "구엘공원 가이드 입장 ⭐", map: "Park Güell Barcelona" },
         { text: "사그라다 파밀리아 VIP 내부 ⭐⭐", map: "Sagrada Familia Barcelona" }
       ] },
       { text: "2026년 가우디 서거 100주년 완공 예정" },
@@ -191,14 +183,12 @@ const SCHEDULE = [
       { text: "준비물: 티켓PDF, 이어폰, 여권원본 ⭐, 20€" },
       { course: "ALHAMBRA 5h COURSE", items: [
         { text: "매표소 미팅 (5-10월: 8:30)" },
-        { text: "수신기 + 개요 설명" },
-        { text: "나사리궁전 1h 30m ⭐⭐ (9:30 입장)", map: "Nasrid Palaces Alhambra" },
+        { text: "나사리궁전 1h 30m ⭐⭐", map: "Nasrid Palaces Alhambra" },
         { text: "알카사바 (군사기지)", map: "Alcazaba Alhambra" },
-        { text: "헤네랄리페 (여름별궁) 3h", map: "Generalife Alhambra" },
+        { text: "헤네랄리페 (여름별궁)", map: "Generalife Alhambra" },
         { text: "까를궁전 (카를로스 5세)", map: "Palacio Carlos V Alhambra" }
       ] },
-      { notice: "현지 부가세 1인 10€ 현장 지불 / 여권원본 필수 / 문의: 카톡 tourcontigo" },
-      { text: "오후 자유시간 (시내·타파스)" }
+      { notice: "현지 부가세 1인 10€ 현장 지불 / 여권원본 필수 / 문의: 카톡 tourcontigo" }
     ] },
   { date: "5/22", day: "Fri", city: "Granada", emoji: "🌅", main: "시내 + 알바이신 선셋 스냅", time: "Day Free / 19:30", transport: "Walk", stay: "Granada Night 3",
     highlight: true,
@@ -206,13 +196,11 @@ const SCHEDULE = [
       { text: "낮: 그라나다 시내 자유" },
       { text: "그라나다 대성당", map: "Granada Cathedral" },
       { text: "왕실 예배당", map: "Capilla Real Granada" },
-      { text: "알카이세리아 시장", map: "Alcaicería Granada" },
       { course: "📸 ALBAICÍN SUNSET SNAP", items: [
         { text: "🗺️ 모이는 곳: 호텔 그라나다 센터", map: "Hotel Granada Center Spain" },
         { text: "촬영 19:30-21:00 ⭐⭐" },
         { text: "스냅: 비노마드스튜디오 (120€)" },
-        { text: "미라도르 산 니콜라스", map: "Mirador San Nicolas Granada" },
-        { text: "알바이신 골목·하얀집들", map: "Albaicín Granada" }
+        { text: "미라도르 산 니콜라스", map: "Mirador San Nicolas Granada" }
       ] },
       { text: "코디: 화이트 퍼프 롱드레스" }
     ] },
@@ -226,17 +214,14 @@ const SCHEDULE = [
         { text: "프리힐리아나 (스페인의 산토리니) ⭐", map: "Frigiliana Spain" },
         { text: "유럽의 발코니 네르하", map: "Balcón de Europa Nerja" },
         { text: "누에보다리의 론다 ⭐", map: "Puente Nuevo Ronda" },
-        { text: "(투우장·헤밍웨이 산책길·전망대)" },
         { text: "🖤 세비야 도착 (Jardines de Murillo)", map: "Jardines de Murillo Sevilla" }
-      ] },
-      { text: "Only YOU Hotel Sevilla 체크인", map: "Only YOU Hotel Sevilla" }
+      ] }
     ] },
   { date: "5/24", day: "Sun", city: "Sevilla", emoji: "🕌", main: "스페인광장·대성당·야경", time: "8:30-23:00", transport: "Walk", stay: "Sevilla Night 2",
     details: [
       { course: "📍 시내투어 8:30-13:00 (26€)", items: [
         { text: "🗺️ 스페인 광장 중앙분수", map: "Plaza de España Sevilla" },
         { text: "김호영&최경은 공인가이드" },
-        { text: "스페인 광장", map: "Plaza de España Sevilla" },
         { text: "세비야 대학교", map: "Universidad de Sevilla" },
         { text: "세비야 대성당+히랄다 ⭐", map: "Seville Cathedral" }
       ] },
@@ -246,7 +231,6 @@ const SCHEDULE = [
       ] },
       { course: "📍 야경투어 20:00-23:00", items: [
         { text: "🗺️ 메트로폴 파라솔 앞 분수대", map: "Metropol Parasol Sevilla" },
-        { text: "팔로우미투어" },
         { text: "산타크루즈 지구 ⭐", map: "Barrio Santa Cruz Sevilla" }
       ] }
     ] },
@@ -255,14 +239,12 @@ const SCHEDULE = [
     details: [
       { course: "📸 SEVILLA SNAP ⭐⭐", items: [
         { text: "8:00-9:00 촬영" },
-        { text: "🗺️ 촬영 안내 하루전 (노미준)" },
         { text: "스냅: 노미준 (210€)" },
-        { text: "코디: 화이트셔츠 OR 와인+화이트" }
+        { text: "코디: 와인+화이트" }
       ] },
-      { text: "낮: 메트로폴 파라솔 (전망)", map: "Metropol Parasol Sevilla" },
+      { text: "메트로폴 파라솔", map: "Metropol Parasol Sevilla" },
       { course: "🎭 플라멩고 공연 19:00", items: [
-        { text: "Museo del Baile Flamenco", map: "Museo del Baile Flamenco Sevilla" },
-        { text: "준비물: 술마실 돈" }
+        { text: "Museo del Baile Flamenco", map: "Museo del Baile Flamenco Sevilla" }
       ] }
     ] },
   { date: "5/26", day: "Tue", city: "Sevilla", emoji: "🌳", main: "트리아나 자유일정", time: "Free", transport: "Walk", stay: "Sevilla Night 4",
@@ -270,30 +252,24 @@ const SCHEDULE = [
       { text: "스페인광장 재방문", map: "Plaza de España Sevilla" },
       { text: "트리아나 지구", map: "Triana Sevilla" },
       { text: "트리아나 도자기 마을", map: "Centro Cerámica Triana" },
-      { text: "트리아나 시장", map: "Mercado de Triana" },
-      { text: "과달키비르 강변 산책", map: "Guadalquivir River Sevilla" },
-      { text: "타파스 투어" }
+      { text: "과달키비르 강변", map: "Guadalquivir River Sevilla" }
     ] },
   { date: "5/27", day: "Wed", city: "→ Porto", emoji: "✈", main: "포르투 이동·시내", time: "16:20-16:35", transport: "Ryanair FR5466", stay: "Porto Night 1 (Airbnb)",
     details: [
       { text: "오전 세비야 브런치" },
       { text: "✈ Ryanair FR5466 16:20-16:35" },
       { text: "체크인 오픈: 5/26 16:20" },
-      { text: "세비야 공항", map: "Seville Airport SVQ" },
       { text: "포르투 공항", map: "Porto Airport OPO" },
-      { text: "에어비앤비 셀프체크인 16:00~", map: "Rua da Vitória 152 Porto" },
-      { text: "도우루 강변 산책", map: "Douro River Porto" }
+      { text: "에어비앤비 셀프체크인 16:00~", map: "Rua da Vitória 152 Porto" }
     ] },
   { date: "5/28", day: "Thu", city: "Porto", emoji: "🚶", main: "포르투 시내투어", time: "13:30-21:00", transport: "Walk 7.5h", stay: "Porto Night 2",
     details: [
       { text: "🗺️ Torre dos Clérigos", map: "Torre dos Clérigos Porto" },
       { text: "투어: 나자르투어 (28€)" },
-      { text: "⚠ 도보 7.5h - 운동화 필수" },
       { course: "PORTO COURSE", items: [
         { text: "클레리구스 탑·성당", map: "Torre dos Clérigos Porto" },
-        { text: "렐루 서점 (해리포터 영감) ⭐", map: "Livraria Lello Porto" },
-        { text: "상 벤투 역 (아줄레주 타일) ⭐", map: "São Bento Station Porto" },
-        { text: "포르투 대성당", map: "Porto Cathedral" },
+        { text: "렐루 서점 ⭐", map: "Livraria Lello Porto" },
+        { text: "상 벤투 역 ⭐", map: "São Bento Station Porto" },
         { text: "히베이라 지구 ⭐", map: "Ribeira Porto" },
         { text: "동 루이스 1세 다리", map: "Dom Luís I Bridge Porto" },
         { text: "포트와인 셀러 ⭐", map: "Vila Nova de Gaia Wine Cellars" }
@@ -303,31 +279,23 @@ const SCHEDULE = [
     details: [
       { text: "🗺️ 바탈랴 광장, Herculano Stays Porto 앞", map: "Praça da Batalha Porto" },
       { text: "투어: 나자르투어 (221,000원)" },
-      { text: "준비물: 이어폰·쿠키간식" },
       { course: "COIMBRA", items: [
         { text: "코임브라 대학교 (1290년) ⭐", map: "University of Coimbra" },
-        { text: "조아니나 도서관 ⭐⭐", map: "Joanina Library Coimbra" },
-        { text: "코임브라 시내 (산타크루즈 수도원)", map: "Coimbra Portugal" }
+        { text: "조아니나 도서관 ⭐⭐", map: "Joanina Library Coimbra" }
       ] },
       { course: "AVEIRO & COSTA NOVA", items: [
-        { text: "아베이루 + 점심 2h 20m ⭐", map: "Aveiro Portugal" },
-        { text: "코스타노바 줄무늬마을 ⭐", map: "Costa Nova Portugal" },
-        { text: "해안 사구", map: "Passadiços Costa Nova" }
-      ] },
-      { course: "LISBOA", items: [
-        { text: "리스본 공항 or 피게이라 광장", map: "Praça da Figueira Lisboa" },
-        { text: "호텔 체크인 15:00~", map: "R. Castilho 149 Lisboa" }
+        { text: "아베이루 + 점심 ⭐", map: "Aveiro Portugal" },
+        { text: "코스타노바 줄무늬마을 ⭐", map: "Costa Nova Portugal" }
       ] }
     ] },
   { date: "5/30", day: "Sat", city: "Lisboa", emoji: "🌊", main: "호카곶 근교투어", time: "7:40-18:40", transport: "Bus", stay: "Lisboa Night 2",
     details: [
       { text: "🗺️ Restauradores 광장 망고 매장", map: "Praça dos Restauradores Lisboa" },
       { text: "투어: 투어펠리스 (78€)" },
-      { text: "⚠ 대서양 바람 - 바람막이 필수" },
       { course: "LISBON OUTSKIRTS", items: [
-        { text: "호카곶 (유럽 대륙 최서단) ⭐⭐", map: "Cabo da Roca Portugal" },
-        { text: "나자레 (서핑 명소)", map: "Nazaré Portugal" },
-        { text: "오비두스 (성벽 마을) ⭐", map: "Óbidos Portugal" },
+        { text: "호카곶 ⭐⭐", map: "Cabo da Roca Portugal" },
+        { text: "나자레", map: "Nazaré Portugal" },
+        { text: "오비두스 ⭐", map: "Óbidos Portugal" },
         { text: "신트라 페나 궁전 ⭐⭐", map: "Pena Palace Sintra" }
       ] }
     ] },
@@ -338,19 +306,15 @@ const SCHEDULE = [
       { course: "LISBON CENTRO", items: [
         { text: "호시우 광장", map: "Praça do Rossio Lisboa" },
         { text: "코메르시우 광장", map: "Praça do Comércio Lisboa" },
-        { text: "산타주스타 엘리베이터", map: "Santa Justa Lift Lisboa" },
         { text: "알파마·상 조르제 성", map: "Castelo de São Jorge" },
-        { text: "벨렘 지구", map: "Belém Lisboa" },
         { text: "제로니무스 수도원 ⭐", map: "Jerónimos Monastery Lisbon" },
-        { text: "벨렘 탑", map: "Belém Tower Lisbon" },
         { text: "에그타르트 ⭐", map: "Pastéis de Belém Lisboa" }
       ] }
     ] },
   { date: "6/1", day: "Mon", city: "→ 서울", emoji: "✈", main: "리스본 → 서울 출발", time: "Departure", transport: "Flight", stay: "기내",
     details: [
-      { text: "오전 호텔 체크아웃" },
+      { text: "호텔 체크아웃" },
       { text: "리스본 공항 (3h 전)", map: "Lisbon Airport LIS" },
-      { text: "면세 쇼핑·기내식" },
       { text: "6/2 17:00 인천 도착 🤍" }
     ] }
 ];
@@ -387,10 +351,167 @@ const HOTELS = [
   { date: "5/29-6/1", nights: "3 nights", city: "Lisboa", type: "Hotel", name: "Lisboa Hotel", ref: "1726487752", checkin: "15:00", address: "R. Castilho 149, 1070-050", note: "조식 포함", map: "R. Castilho 149 Lisboa" }
 ];
 
+// ============ LOCAL GUIDE 데이터 ============
+const GUIDES = [
+  {
+    city: "BARCELONA",
+    cityKor: "바르셀로나",
+    emoji: "🌞",
+    tagline: "지중해 햇살과 가우디의 도시",
+    food: [
+      { name: "Bombas", desc: "감자 크로켓 (바르셀로네타 특산)", emoji: "🥔" },
+      { name: "파에야 (해산물)", desc: "정통 발렌시안 vs 해산물 선택", emoji: "🥘" },
+      { name: "Patatas Bravas", desc: "매콤한 토마토 소스 감자튀김", emoji: "🍟" },
+      { name: "Jamón Ibérico", desc: "이베리코 하몽 - 무조건 도토리등급", emoji: "🥓" },
+      { name: "Sangría / Cava", desc: "샹그리아 또는 카바(스파클링)", emoji: "🍷" }
+    ],
+    snack: [
+      { name: "Xuxos", desc: "추로스 사촌 - 크림 충전 도넛", trendy: true, emoji: "🍩" },
+      { name: "Turron 아이스크림", desc: "누가 + 아몬드 - 5월 유행", trendy: true, emoji: "🍦" },
+      { name: "Chocolate con Churros", desc: "진한 핫초코 + 추로스", emoji: "☕" }
+    ],
+    souvenir: [
+      { name: "TOUS 곰돌이", desc: "스페인 럭셔리 주얼리·면세가 최저", trendy: true },
+      { name: "Loewe 가죽 소품", desc: "스페인 본진 - 라스피노자 핸드밤" },
+      { name: "Camper 신발", desc: "마요르카 출신 - 한국 절반 가격" },
+      { name: "Pukas 또는 ZARA 한정", desc: "ZARA 본사 - 한국 미출시 라인" },
+      { name: "라 콜메나 누가", desc: "1849년 노포 - 직접 가야만 살 수 있음" }
+    ],
+    trendy2026: [
+      "🌿 빈티지 디자인 마켓 (Els Encants) 토요일 오전",
+      "📸 카사 비센스 (덜 알려진 가우디·줄 없음)",
+      "🍸 Paradiso 칵테일바 (세계 1위)",
+      "🥯 Brunch & Cake 줄서서라도 가는 브런치"
+    ]
+  },
+  {
+    city: "GRANADA",
+    cityKor: "그라나다",
+    emoji: "🏔",
+    tagline: "무어 왕국과 무료 타파스의 천국",
+    food: [
+      { name: "무료 타파스", desc: "음료 1잔 = 타파스 1개 무료 ⭐⭐", emoji: "🍻" },
+      { name: "피노 셰리주", desc: "안달루시아 화이트 와인", emoji: "🥂" },
+      { name: "Pionono", desc: "그라나다 명물 미니 케이크", emoji: "🍰" },
+      { name: "Habas con Jamón", desc: "잠두콩 + 하몽 볶음", emoji: "🫛" },
+      { name: "Tortilla de Sacromonte", desc: "양 골수 오믈렛 (도전!)", emoji: "🥚" }
+    ],
+    snack: [
+      { name: "차로 + 아몬드 페이스트", desc: "무어 영향 디저트", emoji: "🌰" },
+      { name: "Helado (아이스크림)", desc: "Los Italianos 노포", trendy: true, emoji: "🍨" }
+    ],
+    souvenir: [
+      { name: "탬버린·캐스터넷", desc: "플라멩고 악기 (사크로몬테)" },
+      { name: "무어 도자기", desc: "알바이신 거리·블루 패턴" },
+      { name: "사프란", desc: "스페인 정품·소량 진공포장 ⭐" },
+      { name: "올리브 오일", desc: "안달루시아산 엑스트라 버진" }
+    ],
+    trendy2026: [
+      "☕ Bar Aliatar 현지인 핫플 타파스",
+      "🌅 미라도르 산 크리스토발 (산 니콜라스 대안)",
+      "💆 무어 목욕탕 Hammam Al Ándalus"
+    ]
+  },
+  {
+    city: "SEVILLA",
+    cityKor: "세비야",
+    emoji: "🌹",
+    tagline: "플라멩고와 오렌지 향기",
+    food: [
+      { name: "Salmorejo", desc: "걸쭉한 토마토 콜드 수프 ⭐", emoji: "🍅" },
+      { name: "Gazpacho", desc: "정통 안달루시아 차가운 수프", emoji: "🥗" },
+      { name: "Solomillo al Whisky", desc: "위스키 안심 - 세비야 시그니처", emoji: "🥩" },
+      { name: "Espinacas con Garbanzos", desc: "병아리콩 시금치", emoji: "🍲" },
+      { name: "오렌지 와인", desc: "세비야 오렌지로 만든 와인", emoji: "🍊" }
+    ],
+    snack: [
+      { name: "Pestiños", desc: "꿀에 절인 페이스트리", emoji: "🍯" },
+      { name: "Yemas", desc: "달걀 노른자 캔디", emoji: "🟡" },
+      { name: "Mantecados", desc: "버터쿠키 - 안달루시아 명물", trendy: true, emoji: "🍪" }
+    ],
+    souvenir: [
+      { name: "플라멩고 의상·부채", desc: "트리아나 도자기 마을 ⭐" },
+      { name: "트리아나 도자기", desc: "수공예 타일·머그", trendy: true },
+      { name: "Maria Trinidad 향수", desc: "오렌지꽃 향수 - 세비야 한정" },
+      { name: "마자르 가죽 신발", desc: "Pikolinos·Wonders 브랜드" }
+    ],
+    trendy2026: [
+      "📸 Setas (메트로폴 파라솔) 일몰 ⭐⭐",
+      "🍹 El Rinconcillo 1670년 노포 타파스",
+      "🌸 Plaza de España 보트 타기 (€6)",
+      "🎵 La Carbonería 무료 플라멩고 (밤 22시)"
+    ]
+  },
+  {
+    city: "PORTO",
+    cityKor: "포르투",
+    emoji: "🍷",
+    tagline: "포트와인과 아줄레주의 마법",
+    food: [
+      { name: "Francesinha", desc: "포르투 명물 샌드위치 ⭐⭐", emoji: "🥪" },
+      { name: "Bacalhau à Brás", desc: "대구 + 감자 + 달걀 볶음", emoji: "🐟" },
+      { name: "Bifana", desc: "돼지고기 바게트 (Conga 추천)", trendy: true, emoji: "🍞" },
+      { name: "포트 와인", desc: "Tawny vs Ruby - 무조건 시음 ⭐", emoji: "🍷" },
+      { name: "Caldo Verde", desc: "초록 수프 - 진짜 포르투갈 음식", emoji: "🥬" }
+    ],
+    snack: [
+      { name: "파스텔 드 나타", desc: "에그타르트 - Manteigaria 추천", trendy: true, emoji: "🥧" },
+      { name: "Pão de Ló", desc: "포르투갈 카스텔라", emoji: "🍰" },
+      { name: "Bolinhos de Bacalhau", desc: "대구 크로켓", emoji: "🍡" }
+    ],
+    souvenir: [
+      { name: "포트 와인", desc: "면세 한도 (1L) 활용 ⭐⭐", trendy: true },
+      { name: "코르크 제품", desc: "지갑·노트북 케이스 (포르투갈 1위 생산)", trendy: true },
+      { name: "Claus Porto 비누", desc: "1887년 럭셔리 비누 ⭐" },
+      { name: "아줄레주 타일 마그넷", desc: "상 벤투 역 컨셉" },
+      { name: "Sardine 통조림", desc: "Pinhais 또는 Conserveira (디자인 ⭐)", trendy: true }
+    ],
+    trendy2026: [
+      "📚 Livraria Lello (해리포터 영감) ⭐⭐",
+      "🌅 Miradouro da Vitória 무료 일몰 명소",
+      "🥐 Manteigaria 에그타르트 (리스본·포르투 양쪽)",
+      "🍻 Pipa Velha 현지인 와인바"
+    ]
+  },
+  {
+    city: "LISBOA",
+    cityKor: "리스본",
+    emoji: "🌊",
+    tagline: "7개 언덕과 트램의 도시",
+    food: [
+      { name: "Pastéis de Belém", desc: "원조 에그타르트 ⭐⭐ (벨렘)", emoji: "🥧" },
+      { name: "Bacalhau à Brás", desc: "리스본도 대구 강자", emoji: "🐟" },
+      { name: "Ginja", desc: "체리 리큐어 - 초콜릿 컵에 ⭐", trendy: true, emoji: "🍒" },
+      { name: "Polvo à Lagareiro", desc: "올리브오일 문어 요리", emoji: "🐙" },
+      { name: "Vinho Verde", desc: "그린 와인 - 청량한 화이트", emoji: "🥂" }
+    ],
+    snack: [
+      { name: "Pão de Deus", desc: "코코넛 토핑 빵 - 신의 빵", emoji: "🥥" },
+      { name: "Travesseiros", desc: "신트라 명물 베개 페이스트리", trendy: true, emoji: "🛏" },
+      { name: "Queijadas", desc: "치즈 컵케이크", emoji: "🧀" }
+    ],
+    souvenir: [
+      { name: "통조림 (Conserveira de Lisboa)", desc: "1930년대 빈티지 패키지 ⭐⭐", trendy: true },
+      { name: "Claus Porto 비누", desc: "포르투갈 럭셔리 비누 (리스본도 판매)" },
+      { name: "아줄레주 타일", desc: "Cortiço & Netos 100년 노포" },
+      { name: "코르크 제품", desc: "Cork & Co 매장 (Bairro Alto)" },
+      { name: "Burel 양모 제품", desc: "포르투갈 산 (블랭킷·가방)", trendy: true },
+      { name: "Vista Alegre 도자기", desc: "포르투갈 왕실 도자기 (시그니처)" }
+    ],
+    trendy2026: [
+      "🎵 Tasca do Chico 파두 라이브 ⭐⭐",
+      "🌅 Miradouro da Senhora do Monte 일몰 명소",
+      "🚋 28번 트램 새벽에 타기 (사람 없을 때)",
+      "🍸 Park 옥상바 (주차장 옥상) 핫플",
+      "🥐 Manteigaria (Chiado·Time Out Market)"
+    ]
+  }
+];
+
 const OUTFITS = [
   { num: 1, date: "5/16", day: "Sat", desc: "아이보리 블라우스 + 검정 숏팬츠", note: "도착·박물관의밤", topColor: "#f5ecd9", bottomColor: "#1a1a1a" },
   { num: 2, date: "5/17", day: "Sun", desc: "블루가디건 + 화이트레이스롱스커트", note: "몬세라트·지로나", topColor: "#1e3a8a", bottomColor: "#fafafa" },
-  { num: 3, date: "5/18", day: "Mon", desc: "오프숄더 + 청바지 + 가디건", note: "가우디 (어깨 가리기)", topColor: "#fff", bottomColor: "#4a6b9a" },
+  { num: 3, date: "5/18", day: "Mon", desc: "오프숄더 + 청바지 + 가디건", note: "가우디", topColor: "#fff", bottomColor: "#4a6b9a" },
   { num: 4, date: "5/19", day: "Tue", desc: "화이트니트가디건 + 검정스커트", note: "바르셀로나 시내", topColor: "#fafafa", bottomColor: "#1a1a1a" },
   { num: 5, date: "5/20", day: "Wed", desc: "줄무늬T + 검정가디건 + 플리츠팬츠", note: "이동일", topColor: "#e8e4dc", bottomColor: "#1a1a1a" },
   { num: 6, date: "5/21", day: "Thu", desc: "블루셔츠 + 아이보리 롱원피스", note: "알람브라", topColor: "#7ba4d4", bottomColor: "#f5ecd9" },
@@ -408,33 +529,37 @@ const OUTFITS = [
   { num: 18, date: "5/31", day: "Sun", desc: "편한 옷 + 바람막이", note: "귀국", topColor: "#d4cfc4", bottomColor: "#3a3a3a" }
 ];
 
-// ============ 2026 모던 컬러 팔레트 ============
-// 세이지 그린 + 클라우드 블루 + 크림 화이트 + 소프트 코랄 액센트
+// ============ 컬러: 5월 햇살 · 맑은 호수 · 연녹색 잎 ============
 const C = {
-  // 메인 (세이지 그린 톤)
-  sage: '#7fa893',
-  sageDeep: '#1a4d3e',
-  sageLight: '#c5d9cc',
-  sageMint: '#a8c9b5',
+  // 메인 - 연녹색잎 (light fresh green)
+  leaf: '#86c08a',
+  leafDeep: '#3d7a44',
+  leafLight: '#d3e8d4',
+  leafMint: '#b5dab8',
 
-  // 서브 (클라우드 블루)
-  sky: '#a8c5d6',
-  skyDeep: '#3d5a6e',
-  skyLight: '#dde8ee',
+  // 서브 - 맑은 호수 (clear lake blue)
+  lake: '#7ec0d8',
+  lakeDeep: '#2a6b85',
+  lakeLight: '#dceef4',
 
-  // 액센트 (소프트 코랄 - 스냅데이용)
-  coral: '#e8a895',
-  coralLight: '#f5d4c8',
+  // 햇살 - 따뜻한 옐로우 (sunshine)
+  sun: '#f5d77e',
+  sunLight: '#fdf4d3',
+  sunDeep: '#a87a1a',
+
+  // 액센트 - 코랄 (스냅데이용)
+  coral: '#f4a896',
+  coralLight: '#fde0d7',
 
   // 뉴트럴
-  cream: '#f4f7f5',
+  cream: '#fafffe',
   white: '#ffffff',
-  paper: '#fafbfa',
-  ink: '#1a2826',
+  paper: '#f5fbf7',
+  ink: '#1f2e2a',
   inkMid: '#5a6b65',
-  inkLight: '#8a9b95',
-  line: '#e6ebe8',
-  lineDeep: '#d4dcd6'
+  inkLight: '#8a9e95',
+  line: '#e2efe8',
+  lineDeep: '#d0e0d5'
 };
 
 function getDday(startDate) {
@@ -456,141 +581,133 @@ function MapPill({ query }) {
   );
 }
 
+// 헤더 (더 플랫하고 밝게)
 function Header({ tab, setTab }) {
   const dday = getDday(TRIP.startDate);
   const tabs = [
     { id: 'schedule', label: 'Schedule' },
     { id: 'reservations', label: 'Bookings' },
+    { id: 'guide', label: 'Guide' },
     { id: 'outfits', label: 'Outfits' }
   ];
 
   return (
     <div>
-      {/* 메인 헤더 - 세이지 그린 그라데이션 */}
+      {/* 메인 헤더 - 5월 햇살 무드 (더 플랫) */}
       <div style={{
-        background: `linear-gradient(160deg, #c5d9cc 0%, #a8c9b5 40%, #7fa893 100%)`,
-        color: C.sageDeep,
-        padding: '28px 20px 36px',
+        background: `linear-gradient(180deg, #e8f5ed 0%, #d3e8d4 60%, #c5e0ce 100%)`,
+        color: C.leafDeep,
+        padding: '24px 20px 28px',
         position: 'relative',
         overflow: 'hidden'
       }}>
-        {/* 배경 패턴 - 부드러운 원 */}
+        {/* 햇살 효과 */}
         <div style={{
           position: 'absolute',
-          top: '-100px',
-          right: '-100px',
-          width: '300px',
-          height: '300px',
+          top: '-60px',
+          right: '-40px',
+          width: '180px',
+          height: '180px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(253, 244, 211, 0.7) 0%, rgba(245, 215, 126, 0.2) 50%, transparent 80%)',
           pointerEvents: 'none'
         }}></div>
+        {/* 호수 푸른빛 */}
         <div style={{
           position: 'absolute',
-          bottom: '-80px',
-          left: '-80px',
-          width: '240px',
-          height: '240px',
+          bottom: '-60px',
+          left: '-40px',
+          width: '160px',
+          height: '160px',
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(168, 197, 214, 0.5) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(220, 238, 244, 0.6) 0%, transparent 70%)',
           pointerEvents: 'none'
         }}></div>
 
         <div style={{ position: 'relative', zIndex: 1 }}>
-          {/* 상단 메타 */}
+          {/* 상단 메타 (간결하게) */}
           <div style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginBottom: '32px'
+            marginBottom: '20px'
           }}>
             <div className="mono" style={{
-              fontSize: '11px',
-              letterSpacing: '2px',
-              fontWeight: 500,
-              color: C.sageDeep,
+              fontSize: '10.5px',
+              letterSpacing: '2.5px',
+              fontWeight: 600,
+              color: C.leafDeep,
               opacity: 0.7
             }}>
-              {TRIP.year} · MAY
+              ✦ {TRIP.year} ✦
             </div>
             <div className="mono" style={{
-              fontSize: '11px',
+              fontSize: '10.5px',
               letterSpacing: '2px',
               fontWeight: 500,
-              color: C.sageDeep,
-              opacity: 0.7
+              color: C.leafDeep,
+              opacity: 0.65
             }}>
               {TRIP.duration}
             </div>
           </div>
 
-          {/* 타이틀 */}
-          <div className="display" style={{
-            fontSize: '56px',
-            lineHeight: 0.95,
-            marginBottom: '4px',
-            color: C.sageDeep,
-            fontWeight: 400
-          }}>
-            {TRIP.title}
-          </div>
-          <div className="display" style={{
-            fontSize: '24px',
-            fontStyle: 'italic',
-            color: C.sageDeep,
-            opacity: 0.75,
-            marginBottom: '24px',
-            fontWeight: 400
-          }}>
-            {TRIP.subtitle}
+          {/* 타이틀 (한 줄로 더 플랫하게) */}
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', flexWrap: 'wrap', marginBottom: '14px' }}>
+            <div className="display" style={{
+              fontSize: '44px',
+              lineHeight: 0.95,
+              color: C.leafDeep,
+              fontWeight: 400
+            }}>
+              {TRIP.title}
+            </div>
+            <div className="display" style={{
+              fontSize: '20px',
+              fontStyle: 'italic',
+              color: C.leafDeep,
+              opacity: 0.7,
+              fontWeight: 400
+            }}>
+              {TRIP.subtitle}
+            </div>
           </div>
 
-          {/* D-day 카드 */}
+          {/* D-day + 날짜 한줄 정리 */}
           {dday > 0 && (
             <div style={{
-              display: 'inline-flex',
+              display: 'flex',
               alignItems: 'center',
-              gap: '14px',
-              padding: '12px 18px',
-              background: 'rgba(255,255,255,0.55)',
-              borderRadius: '16px',
-              border: '1px solid rgba(255,255,255,0.6)'
+              gap: '12px',
+              padding: '10px 14px',
+              background: 'rgba(255,255,255,0.65)',
+              borderRadius: '14px',
+              border: '1px solid rgba(255,255,255,0.8)'
             }} className="glass">
-              <div>
-                <div className="mono" style={{
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px' }}>
+                <span className="mono" style={{
                   fontSize: '10px',
-                  letterSpacing: '2px',
-                  fontWeight: 500,
-                  color: C.sageDeep,
-                  opacity: 0.6
-                }}>
-                  COUNTDOWN
-                </div>
-                <div className="display" style={{
-                  fontSize: '28px',
-                  color: C.sageDeep,
-                  lineHeight: 1,
-                  marginTop: '2px'
-                }}>
-                  D − {dday}
-                </div>
-              </div>
-              <div style={{ width: '1px', height: '32px', background: 'rgba(26, 77, 62, 0.2)' }}></div>
-              <div>
-                <div className="mono" style={{
-                  fontSize: '10px',
-                  letterSpacing: '2px',
-                  fontWeight: 500,
-                  color: C.sageDeep,
-                  opacity: 0.6
-                }}>
-                  DEPARTURE
-                </div>
-                <div style={{
-                  fontSize: '13px',
+                  letterSpacing: '1.5px',
                   fontWeight: 600,
-                  color: C.sageDeep,
-                  marginTop: '4px'
+                  color: C.leafDeep,
+                  opacity: 0.6
+                }}>
+                  D −
+                </span>
+                <span className="display" style={{
+                  fontSize: '26px',
+                  color: C.leafDeep,
+                  lineHeight: 1
+                }}>
+                  {dday}
+                </span>
+              </div>
+              <div style={{ width: '1px', height: '24px', background: 'rgba(61, 122, 68, 0.2)' }}></div>
+              <div>
+                <div style={{
+                  fontSize: '12px',
+                  fontWeight: 600,
+                  color: C.leafDeep
                 }}>
                   {TRIP.dates}
                 </div>
@@ -598,23 +715,27 @@ function Header({ tab, setTab }) {
             </div>
           )}
           {dday === 0 && (
-            <div style={{ marginTop: '12px' }} className="display" style={{ fontSize: '24px', fontStyle: 'italic' }}>Today is the day ✦</div>
+            <div className="display" style={{ fontSize: '22px', fontStyle: 'italic', color: C.leafDeep }}>
+              Today is the day ✦
+            </div>
           )}
           {dday < 0 && Math.abs(dday) <= 17 && (
-            <div className="display" style={{ fontSize: '24px', fontStyle: 'italic' }}>Day {Math.abs(dday) + 1} of journey</div>
+            <div className="display" style={{ fontSize: '22px', fontStyle: 'italic', color: C.leafDeep }}>
+              Day {Math.abs(dday) + 1} of journey
+            </div>
           )}
         </div>
       </div>
 
-      {/* 탭 네비게이션 */}
+      {/* 탭 - 스티키 */}
       <div className="glass" style={{
         display: 'flex',
-        background: 'rgba(250, 251, 250, 0.85)',
+        background: 'rgba(250, 255, 254, 0.92)',
         borderBottom: `1px solid ${C.line}`,
         position: 'sticky',
         top: 0,
         zIndex: 100,
-        padding: '6px 16px'
+        padding: '6px 10px'
       }}>
         {tabs.map(t => (
           <button
@@ -622,17 +743,17 @@ function Header({ tab, setTab }) {
             onClick={() => setTab(t.id)}
             style={{
               flex: 1,
-              padding: '10px 0',
-              background: tab === t.id ? C.sageDeep : 'transparent',
+              padding: '9px 4px',
+              background: tab === t.id ? C.leafDeep : 'transparent',
               color: tab === t.id ? C.cream : C.inkMid,
               border: 'none',
               borderRadius: '12px',
               cursor: 'pointer',
               fontFamily: 'inherit',
-              fontSize: '13px',
+              fontSize: '12px',
               fontWeight: 600,
               letterSpacing: '-0.01em',
-              margin: '0 3px',
+              margin: '0 2px',
               transition: 'all 0.2s'
             }}
           >
@@ -644,13 +765,14 @@ function Header({ tab, setTab }) {
   );
 }
 
+// 날짜 네비 - 헤더 탭 아래로 sticky 잡힘
 function DateNav({ schedule, onSelect, currentIdx }) {
   return (
     <div style={{
       display: 'flex',
       gap: '8px',
       overflowX: 'auto',
-      padding: '14px 16px',
+      padding: '12px 16px',
       background: C.paper,
       borderBottom: `1px solid ${C.line}`,
       WebkitOverflowScrolling: 'touch'
@@ -661,16 +783,16 @@ function DateNav({ schedule, onSelect, currentIdx }) {
           onClick={() => onSelect(i)}
           style={{
             flexShrink: 0,
-            padding: '10px 14px',
-            background: currentIdx === i ? C.sageDeep : C.white,
+            padding: '8px 12px',
+            background: currentIdx === i ? C.leafDeep : C.white,
             color: currentIdx === i ? C.cream : C.ink,
             border: currentIdx === i ? 'none' : `1px solid ${C.line}`,
-            borderRadius: '14px',
+            borderRadius: '12px',
             cursor: 'pointer',
             fontFamily: 'inherit',
-            minWidth: '64px',
+            minWidth: '60px',
             transition: 'all 0.2s',
-            boxShadow: currentIdx === i ? '0 4px 12px rgba(26, 77, 62, 0.2)' : 'none'
+            boxShadow: currentIdx === i ? '0 3px 10px rgba(61, 122, 68, 0.2)' : 'none'
           }}
         >
           <div className="mono" style={{
@@ -683,9 +805,9 @@ function DateNav({ schedule, onSelect, currentIdx }) {
             {day.day}
           </div>
           <div style={{
-            fontSize: '15px',
+            fontSize: '14px',
             fontWeight: 600,
-            marginTop: '2px',
+            marginTop: '1px',
             letterSpacing: '-0.02em'
           }}>
             {day.date}
@@ -717,7 +839,7 @@ function DetailItem({ detail }) {
         width: '5px',
         height: '5px',
         borderRadius: '50%',
-        background: C.sage
+        background: C.leaf
       }}></span>
       <span>{detail.text}</span>
       {detail.map && <MapPill query={detail.map} />}
@@ -730,20 +852,15 @@ function CourseBox({ course }) {
     <div className="course-card">
       <div className="mono" style={{
         fontSize: '10px',
-        fontWeight: 600,
-        color: C.sageDeep,
+        fontWeight: 700,
+        color: C.leafDeep,
         letterSpacing: '2.5px',
         marginBottom: '10px',
         display: 'flex',
         alignItems: 'center',
         gap: '8px'
       }}>
-        <span style={{
-          width: '20px',
-          height: '1.5px',
-          background: C.sage,
-          display: 'inline-block'
-        }}></span>
+        <span style={{ width: '20px', height: '1.5px', background: C.leaf, display: 'inline-block' }}></span>
         {course.course}
       </div>
       {course.items.map((item, i) => (
@@ -759,15 +876,7 @@ function CourseBox({ course }) {
           flexWrap: 'wrap',
           gap: '5px'
         }}>
-          <span style={{
-            position: 'absolute',
-            left: 0,
-            top: '11px',
-            width: '4px',
-            height: '4px',
-            borderRadius: '50%',
-            background: C.sageMint
-          }}></span>
+          <span style={{ position: 'absolute', left: 0, top: '11px', width: '4px', height: '4px', borderRadius: '50%', background: C.leafMint }}></span>
           <span>{item.text}</span>
           {item.map && <MapPill query={item.map} />}
         </div>
@@ -779,11 +888,7 @@ function CourseBox({ course }) {
 function NoticeCard({ text }) {
   return (
     <div className="notice-card">
-      <div style={{
-        display: 'flex',
-        alignItems: 'flex-start',
-        gap: '8px'
-      }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ flexShrink: 0, marginTop: '2px' }}>
           <circle cx="12" cy="12" r="10"/>
           <line x1="12" y1="8" x2="12" y2="12"/>
@@ -802,16 +907,16 @@ function ScheduleCard({ day, index, isOpen, onToggle }) {
       background: isHighlight
         ? `linear-gradient(135deg, ${C.white} 0%, ${C.coralLight}50 100%)`
         : C.white,
-      borderRadius: '20px',
+      borderRadius: '18px',
       marginBottom: '12px',
       overflow: 'hidden',
       border: isHighlight ? `1.5px solid ${C.coral}` : `1px solid ${C.line}`,
       transition: 'all 0.3s',
-      boxShadow: isHighlight ? '0 4px 16px rgba(232, 168, 149, 0.18)' : '0 1px 2px rgba(26, 40, 38, 0.03)'
+      boxShadow: isHighlight ? '0 4px 14px rgba(244, 168, 150, 0.18)' : '0 1px 2px rgba(31, 46, 42, 0.03)'
     }}>
       <button onClick={onToggle} style={{
         width: '100%',
-        padding: '18px',
+        padding: '16px',
         background: 'none',
         border: 'none',
         textAlign: 'left',
@@ -819,23 +924,22 @@ function ScheduleCard({ day, index, isOpen, onToggle }) {
         fontFamily: 'inherit',
         color: 'inherit'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-          {/* 날짜 디스플레이 */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{
             flexShrink: 0,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            width: '56px',
-            height: '56px',
-            background: isHighlight ? C.coral : C.sageLight,
-            borderRadius: '16px'
+            width: '52px',
+            height: '52px',
+            background: isHighlight ? C.coral : C.leafLight,
+            borderRadius: '14px'
           }}>
             <div className="mono" style={{
               fontSize: '8.5px',
               letterSpacing: '1.5px',
-              color: isHighlight ? C.white : C.sageDeep,
+              color: isHighlight ? C.white : C.leafDeep,
               opacity: 0.8,
               fontWeight: 600,
               textTransform: 'uppercase'
@@ -843,9 +947,9 @@ function ScheduleCard({ day, index, isOpen, onToggle }) {
               {day.day}
             </div>
             <div style={{
-              fontSize: '18px',
+              fontSize: '17px',
               fontWeight: 700,
-              color: isHighlight ? C.white : C.sageDeep,
+              color: isHighlight ? C.white : C.leafDeep,
               lineHeight: 1,
               letterSpacing: '-0.03em',
               marginTop: '1px'
@@ -855,12 +959,12 @@ function ScheduleCard({ day, index, isOpen, onToggle }) {
           </div>
 
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '3px' }}>
               <span style={{ fontSize: '13px' }}>{day.emoji}</span>
               <span className="mono" style={{
                 fontSize: '10px',
-                color: isHighlight ? C.coral : C.sage,
-                fontWeight: 600,
+                color: isHighlight ? C.coral : C.leafDeep,
+                fontWeight: 700,
                 letterSpacing: '1.5px',
                 textTransform: 'uppercase'
               }}>
@@ -883,10 +987,10 @@ function ScheduleCard({ day, index, isOpen, onToggle }) {
               )}
             </div>
             <div style={{
-              fontSize: '15px',
+              fontSize: '14.5px',
               fontWeight: 600,
               color: C.ink,
-              marginBottom: '6px',
+              marginBottom: '4px',
               lineHeight: 1.3,
               letterSpacing: '-0.01em'
             }}>
@@ -914,7 +1018,7 @@ function ScheduleCard({ day, index, isOpen, onToggle }) {
 
           <div style={{
             flexShrink: 0,
-            color: C.sage,
+            color: C.leaf,
             transform: isOpen ? 'rotate(180deg)' : 'rotate(0)',
             transition: 'transform 0.3s ease'
           }}>
@@ -926,27 +1030,20 @@ function ScheduleCard({ day, index, isOpen, onToggle }) {
       </button>
       {isOpen && (
         <div className="fade-up" style={{
-          padding: '0 18px 18px',
+          padding: '0 16px 16px',
           borderTop: `1px solid ${C.line}`,
-          paddingTop: '14px',
+          paddingTop: '12px',
           marginTop: '2px'
         }}>
           <div className="mono" style={{
             fontSize: '10px',
             color: C.inkLight,
             marginBottom: '10px',
-            fontWeight: 500,
+            fontWeight: 600,
             letterSpacing: '1.5px',
-            textTransform: 'uppercase',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px'
+            textTransform: 'uppercase'
           }}>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="18" y1="6" x2="6" y2="18"/>
-              <polyline points="18 18 18 6 6 6"/>
-            </svg>
-            {day.transport}
+            ✈ {day.transport}
           </div>
           {day.details.map((detail, i) => (
             detail.course
@@ -974,10 +1071,10 @@ function SchedulePage() {
   };
   return (
     <div>
-      <div style={{ position: 'sticky', top: '50px', zIndex: 90 }}>
+      <div style={{ position: 'sticky', top: '46px', zIndex: 89 }}>
         <DateNav schedule={SCHEDULE} onSelect={handleSelect} currentIdx={currentIdx} />
       </div>
-      <div style={{ padding: '20px 16px' }}>
+      <div style={{ padding: '18px 16px' }}>
         {SCHEDULE.map((day, i) => (
           <ScheduleCard key={i} day={day} index={i} isOpen={openIdx === i} onToggle={() => {
             setOpenIdx(openIdx === i ? null : i);
@@ -992,22 +1089,22 @@ function SchedulePage() {
 function SectionHeader({ count, label, subtitle }) {
   return (
     <div style={{
-      marginTop: '28px',
-      marginBottom: '14px',
+      marginTop: '24px',
+      marginBottom: '12px',
       display: 'flex',
       alignItems: 'baseline',
       gap: '10px'
     }}>
       <span className="display" style={{
-        fontSize: '32px',
-        color: C.sageDeep,
+        fontSize: '28px',
+        color: C.leafDeep,
         lineHeight: 1
       }}>
         {label}
       </span>
       {count && (
         <span className="mono" style={{
-          fontSize: '11px',
+          fontSize: '10.5px',
           color: C.inkLight,
           fontWeight: 500,
           letterSpacing: '1.5px'
@@ -1026,128 +1123,61 @@ function SectionHeader({ count, label, subtitle }) {
 
 function ReservationsPage() {
   const typeColors = {
-    "TOUR": { bg: C.sageLight, color: C.sageDeep, label: '투어' },
-    "SNAP": { bg: C.coralLight, color: '#8a3a28', label: '스냅' },
-    "SHOW": { bg: C.skyLight, color: C.skyDeep, label: '공연' }
+    "TOUR": { bg: C.leafLight, color: C.leafDeep },
+    "SNAP": { bg: C.coralLight, color: '#9a3a28' },
+    "SHOW": { bg: C.lakeLight, color: C.lakeDeep }
   };
 
   return (
-    <div style={{ padding: '20px 16px' }}>
-      {/* 인트로 카드 */}
+    <div style={{ padding: '18px 16px' }}>
       <div style={{
-        background: `linear-gradient(135deg, ${C.skyLight} 0%, ${C.sageLight} 100%)`,
-        padding: '22px',
-        borderRadius: '20px',
+        background: `linear-gradient(135deg, ${C.lakeLight} 0%, ${C.leafLight} 100%)`,
+        padding: '20px',
+        borderRadius: '18px',
         marginBottom: '8px',
         position: 'relative',
         overflow: 'hidden'
       }}>
-        <div style={{
-          position: 'absolute',
-          top: '-30px',
-          right: '-30px',
-          width: '120px',
-          height: '120px',
-          borderRadius: '50%',
-          background: 'rgba(255,255,255,0.4)'
-        }}></div>
+        <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '100px', height: '100px', borderRadius: '50%', background: 'rgba(255,255,255,0.4)' }}></div>
         <div style={{ position: 'relative' }}>
-          <div className="display" style={{
-            fontSize: '32px',
-            color: C.sageDeep,
-            lineHeight: 1.1,
-            marginBottom: '4px'
-          }}>
+          <div className="display" style={{ fontSize: '28px', color: C.leafDeep, lineHeight: 1.1, marginBottom: '4px' }}>
             All Bookings
           </div>
-          <div style={{
-            fontSize: '12px',
-            color: C.inkMid,
-            letterSpacing: '0.5px'
-          }}>
-            예약 정보 한눈에 · 🗺️ 탭하면 구글맵
+          <div style={{ fontSize: '12px', color: C.inkMid }}>
+            예약 한눈에 · 🗺️ 탭하면 구글맵
           </div>
         </div>
       </div>
 
       <SectionHeader label="Flights" count={`${FLIGHTS.length} flights`} />
       {FLIGHTS.map((f, i) => (
-        <div key={i} style={{
-          background: C.white,
-          borderRadius: '18px',
-          padding: '18px',
-          marginBottom: '10px',
-          border: `1px solid ${C.line}`
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-            <span style={{
-              background: C.skyLight,
-              color: C.skyDeep,
-              padding: '4px 10px',
-              borderRadius: '8px',
-              fontSize: '10px',
-              fontWeight: 600,
-              letterSpacing: '1px'
-            }}>
-              FLIGHT
-            </span>
-            <span className="mono" style={{ fontSize: '12px', color: C.inkMid, fontWeight: 500 }}>
-              {f.date}
-            </span>
+        <div key={i} style={{ background: C.white, borderRadius: '16px', padding: '16px', marginBottom: '10px', border: `1px solid ${C.line}` }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
+            <span style={{ background: C.lakeLight, color: C.lakeDeep, padding: '3px 9px', borderRadius: '7px', fontSize: '10px', fontWeight: 700, letterSpacing: '1px' }}>FLIGHT</span>
+            <span className="mono" style={{ fontSize: '11.5px', color: C.inkMid, fontWeight: 500 }}>{f.date}</span>
           </div>
-          {/* 항공편 시각화 */}
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            marginBottom: '10px'
-          }}>
-            <div style={{ textAlign: 'left' }}>
-              <div className="mono" style={{ fontSize: '20px', fontWeight: 700, color: C.ink, letterSpacing: '-0.02em' }}>
-                {f.from}
-              </div>
-              <div style={{ fontSize: '10px', color: C.inkLight, marginTop: '2px' }}>
-                {f.fromKr}
-              </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+            <div>
+              <div className="mono" style={{ fontSize: '18px', fontWeight: 700, color: C.ink, letterSpacing: '-0.02em' }}>{f.from}</div>
+              <div style={{ fontSize: '9.5px', color: C.inkLight, marginTop: '1px' }}>{f.fromKr}</div>
             </div>
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '5px' }}>
               <div style={{ flex: 1, height: '1px', background: C.lineDeep }}></div>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill={C.sage}>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill={C.leaf}>
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" transform="rotate(45 12 12)"/>
               </svg>
               <div style={{ flex: 1, height: '1px', background: C.lineDeep }}></div>
             </div>
             <div style={{ textAlign: 'right' }}>
-              <div className="mono" style={{ fontSize: '20px', fontWeight: 700, color: C.ink, letterSpacing: '-0.02em' }}>
-                {f.to}
-              </div>
-              <div style={{ fontSize: '10px', color: C.inkLight, marginTop: '2px' }}>
-                {f.toKr}
-              </div>
+              <div className="mono" style={{ fontSize: '18px', fontWeight: 700, color: C.ink, letterSpacing: '-0.02em' }}>{f.to}</div>
+              <div style={{ fontSize: '9.5px', color: C.inkLight, marginTop: '1px' }}>{f.toKr}</div>
             </div>
           </div>
-
-          {f.map && (
-            <div style={{ marginBottom: '8px' }}>
-              <MapPill query={f.map} />
-            </div>
-          )}
-
-          <div style={{
-            fontSize: '12px',
-            color: C.inkMid,
-            paddingTop: '8px',
-            borderTop: `1px solid ${C.line}`
-          }}>
-            <div style={{ marginBottom: '3px' }}>{f.time}</div>
-            {f.code !== '—' && (
-              <div className="mono" style={{ fontSize: '11px', color: C.inkLight }}>
-                {f.airline} · {f.code}
-              </div>
-            )}
-            <div style={{ fontSize: '11px', color: C.inkLight, marginTop: '2px' }}>
-              {f.note}
-            </div>
+          {f.map && <div style={{ marginBottom: '8px' }}><MapPill query={f.map} /></div>}
+          <div style={{ fontSize: '11.5px', color: C.inkMid, paddingTop: '8px', borderTop: `1px solid ${C.line}` }}>
+            <div>{f.time}</div>
+            {f.code !== '—' && <div className="mono" style={{ fontSize: '10.5px', color: C.inkLight, marginTop: '2px' }}>{f.airline} · {f.code}</div>}
+            <div style={{ fontSize: '10.5px', color: C.inkLight, marginTop: '2px' }}>{f.note}</div>
           </div>
         </div>
       ))}
@@ -1157,84 +1187,36 @@ function ReservationsPage() {
         const tc = typeColors[r.type] || typeColors["TOUR"];
         return (
           <div key={i} style={{
-            background: r.highlight
-              ? `linear-gradient(135deg, ${C.white} 0%, ${C.coralLight}30 100%)`
-              : C.white,
-            borderRadius: '18px',
-            padding: '18px',
+            background: r.highlight ? `linear-gradient(135deg, ${C.white} 0%, ${C.coralLight}30 100%)` : C.white,
+            borderRadius: '16px',
+            padding: '16px',
             marginBottom: '10px',
             border: r.highlight ? `1.5px solid ${C.coral}` : `1px solid ${C.line}`,
-            boxShadow: r.highlight ? `0 4px 14px ${C.coralLight}80` : 'none'
+            boxShadow: r.highlight ? `0 4px 12px ${C.coralLight}70` : 'none'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-              <span style={{
-                background: tc.bg,
-                color: tc.color,
-                padding: '4px 10px',
-                borderRadius: '8px',
-                fontSize: '10px',
-                fontWeight: 600,
-                letterSpacing: '1px'
-              }}>
-                {r.type}
-              </span>
-              <span className="mono" style={{ fontSize: '12px', color: C.inkMid, fontWeight: 500 }}>
-                {r.date}
-              </span>
-              {r.price && (
-                <span className="mono" style={{
-                  marginLeft: 'auto',
-                  fontSize: '12px',
-                  color: C.sageDeep,
-                  fontWeight: 700
-                }}>
-                  {r.price}
-                </span>
-              )}
-              {r.highlight && !r.price && (
-                <span style={{
-                  marginLeft: 'auto',
-                  fontSize: '11px',
-                  color: C.coral,
-                  fontWeight: 600
-                }}>
-                  ✦
-                </span>
-              )}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+              <span style={{ background: tc.bg, color: tc.color, padding: '3px 9px', borderRadius: '7px', fontSize: '10px', fontWeight: 700, letterSpacing: '1px' }}>{r.type}</span>
+              <span className="mono" style={{ fontSize: '11.5px', color: C.inkMid, fontWeight: 500 }}>{r.date}</span>
+              {r.price && <span className="mono" style={{ marginLeft: 'auto', fontSize: '11.5px', color: C.leafDeep, fontWeight: 700 }}>{r.price}</span>}
+              {r.highlight && !r.price && <span style={{ marginLeft: 'auto', fontSize: '11px', color: C.coral, fontWeight: 600 }}>✦</span>}
             </div>
-            <div style={{
-              fontSize: '15px',
-              fontWeight: 600,
-              marginBottom: '10px',
-              color: C.ink,
-              lineHeight: 1.35,
-              letterSpacing: '-0.01em'
-            }}>
-              {r.title}
-            </div>
-            <div style={{
-              display: 'grid',
-              gap: '5px',
-              fontSize: '12px',
-              color: C.inkMid,
-              paddingTop: '10px',
-              borderTop: `1px solid ${C.line}`
-            }}>
+            <div style={{ fontSize: '14.5px', fontWeight: 600, marginBottom: '10px', color: C.ink, lineHeight: 1.35 }}>{r.title}</div>
+            <div style={{ display: 'grid', gap: '4px', fontSize: '11.5px', color: C.inkMid, paddingTop: '8px', borderTop: `1px solid ${C.line}` }}>
               <div style={{ display: 'flex', gap: '8px' }}>
-                <span style={{ color: C.inkLight, fontSize: '11px', minWidth: '46px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>Time</span>
+                <span style={{ color: C.inkLight, fontSize: '10px', minWidth: '42px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>Time</span>
                 <span>{r.time}</span>
               </div>
               <div style={{ display: 'flex', gap: '8px' }}>
-                <span style={{ color: C.inkLight, fontSize: '11px', minWidth: '46px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>업체</span>
+                <span style={{ color: C.inkLight, fontSize: '10px', minWidth: '42px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>업체</span>
                 <span>{r.company}</span>
               </div>
               <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
-                <span style={{ color: C.inkLight, fontSize: '11px', minWidth: '46px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>Meet</span>
+                <span style={{ color: C.inkLight, fontSize: '10px', minWidth: '42px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>Meet</span>
                 <span>{r.meet}</span>
                 {r.map && <MapPill query={r.map} />}
               </div>
               <div style={{ display: 'flex', gap: '8px' }}>
-                <span style={{ color: C.coral, fontSize: '11px', minWidth: '46px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>준비</span>
+                <span style={{ color: C.coral, fontSize: '10px', minWidth: '42px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700 }}>준비</span>
                 <span style={{ color: '#8a3a28', fontWeight: 500 }}>{r.item}</span>
               </div>
             </div>
@@ -1244,101 +1226,38 @@ function ReservationsPage() {
 
       <SectionHeader label="Stays" count={`${HOTELS.length} hotels`} />
       {HOTELS.map((h, i) => (
-        <div key={i} style={{
-          background: C.white,
-          borderRadius: '18px',
-          padding: '18px',
-          marginBottom: '10px',
-          border: `1px solid ${C.line}`
-        }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
+        <div key={i} style={{ background: C.white, borderRadius: '16px', padding: '16px', marginBottom: '10px', border: `1px solid ${C.line}` }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px' }}>
             <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px', flexWrap: 'wrap' }}>
-                <span className="mono" style={{
-                  fontSize: '10px',
-                  color: C.sage,
-                  fontWeight: 700,
-                  letterSpacing: '2px',
-                  textTransform: 'uppercase'
-                }}>
-                  {h.city}
-                </span>
-                <span style={{
-                  background: h.type === 'Hotel' ? C.skyLight : C.sageLight,
-                  color: h.type === 'Hotel' ? C.skyDeep : C.sageDeep,
-                  padding: '2px 8px',
-                  borderRadius: '6px',
-                  fontSize: '9.5px',
-                  fontWeight: 600,
-                  letterSpacing: '0.5px'
-                }}>
-                  {h.type}
-                </span>
-                <span className="mono" style={{ fontSize: '10px', color: C.inkLight, fontWeight: 500 }}>
-                  {h.nights}
-                </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '5px', flexWrap: 'wrap' }}>
+                <span className="mono" style={{ fontSize: '10px', color: C.leafDeep, fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase' }}>{h.city}</span>
+                <span style={{ background: h.type === 'Hotel' ? C.lakeLight : C.leafLight, color: h.type === 'Hotel' ? C.lakeDeep : C.leafDeep, padding: '2px 7px', borderRadius: '5px', fontSize: '9.5px', fontWeight: 600 }}>{h.type}</span>
+                <span className="mono" style={{ fontSize: '9.5px', color: C.inkLight, fontWeight: 500 }}>{h.nights}</span>
               </div>
-              <div style={{
-                fontSize: '16px',
-                fontWeight: 600,
-                color: C.ink,
-                marginBottom: '4px',
-                letterSpacing: '-0.01em',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                flexWrap: 'wrap'
-              }}>
+              <div style={{ fontSize: '15px', fontWeight: 600, color: C.ink, marginBottom: '3px', display: 'flex', alignItems: 'center', gap: '7px', flexWrap: 'wrap' }}>
                 <span>{h.name}</span>
                 {h.map && <MapPill query={h.map} />}
               </div>
             </div>
-            <div className="mono" style={{
-              fontSize: '10.5px',
-              color: C.inkMid,
-              textAlign: 'right',
-              flexShrink: 0,
-              marginLeft: '8px',
-              fontWeight: 500
-            }}>
-              {h.date}
-            </div>
+            <div className="mono" style={{ fontSize: '10px', color: C.inkMid, textAlign: 'right', flexShrink: 0, marginLeft: '6px', fontWeight: 500 }}>{h.date}</div>
           </div>
-
-          <div style={{
-            display: 'grid',
-            gap: '5px',
-            fontSize: '12px',
-            color: C.inkMid,
-            paddingTop: '10px',
-            borderTop: `1px solid ${C.line}`
-          }}>
+          <div style={{ display: 'grid', gap: '4px', fontSize: '11.5px', color: C.inkMid, paddingTop: '8px', borderTop: `1px solid ${C.line}` }}>
             <div style={{ display: 'flex', gap: '8px' }}>
-              <span style={{ color: C.inkLight, fontSize: '11px', minWidth: '50px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>체크인</span>
+              <span style={{ color: C.inkLight, fontSize: '10px', minWidth: '46px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>체크인</span>
               <span>{h.checkin}</span>
             </div>
             {h.ref !== '-' && (
               <div style={{ display: 'flex', gap: '8px' }}>
-                <span style={{ color: C.inkLight, fontSize: '11px', minWidth: '50px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>Ref</span>
-                <span className="mono" style={{ fontSize: '11px' }}>{h.ref}</span>
+                <span style={{ color: C.inkLight, fontSize: '10px', minWidth: '46px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>Ref</span>
+                <span className="mono" style={{ fontSize: '10.5px' }}>{h.ref}</span>
               </div>
             )}
             <div style={{ display: 'flex', gap: '8px' }}>
-              <span style={{ color: C.inkLight, fontSize: '11px', minWidth: '50px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>주소</span>
-              <span style={{ fontSize: '11.5px' }}>{h.address}</span>
+              <span style={{ color: C.inkLight, fontSize: '10px', minWidth: '46px', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>주소</span>
+              <span style={{ fontSize: '11px' }}>{h.address}</span>
             </div>
             {h.note && (
-              <div style={{
-                marginTop: '6px',
-                padding: '6px 10px',
-                background: C.sageLight,
-                borderRadius: '8px',
-                fontSize: '11.5px',
-                color: C.sageDeep,
-                fontWeight: 500,
-                display: 'inline-block',
-                width: 'fit-content'
-              }}>
+              <div style={{ marginTop: '4px', padding: '5px 9px', background: C.leafLight, borderRadius: '7px', fontSize: '11px', color: C.leafDeep, fontWeight: 500, display: 'inline-block', width: 'fit-content' }}>
                 ✓ {h.note}
               </div>
             )}
@@ -1349,39 +1268,234 @@ function ReservationsPage() {
   );
 }
 
-function OutfitsPage() {
+// ============ LOCAL GUIDE 페이지 ============
+function GuideCard({ guide }) {
+  const [openSection, setOpenSection] = useState(null);
+
+  const sections = [
+    { id: 'trendy', label: '2026 핫플', icon: '🔥', data: guide.trendy2026, isText: true },
+    { id: 'food', label: 'Must Eat', icon: '🍽', data: guide.food },
+    { id: 'snack', label: '간식·디저트', icon: '🍩', data: guide.snack },
+    { id: 'souvenir', label: '기념품', icon: '🎁', data: guide.souvenir }
+  ];
+
   return (
-    <div style={{ padding: '20px 16px' }}>
+    <div style={{
+      background: C.white,
+      borderRadius: '20px',
+      padding: '20px',
+      marginBottom: '14px',
+      border: `1px solid ${C.line}`,
+      boxShadow: '0 2px 8px rgba(31, 46, 42, 0.04)'
+    }}>
+      {/* 도시 헤더 */}
       <div style={{
-        background: `linear-gradient(135deg, ${C.coralLight} 0%, ${C.skyLight} 100%)`,
-        padding: '22px',
-        borderRadius: '20px',
-        marginBottom: '20px',
+        padding: '14px 16px',
+        marginBottom: '14px',
+        marginLeft: '-20px',
+        marginRight: '-20px',
+        marginTop: '-20px',
+        background: `linear-gradient(135deg, ${C.leafLight} 0%, ${C.lakeLight} 100%)`,
+        borderRadius: '20px 20px 0 0',
         position: 'relative',
         overflow: 'hidden'
       }}>
-        <div style={{
-          position: 'absolute',
-          top: '-40px',
-          right: '-40px',
-          width: '140px',
-          height: '140px',
-          borderRadius: '50%',
-          background: 'rgba(255,255,255,0.4)'
-        }}></div>
+        <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '90px', height: '90px', borderRadius: '50%', background: 'rgba(255,255,255,0.4)' }}></div>
+        <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ fontSize: '32px' }}>{guide.emoji}</div>
+          <div style={{ flex: 1 }}>
+            <div className="display" style={{ fontSize: '24px', color: C.leafDeep, lineHeight: 1, marginBottom: '2px' }}>
+              {guide.cityKor}
+            </div>
+            <div className="mono" style={{ fontSize: '9.5px', color: C.leafDeep, opacity: 0.6, letterSpacing: '2px', fontWeight: 600, marginBottom: '4px' }}>
+              {guide.city}
+            </div>
+            <div style={{ fontSize: '11.5px', color: C.leafDeep, opacity: 0.8, fontStyle: 'italic' }}>
+              {guide.tagline}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 섹션들 */}
+      {sections.map(section => (
+        <div key={section.id} style={{ marginBottom: '10px' }}>
+          <button
+            onClick={() => setOpenSection(openSection === section.id ? null : section.id)}
+            style={{
+              width: '100%',
+              padding: '10px 12px',
+              background: openSection === section.id ? C.leafLight : C.paper,
+              border: `1px solid ${C.line}`,
+              borderRadius: '10px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              fontFamily: 'inherit',
+              transition: 'all 0.2s'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '15px' }}>{section.icon}</span>
+              <span style={{ fontSize: '13px', fontWeight: 600, color: C.ink }}>{section.label}</span>
+              <span className="mono" style={{ fontSize: '10px', color: C.inkLight, fontWeight: 500 }}>
+                {section.data.length}
+              </span>
+            </div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={C.leaf} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ transform: openSection === section.id ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }}>
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+
+          {openSection === section.id && (
+            <div className="fade-up" style={{ padding: '10px 4px 4px' }}>
+              {section.isText ? (
+                section.data.map((item, i) => (
+                  <div key={i} style={{
+                    fontSize: '13px',
+                    color: C.ink,
+                    padding: '6px 0',
+                    paddingLeft: '14px',
+                    position: 'relative',
+                    lineHeight: 1.5
+                  }}>
+                    <span style={{ position: 'absolute', left: 0, top: '12px', width: '5px', height: '5px', borderRadius: '50%', background: C.sun }}></span>
+                    {item}
+                  </div>
+                ))
+              ) : (
+                section.data.map((item, i) => (
+                  <div key={i} style={{
+                    padding: '10px 12px',
+                    background: C.paper,
+                    borderRadius: '10px',
+                    marginBottom: '6px',
+                    border: `1px solid ${C.line}`,
+                    display: 'flex',
+                    gap: '10px',
+                    alignItems: 'flex-start'
+                  }}>
+                    {item.emoji && <span style={{ fontSize: '20px', flexShrink: 0 }}>{item.emoji}</span>}
+                    <div style={{ flex: 1 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '2px' }}>
+                        <span style={{ fontSize: '13px', fontWeight: 600, color: C.ink }}>{item.name}</span>
+                        {item.trendy && (
+                          <span style={{
+                            fontSize: '8.5px',
+                            color: C.sunDeep,
+                            background: C.sunLight,
+                            padding: '1.5px 5px',
+                            borderRadius: '4px',
+                            fontWeight: 700,
+                            letterSpacing: '0.5px'
+                          }}>
+                            HOT 2026
+                          </span>
+                        )}
+                      </div>
+                      <div style={{ fontSize: '11.5px', color: C.inkMid, lineHeight: 1.4 }}>
+                        {item.desc}
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function GuidePage() {
+  return (
+    <div style={{ padding: '18px 16px' }}>
+      {/* 인트로 */}
+      <div style={{
+        background: `linear-gradient(135deg, ${C.sunLight} 0%, ${C.leafLight} 60%, ${C.lakeLight} 100%)`,
+        padding: '22px',
+        borderRadius: '20px',
+        marginBottom: '14px',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '120px', height: '120px', borderRadius: '50%', background: 'rgba(255,255,255,0.5)' }}></div>
         <div style={{ position: 'relative' }}>
-          <div className="display" style={{
-            fontSize: '32px',
-            color: C.sageDeep,
-            lineHeight: 1.1,
-            marginBottom: '4px'
-          }}>
+          <div className="display" style={{ fontSize: '30px', color: C.leafDeep, lineHeight: 1.1, marginBottom: '6px' }}>
+            Local Guide
+          </div>
+          <div style={{ fontSize: '12.5px', color: C.inkMid, marginBottom: '12px' }}>
+            도시별 꼭 먹어야 할 음식 · 기념품 · 2026 핫플
+          </div>
+          <a
+            href={TRIP.mapList}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '10px 14px',
+              background: C.leafDeep,
+              color: C.cream,
+              borderRadius: '12px',
+              fontSize: '12px',
+              fontWeight: 600,
+              textDecoration: 'none',
+              letterSpacing: '-0.01em'
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            나의 구글맵 리스트 열기
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      {GUIDES.map((g, i) => (
+        <GuideCard key={i} guide={g} />
+      ))}
+
+      <div style={{
+        padding: '14px',
+        background: C.sunLight,
+        borderRadius: '12px',
+        fontSize: '11.5px',
+        color: C.sunDeep,
+        lineHeight: 1.6,
+        marginTop: '8px'
+      }}>
+        💡 <strong>참고:</strong> HOT 2026 표시는 최근 SNS·트렌드 기준 추천이에요. 통조림·코르크는 한국 면세 한도 잘 체크하세요!
+      </div>
+    </div>
+  );
+}
+
+function OutfitsPage() {
+  return (
+    <div style={{ padding: '18px 16px' }}>
+      <div style={{
+        background: `linear-gradient(135deg, ${C.coralLight} 0%, ${C.sunLight} 100%)`,
+        padding: '20px',
+        borderRadius: '18px',
+        marginBottom: '16px',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        <div style={{ position: 'absolute', top: '-30px', right: '-30px', width: '110px', height: '110px', borderRadius: '50%', background: 'rgba(255,255,255,0.4)' }}></div>
+        <div style={{ position: 'relative' }}>
+          <div className="display" style={{ fontSize: '28px', color: C.leafDeep, lineHeight: 1.1, marginBottom: '4px' }}>
             Daily Looks
           </div>
-          <div style={{
-            fontSize: '12px',
-            color: C.inkMid
-          }}>
+          <div style={{ fontSize: '12px', color: C.inkMid }}>
             18 outfits · 매일 다른 룩 · 스냅 2회 강조
           </div>
         </div>
@@ -1389,90 +1503,28 @@ function OutfitsPage() {
 
       {OUTFITS.map((o, i) => (
         <div key={i} style={{
-          background: o.highlight
-            ? `linear-gradient(135deg, ${C.white} 0%, ${C.coralLight}30 100%)`
-            : C.white,
-          borderRadius: '16px',
-          padding: '14px',
-          marginBottom: '10px',
+          background: o.highlight ? `linear-gradient(135deg, ${C.white} 0%, ${C.coralLight}30 100%)` : C.white,
+          borderRadius: '14px',
+          padding: '12px',
+          marginBottom: '8px',
           border: o.highlight ? `1.5px solid ${C.coral}` : `1px solid ${C.line}`,
           display: 'flex',
-          gap: '14px',
+          gap: '12px',
           alignItems: 'center'
         }}>
-          {/* 코디 컬러 미리보기 */}
-          <div style={{
-            flexShrink: 0,
-            width: '48px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '3px'
-          }}>
-            <div style={{
-              height: '30px',
-              background: o.topColor,
-              borderRadius: '8px 8px 3px 3px',
-              border: '1px solid rgba(0,0,0,0.06)'
-            }}></div>
-            <div style={{
-              height: '36px',
-              background: o.bottomColor,
-              borderRadius: '3px 3px 8px 8px',
-              border: '1px solid rgba(0,0,0,0.06)'
-            }}></div>
+          <div style={{ flexShrink: 0, width: '44px', display: 'flex', flexDirection: 'column', gap: '3px' }}>
+            <div style={{ height: '28px', background: o.topColor, borderRadius: '7px 7px 3px 3px', border: '1px solid rgba(0,0,0,0.06)' }}></div>
+            <div style={{ height: '33px', background: o.bottomColor, borderRadius: '3px 3px 7px 7px', border: '1px solid rgba(0,0,0,0.06)' }}></div>
           </div>
-
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '4px', flexWrap: 'wrap' }}>
-              <span className="mono" style={{
-                fontSize: '11px',
-                color: C.sage,
-                fontWeight: 700,
-                letterSpacing: '1px'
-              }}>
-                №{String(o.num).padStart(2, '0')}
-              </span>
-              <span style={{
-                fontSize: '14px',
-                fontWeight: 600,
-                color: C.ink,
-                letterSpacing: '-0.01em'
-              }}>
-                {o.date}
-              </span>
-              <span className="mono" style={{ fontSize: '10px', color: C.inkLight, letterSpacing: '1px' }}>
-                {o.day}
-              </span>
-              {o.highlight && (
-                <span style={{
-                  fontSize: '9px',
-                  color: C.coral,
-                  background: C.coralLight,
-                  padding: '2px 6px',
-                  borderRadius: '6px',
-                  fontWeight: 600,
-                  letterSpacing: '0.5px',
-                  marginLeft: 'auto'
-                }}>
-                  SNAP
-                </span>
-              )}
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: '7px', marginBottom: '3px', flexWrap: 'wrap' }}>
+              <span className="mono" style={{ fontSize: '10.5px', color: C.leaf, fontWeight: 700, letterSpacing: '1px' }}>№{String(o.num).padStart(2, '0')}</span>
+              <span style={{ fontSize: '13px', fontWeight: 600, color: C.ink }}>{o.date}</span>
+              <span className="mono" style={{ fontSize: '9.5px', color: C.inkLight, letterSpacing: '1px' }}>{o.day}</span>
+              {o.highlight && <span style={{ fontSize: '8.5px', color: C.coral, background: C.coralLight, padding: '2px 6px', borderRadius: '5px', fontWeight: 700, letterSpacing: '0.5px', marginLeft: 'auto' }}>SNAP</span>}
             </div>
-            <div style={{
-              fontSize: '13px',
-              color: C.ink,
-              marginBottom: '3px',
-              lineHeight: 1.4
-            }}>
-              {o.desc}
-            </div>
-            <div style={{
-              fontSize: '11px',
-              color: o.highlight ? C.coral : C.inkLight,
-              fontWeight: o.highlight ? 600 : 400
-            }}>
-              {o.note}
-            </div>
+            <div style={{ fontSize: '12.5px', color: C.ink, marginBottom: '2px', lineHeight: 1.4 }}>{o.desc}</div>
+            <div style={{ fontSize: '10.5px', color: o.highlight ? C.coral : C.inkLight, fontWeight: o.highlight ? 600 : 400 }}>{o.note}</div>
           </div>
         </div>
       ))}
@@ -1488,6 +1540,7 @@ function App() {
       <div>
         {tab === 'schedule' && <SchedulePage />}
         {tab === 'reservations' && <ReservationsPage />}
+        {tab === 'guide' && <GuidePage />}
         {tab === 'outfits' && <OutfitsPage />}
       </div>
       <div className="glass" style={{
@@ -1495,26 +1548,15 @@ function App() {
         bottom: 0,
         left: 0,
         right: 0,
-        padding: '14px 16px 18px',
-        background: 'rgba(244, 247, 245, 0.92)',
+        padding: '12px 16px 16px',
+        background: 'rgba(250, 255, 254, 0.92)',
         textAlign: 'center',
         borderTop: `1px solid ${C.line}`
       }}>
-        <div className="display" style={{
-          fontSize: '14px',
-          color: C.sageDeep,
-          fontStyle: 'italic',
-          fontWeight: 400
-        }}>
+        <div className="display" style={{ fontSize: '13.5px', color: C.leafDeep, fontStyle: 'italic', fontWeight: 400 }}>
           forever begins ✦
         </div>
-        <div className="mono" style={{
-          fontSize: '9.5px',
-          color: C.inkLight,
-          letterSpacing: '3px',
-          marginTop: '2px',
-          fontWeight: 500
-        }}>
+        <div className="mono" style={{ fontSize: '9px', color: C.inkLight, letterSpacing: '3px', marginTop: '1px', fontWeight: 500 }}>
           MAY 15 — JUN 1, 2026
         </div>
       </div>
