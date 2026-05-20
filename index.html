@@ -160,49 +160,102 @@ const SCHEDULE = [
       { text: "2026년 가우디 서거 100주년 완공 예정" },
       { text: "성당 입장: 어깨 가리기 필수" }
     ] },
-  { date: "5/19", day: "Tue", city: "Barcelona", emoji: "🚶", main: "바르셀로나 자유일정", time: "Free", transport: "Walk·Metro", stay: "Barcelona Night 4",
+  { date: "5/19", day: "Tue", city: "Barcelona", emoji: "☀️", main: "벙커·공원·시장 (마지막날)", time: "12:00-22:00", transport: "Walk·Bus·Metro", stay: "Barcelona Night 4",
+    outfit: "화이트 니트가디건 + 검정 스커트 + 운동화 (벙커·돌길)",
     details: [
-      { text: "고딕지구·람블라스 거리", map: "Las Ramblas Barcelona" },
-      { text: "피카소 미술관 (예약 추천)", map: "Picasso Museum Barcelona" },
-      { text: "보케리아 시장", map: "La Boqueria Market Barcelona" },
-      { text: "벙커 델 카르멜 (낮 방문)", map: "Bunkers del Carmel Barcelona" },
-      { text: "바르셀로네타 해변", map: "Barceloneta Beach" }
+      { course: "🥐 BRUNCH (완료)", items: [
+        { text: "12:00-13:10 Billy Brunch HQ ✓", map: "Billy Brunch Headquarters Barcelona" }
+      ] },
+      { course: "⛰️ BUNKERS DEL CARMEL", items: [
+        { text: "13:45 호텔 출발 → 메트로+버스" },
+        { text: "벙커 360도 파노라마 ⭐⭐", map: "Bunkers del Carmel Barcelona" },
+        { text: "사그라다·바다·티비다보 뷰" }
+      ] },
+      { course: "🌳 CIUTADELLA PARK", items: [
+        { text: "V19 버스 직행 (Carmel 118 → Ciutadella)", map: "Parc de la Ciutadella Barcelona" },
+        { text: "Cascada 분수 (가우디 초기작) ⭐", map: "Cascada Parc Ciutadella" },
+        { text: "골든아워 산책" }
+      ] },
+      { course: "🛒 시장 픽업 + 호텔", items: [
+        { text: "Santa Caterina 시장 (20시까지)", map: "Mercat de Santa Caterina Barcelona" },
+        { text: "디너용: Fuet·빵·치즈·Gildas (다 먹기)" },
+        { text: "선물용: 안초비·Romesco·올리브오일·초콜릿" },
+        { text: "🥂 호텔 허니문 샴페인 + 짐싸기 💕" }
+      ] },
+      { notice: "내일 5/20 04:30 체크아웃·7:00 BCN→GRX / 22시 취침 필수!" }
     ] },
-  { date: "5/20", day: "Wed", city: "→ Granada", emoji: "✈", main: "그라나다 이동·시내", time: "7:00-8:40", transport: "Vueling YPC4QK", stay: "Granada Night 1 (Airbnb)",
+  { date: "5/20", day: "Wed", city: "Granada", emoji: "✈", main: "그라나다 도착·시내·일몰", time: "14:50 숙소출발", transport: "Vueling YPC4QK", stay: "Granada Night 1 (Airbnb)",
+    outfit: "화이트 끈나시 + 핑크 스트라이프셔츠 + 블랙 린넨롱스커트 + 운동화 / 모자·선글라스·선크림 (셔츠로 어깨·롱스커트로 무릎 가려 성당OK, 더우면 셔츠 벗기)",
     details: [
-      { text: "✈ Vueling 7:00-8:40 (BCN→GRX)" },
-      { text: "예약코드: YPC4QK" },
-      { text: "그라나다 공항", map: "Granada Airport GRX" },
-      { text: "에어비앤비 체크인 17:00~21:00", map: "Calle Huete 3 Granada" },
-      { text: "그라나다 타파스 거리 (무료 타파스)" }
+      { text: "✈ Vueling 7:00-8:40 도착 (BCN→GRX, YPC4QK)", map: "Granada Airport GRX" },
+      { text: "에어비앤비 체크인 (10:00 이후 OK)", map: "Calle Huete 3 Granada" },
+      { text: "숙소 브런치·휴식 → 14:50(2:50pm) 숙소 출발 ⭐" },
+      { course: "🏛 시내 (오후)", items: [
+        { text: "그라나다 대성당 (실내 시원·무릎 가려야 입장)", map: "Granada Cathedral" },
+        { text: "왕실 예배당 (이사벨 여왕 무덤)", map: "Capilla Real Granada" },
+        { text: "알카이세리아 시장 (옛 실크시장)", map: "Alcaicería Granada" },
+        { text: "💐 꽃집 부케 예약 ⭐ (5/21 13:30 픽업·드레스 사진 보여주기)" }
+      ] },
+      { course: "🌅 알바이신·일몰", items: [
+        { text: "알바이신 답사 (내일 스냅 동선 예습)", map: "Albaicín Granada" },
+        { text: "산 니콜라스 일몰 ⭐⭐ (일몰 21:15)", map: "Mirador San Nicolas Granada" }
+      ] },
+      { course: "🍻 타파스 (저녁)", items: [
+        { text: "Bar Ávila (하몽 아사도 ⭐)", map: "Bar Avila Granada" },
+        { text: "음료 시키면 타파스 무료!" }
+      ] },
+      { notice: "오늘 챙길 것: 여권원본·티켓PDF·이어폰 (내일 알람브라) / 폭염 32°C 물 필수" }
     ] },
-  { date: "5/21", day: "Thu", city: "Granada", emoji: "🏰", main: "알람브라 가이드 (오우영)", time: "8:15-13:15", transport: "Walk", stay: "Granada Night 2",
+  { date: "5/21", day: "Thu", city: "Granada", emoji: "🏰", main: "알람브라 + 웨딩스냅", time: "8:15-21:00", transport: "Walk", stay: "Granada Night 2",
+    highlight: true,
+    outfit: "낮(알람브라): 아이보리 끈나시 A라인 롱원피스 + 연블루 셔츠 걸치기 + 운동화 / 저녁(스냅): 웨딩드레스(탑·A라인) + 부케 / 휴대선풍기·물·메이크업픽서",
     details: [
-      { text: "🗺️ 모이는 곳: 알람브라 매표소 앞 (8:30)", map: "Alhambra Ticket Office Granada" },
-      { text: "투어업체: 오우영 공인가이드" },
-      { text: "준비물: 티켓PDF, 이어폰, 여권원본 ⭐, 20€" },
-      { course: "ALHAMBRA 5h COURSE", items: [
-        { text: "매표소 미팅 (5-10월: 8:30)" },
+      { course: "🏰 ALHAMBRA (오전)", items: [
+        { text: "🗺️ 매표소 앞 8:30 미팅", map: "Alhambra Ticket Office Granada" },
+        { text: "오우영 공인가이드 / 준비: 여권원본⭐·티켓PDF·이어폰·20€" },
         { text: "나사리궁전 1h 30m ⭐⭐", map: "Nasrid Palaces Alhambra" },
         { text: "알카사바 (군사기지)", map: "Alcazaba Alhambra" },
         { text: "헤네랄리페 (여름별궁)", map: "Generalife Alhambra" },
-        { text: "까를궁전 (카를로스 5세)", map: "Palacio Carlos V Alhambra" }
+        { text: "까를궁전 (카를로스 5세)", map: "Palacio Carlos V Alhambra" },
+        { text: "13:15 투어 종료" }
       ] },
-      { notice: "현지 부가세 1인 10€ 현장 지불 / 여권원본 필수 / 문의: 카톡 tourcontigo" }
-    ] },
-  { date: "5/22", day: "Fri", city: "Granada", emoji: "🌅", main: "시내 + 알바이신 선셋 스냅", time: "Day Free / 19:30", transport: "Walk", stay: "Granada Night 3",
-    highlight: true,
-    details: [
-      { text: "낮: 그라나다 시내 자유" },
-      { text: "그라나다 대성당", map: "Granada Cathedral" },
-      { text: "왕실 예배당", map: "Capilla Real Granada" },
-      { course: "📸 ALBAICÍN SUNSET SNAP", items: [
-        { text: "🗺️ 모이는 곳: 호텔 그라나다 센터", map: "Hotel Granada Center Spain" },
-        { text: "촬영 19:30-21:00 ⭐⭐" },
-        { text: "스냅: 비노마드스튜디오 (120€)" },
+      { course: "💐 스냅 준비 (오후)", items: [
+        { text: "13:30 가벼운 점심 (살모레호·샐러드) ⚠️코르셋!" },
+        { text: "14:00 꽃집 부케 픽업", map: "Granada Cathedral" },
+        { text: "14:30 숙소 휴식·헤어메이크업 (에어컨·물)" },
+        { text: "⚠️ 부케 에어컨/냉장 보관 (35°C 폭염)" }
+      ] },
+      { course: "📸 ALBAICÍN SUNSET SNAP ⭐⭐", items: [
+        { text: "🗺️ 호텔 그라나다 센터", map: "Hotel Granada Center Spain" },
+        { text: "촬영 19:30-21:00" },
+        { text: "비노마드스튜디오 (120€) · 피크닉+와인 제공" },
         { text: "미라도르 산 니콜라스", map: "Mirador San Nicolas Granada" }
       ] },
-      { text: "코디: 화이트 퍼프 롱드레스" }
+      { notice: "현지 부가세 1인 10€ 현장 지불 / 카톡 tourcontigo / 촬영 후 코르셋 풀고 타파스 Los Diamantes!" }
+    ] },
+  { date: "5/22", day: "Fri", city: "Granada", emoji: "🌇", main: "마지막날 풀코스 (사크로몬테·타파스)", time: "9:00-22:00", transport: "Walk·Bus", stay: "Granada Night 3",
+    outfit: "화이트 페플럼끈나시 + 화이트 오버핏셔츠 걸치기 + 네이비 린넨롱스커트 + 운동화 / 모자·선글라스·부채 (35°C 폭염! 셔츠로 어깨·롱스커트로 무릎 가림)",
+    details: [
+      { course: "🏞 오전 (더위 전)", items: [
+        { text: "9:00 사크로몬테 (집시 동굴 동네) ⭐", map: "Sacromonte Granada" },
+        { text: "동굴 박물관·전망", map: "Museo Cuevas del Sacromonte" },
+        { text: "11:00 카르투하 수도원 (바로크 걸작·실내) ⭐⭐", map: "Monasterio de la Cartuja Granada" }
+      ] },
+      { course: "🍻 점심 타파스", items: [
+        { text: "Bar La Riviera (타파스 3번 제공 ⭐)", map: "Bar La Riviera Granada" }
+      ] },
+      { course: "☀️ 시에스타 (한낮 폭염 회피)", items: [
+        { text: "14:00-17:00 숙소 휴식·짐 정리" },
+        { text: "(한낮 35°C 가장 더운 시간)" }
+      ] },
+      { course: "☕ 오후·저녁", items: [
+        { text: "17:00 아랍 거리 칼데레리아 (민트티·쇼핑)", map: "Calle Calderería Nueva Granada" },
+        { text: "사프란·도자기·기념품 ⭐" },
+        { text: "19:00 🍻 Casa Julio (꿀 가지튀김)", map: "Casa Julio Granada" },
+        { text: "🍻 Bodegas Castañeda (전통)", map: "Bodegas Castaneda Granada" },
+        { text: "21:00 알바이신 야경 (마지막 밤)", map: "Mirador San Nicolas Granada" }
+      ] },
+      { notice: "내일 5/23 GSE 8:30 출발 / 22시엔 숙소·짐 마무리 / 플라멩고는 세비야 예약함" }
     ] },
   { date: "5/23", day: "Sat", city: "→ Sevilla", emoji: "🚌", main: "GSE 안달루시아 이동투어", time: "8:30-20:00", transport: "Bus", stay: "Sevilla Night 1 (Only YOU)",
     details: [
@@ -330,7 +383,7 @@ const RESERVATIONS = [
   { type: "TOUR", date: "5/17", title: "몬지투어 (지로나·몬세라트)", time: "7:40-18:40", company: "투어펠리스", meet: "호텔 마제스틱 옆 샤넬", item: "이어폰, 14€", map: "Hotel Majestic Barcelona", price: "₩97,990" },
   { type: "TOUR", date: "5/18", title: "가우디 VIP 전일투어", time: "7:50-16:10", company: "투어펠리스", meet: "카사 밀라 건너편 몽클레어", item: "이어폰, 간식", map: "Casa Mila La Pedrera Barcelona", price: "₩67,000" },
   { type: "TOUR", date: "5/21", title: "알람브라 가이드 (오우영)", time: "8:15-13:15", company: "오우영 공인가이드", meet: "알람브라 매표소 앞", item: "여권원본, 20€ + 부가세 10€", map: "Alhambra Ticket Office Granada", price: "₩67,000" },
-  { type: "SNAP", date: "5/22", title: "알바이신 선셋 스냅", time: "19:30-21:00", company: "비노마드스튜디오", meet: "호텔 그라나다 센터", item: "120€", highlight: true, map: "Hotel Granada Center" },
+  { type: "SNAP", date: "5/21", title: "알바이신 선셋 스냅", time: "19:30-21:00", company: "비노마드스튜디오", meet: "호텔 그라나다 센터", item: "120€ · 피크닉+와인 제공(부케 직접준비)", highlight: true, map: "Hotel Granada Center" },
   { type: "TOUR", date: "5/23", title: "GSE 그라나다→세비야", time: "8:30-20:00", company: "ESCOTRIP", meet: "PLAZA DEL CAMPILLO 분수대", item: "이어폰, 멀미약", map: "Plaza del Campillo Granada", price: "₩144,152" },
   { type: "TOUR", date: "5/24", title: "세비야 시내투어", time: "8:30-13:00", company: "김호영&최경은", meet: "스페인 광장 중앙분수", item: "26€", map: "Plaza de España Sevilla" },
   { type: "TOUR", date: "5/24", title: "알카사르 오디오", time: "15:00-17:00", company: "투어라이브", meet: "알카사르", item: "₩70,032", map: "Real Alcázar Sevilla" },
@@ -513,10 +566,10 @@ const OUTFITS = [
   { num: 2, date: "5/17", day: "Sun", desc: "블루가디건 + 화이트레이스롱스커트", note: "몬세라트·지로나", topColor: "#1e3a8a", bottomColor: "#fafafa" },
   { num: 3, date: "5/18", day: "Mon", desc: "오프숄더 + 청바지 + 가디건", note: "가우디", topColor: "#fff", bottomColor: "#4a6b9a" },
   { num: 4, date: "5/19", day: "Tue", desc: "화이트니트가디건 + 검정스커트", note: "바르셀로나 시내", topColor: "#fafafa", bottomColor: "#1a1a1a" },
-  { num: 5, date: "5/20", day: "Wed", desc: "줄무늬T + 검정가디건 + 플리츠팬츠", note: "이동일", topColor: "#e8e4dc", bottomColor: "#1a1a1a" },
-  { num: 6, date: "5/21", day: "Thu", desc: "블루셔츠 + 아이보리 롱원피스", note: "알람브라", topColor: "#7ba4d4", bottomColor: "#f5ecd9" },
-  { num: 7, date: "5/22 ☀", day: "Fri", desc: "아이보리블라우스 + 데님숏팬츠", note: "그라나다 시내", topColor: "#f5ecd9", bottomColor: "#2a3f5f" },
-  { num: 8, date: "5/22 🌙", day: "Fri", desc: "화이트 퍼프 롱드레스", note: "📸 알바이신 스냅", topColor: "#fafafa", bottomColor: "#fafafa", highlight: true },
+  { num: 5, date: "5/20", day: "Wed", desc: "화이트 끈나시 + 핑크 스트라이프셔츠 + 블랙 린넨롱스커트", note: "그라나다 도착·성당·일몰 ☀ 폭염32°(셔츠로 어깨·롱스커트로 무릎 가려 성당OK, 더우면 셔츠 벗기)", topColor: "#f0c6c6", bottomColor: "#1a1a1a" },
+  { num: 6, date: "5/21 ☀", day: "Thu", desc: "아이보리 끈나시 롱원피스 + 블루셔츠", note: "알람브라 (끈나시 어깨 햇볕→블루셔츠 걸치기)", topColor: "#7ba4d4", bottomColor: "#f5ecd9" },
+  { num: 7, date: "5/21 📸", day: "Thu", desc: "화이트 탑웨딩드레스 (탑+A라인)", note: "📸 알바이신 선셋 웨딩스냅 (피크닉+와인) · 코르셋 조임→점심 가볍게", topColor: "#fafafa", bottomColor: "#fafafa", highlight: true },
+  { num: 8, date: "5/22 ☀", day: "Fri", desc: "화이트 페플럼끈나시 + 화이트 오버핏셔츠 + 네이비 린넨롱스커트", note: "마지막날 사크로몬테·타파스 (코르셋 해방·타파스 풀투어)", topColor: "#fafafa", bottomColor: "#1a2845" },
   { num: 9, date: "5/23", day: "Sat", desc: "베이지 니트탑 + 화이트 버뮤다", note: "이동일", topColor: "#c9b896", bottomColor: "#fafafa" },
   { num: 10, date: "5/24", day: "Sun", desc: "아이보리 셔츠 + 롱스커트 세트", note: "세비야 시내", topColor: "#f5ecd9", bottomColor: "#f5ecd9" },
   { num: 11, date: "5/25 ☀", day: "Mon", desc: "와인반팔니트 + 화이트레이스롱", note: "📸 세비야 스냅", topColor: "#7a1f2e", bottomColor: "#fafafa", highlight: true },
@@ -528,6 +581,14 @@ const OUTFITS = [
   { num: 17, date: "5/30", day: "Sat", desc: "핑크셔츠 + 화이트나시 + 베이지롱", note: "호카곶 + 바람막이", topColor: "#f0c6c6", bottomColor: "#c9b896" },
   { num: 18, date: "5/31", day: "Sun", desc: "편한 옷 + 바람막이", note: "귀국", topColor: "#d4cfc4", bottomColor: "#3a3a3a" }
 ];
+
+// 날짜로 해당일 코디 찾기 (같은 날 여러 벌 가능 - "5/21 ☀", "5/21 📸" 등)
+function getOutfitsByDate(dateStr) {
+  if (!dateStr) return [];
+  // "5/20", "5/22 ☀" 등에서 날짜 부분만 추출해서 비교
+  const baseDate = dateStr.split(' ')[0].trim();
+  return OUTFITS.filter(o => o.date.split(' ')[0].trim() === baseDate);
+}
 
 // ============ 컬러: 5월 햇살 · 맑은 호수 · 연녹색 잎 ============
 const C = {
@@ -582,14 +643,8 @@ function MapPill({ query }) {
 }
 
 // 헤더 (더 플랫하고 밝게)
-function Header({ tab, setTab }) {
+function Header() {
   const dday = getDday(TRIP.startDate);
-  const tabs = [
-    { id: 'schedule', label: 'Schedule' },
-    { id: 'reservations', label: 'Bookings' },
-    { id: 'guide', label: 'Guide' },
-    { id: 'outfits', label: 'Outfits' }
-  ];
 
   return (
     <div>
@@ -726,94 +781,133 @@ function Header({ tab, setTab }) {
           )}
         </div>
       </div>
-
-      {/* 탭 - 스티키 */}
-      <div className="glass" style={{
-        display: 'flex',
-        background: 'rgba(250, 255, 254, 0.92)',
-        borderBottom: `1px solid ${C.line}`,
-        position: 'sticky',
-        top: 0,
-        zIndex: 100,
-        padding: '6px 10px'
-      }}>
-        {tabs.map(t => (
-          <button
-            key={t.id}
-            onClick={() => setTab(t.id)}
-            style={{
-              flex: 1,
-              padding: '9px 4px',
-              background: tab === t.id ? C.leafDeep : 'transparent',
-              color: tab === t.id ? C.cream : C.inkMid,
-              border: 'none',
-              borderRadius: '12px',
-              cursor: 'pointer',
-              fontFamily: 'inherit',
-              fontSize: '12px',
-              fontWeight: 600,
-              letterSpacing: '-0.01em',
-              margin: '0 2px',
-              transition: 'all 0.2s'
-            }}
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
     </div>
   );
 }
 
-// 날짜 네비 - 헤더 탭 아래로 sticky 잡힘
-function DateNav({ schedule, onSelect, currentIdx }) {
+// 탭바 - 화면 최상단 완전 고정 (fixed)
+function TabBar({ tab, setTab }) {
+  const tabs = [
+    { id: 'schedule', label: 'Schedule' },
+    { id: 'reservations', label: 'Bookings' },
+    { id: 'guide', label: 'Guide' },
+    { id: 'outfits', label: 'Outfits' }
+  ];
   return (
-    <div style={{
+    <div className="glass" style={{
       display: 'flex',
-      gap: '8px',
-      overflowX: 'auto',
-      padding: '12px 16px',
-      background: C.paper,
+      background: 'rgba(250, 255, 254, 0.95)',
       borderBottom: `1px solid ${C.line}`,
-      WebkitOverflowScrolling: 'touch'
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      zIndex: 1000,
+      padding: '8px 10px',
+      boxShadow: '0 2px 12px rgba(31, 46, 42, 0.06)'
     }}>
-      {schedule.map((day, i) => (
+      {tabs.map(t => (
         <button
-          key={i}
-          onClick={() => onSelect(i)}
+          key={t.id}
+          onClick={() => setTab(t.id)}
           style={{
-            flexShrink: 0,
-            padding: '8px 12px',
-            background: currentIdx === i ? C.leafDeep : C.white,
-            color: currentIdx === i ? C.cream : C.ink,
-            border: currentIdx === i ? 'none' : `1px solid ${C.line}`,
+            flex: 1,
+            padding: '10px 4px',
+            background: tab === t.id ? C.leafDeep : 'transparent',
+            color: tab === t.id ? C.cream : C.inkMid,
+            border: 'none',
             borderRadius: '12px',
             cursor: 'pointer',
             fontFamily: 'inherit',
-            minWidth: '60px',
-            transition: 'all 0.2s',
-            boxShadow: currentIdx === i ? '0 3px 10px rgba(61, 122, 68, 0.2)' : 'none'
+            fontSize: '12px',
+            fontWeight: 600,
+            letterSpacing: '-0.01em',
+            margin: '0 2px',
+            transition: 'all 0.2s'
           }}
         >
-          <div className="mono" style={{
-            fontSize: '9px',
-            letterSpacing: '1px',
-            opacity: currentIdx === i ? 0.8 : 0.5,
-            fontWeight: 500,
-            textTransform: 'uppercase'
-          }}>
-            {day.day}
-          </div>
-          <div style={{
-            fontSize: '14px',
-            fontWeight: 600,
-            marginTop: '1px',
-            letterSpacing: '-0.02em'
-          }}>
-            {day.date}
-          </div>
+          {t.label}
         </button>
       ))}
+    </div>
+  );
+}
+
+// 날짜 네비 - 그리드 방식 (가로스크롤 X, 줄바꿈으로 한눈에)
+function DateNav({ schedule, onSelect, currentIdx }) {
+  const [expanded, setExpanded] = useState(false);
+  // 도시별 색 구분
+  const cityColor = (city) => {
+    if (city.includes('Barcelona')) return '#7ec0d8';
+    if (city.includes('Granada')) return '#86c08a';
+    if (city.includes('Sevilla')) return '#f4a896';
+    if (city.includes('Porto')) return '#b89dd4';
+    if (city.includes('Lisboa')) return '#f5d77e';
+    return '#c5d0cb';
+  };
+  return (
+    <div style={{
+      padding: '12px 14px',
+      background: C.paper,
+      borderBottom: `1px solid ${C.line}`
+    }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+        <span className="mono" style={{ fontSize: '10px', color: C.inkLight, fontWeight: 600, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
+          날짜 선택
+        </span>
+        <button onClick={() => setExpanded(!expanded)} style={{
+          background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit',
+          fontSize: '11px', color: C.leafDeep, fontWeight: 600, display: 'flex', alignItems: 'center', gap: '3px'
+        }}>
+          {expanded ? '접기' : '전체 보기'}
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ transform: expanded ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }}>
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+      </div>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(5, 1fr)',
+        gap: '6px',
+        maxHeight: expanded ? '500px' : '64px',
+        overflow: 'hidden',
+        transition: 'max-height 0.3s ease'
+      }}>
+        {schedule.map((day, i) => (
+          <button
+            key={i}
+            onClick={() => onSelect(i)}
+            style={{
+              padding: '7px 4px',
+              background: currentIdx === i ? C.leafDeep : C.white,
+              color: currentIdx === i ? C.cream : C.ink,
+              border: currentIdx === i ? 'none' : `1px solid ${C.line}`,
+              borderRadius: '10px',
+              cursor: 'pointer',
+              fontFamily: 'inherit',
+              transition: 'all 0.2s',
+              boxShadow: currentIdx === i ? '0 3px 10px rgba(61, 122, 68, 0.2)' : 'none',
+              position: 'relative',
+              overflow: 'hidden'
+            }}
+          >
+            <div style={{
+              position: 'absolute', top: 0, left: 0, right: 0, height: '3px',
+              background: cityColor(day.city)
+            }}></div>
+            <div className="mono" style={{
+              fontSize: '8px', letterSpacing: '0.5px',
+              opacity: currentIdx === i ? 0.8 : 0.5, fontWeight: 500, textTransform: 'uppercase', marginTop: '2px'
+            }}>
+              {day.day}
+            </div>
+            <div style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '-0.02em' }}>
+              {day.date}
+            </div>
+            <div style={{ fontSize: '11px', marginTop: '1px' }}>{day.emoji}</div>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -900,7 +994,72 @@ function NoticeCard({ text }) {
   );
 }
 
-function ScheduleCard({ day, index, isOpen, onToggle }) {
+function OutfitModal({ outfits, dateLabel, onClose }) {
+  if (!outfits || outfits.length === 0) return null;
+  return (
+    <div onClick={onClose} style={{
+      position: 'fixed', inset: 0, zIndex: 999,
+      background: 'rgba(31, 46, 42, 0.55)',
+      backdropFilter: 'blur(4px)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      padding: '24px'
+    }}>
+      <div onClick={(e) => e.stopPropagation()} className="fade-up" style={{
+        background: C.white,
+        borderRadius: '22px',
+        width: '100%', maxWidth: '360px',
+        maxHeight: '80vh', overflowY: 'auto',
+        boxShadow: '0 20px 60px rgba(31, 46, 42, 0.3)',
+        overflow: 'hidden'
+      }}>
+        <div style={{
+          background: `linear-gradient(135deg, ${C.coralLight} 0%, ${C.sunLight} 100%)`,
+          padding: '18px 20px',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between'
+        }}>
+          <div>
+            <div className="mono" style={{ fontSize: '9.5px', color: '#9a3a28', letterSpacing: '1.5px', fontWeight: 700 }}>TODAY'S OUTFIT</div>
+            <div className="display" style={{ fontSize: '24px', color: C.leafDeep, lineHeight: 1.1, marginTop: '2px' }}>👗 {dateLabel} 코디</div>
+          </div>
+          <button onClick={onClose} style={{
+            flexShrink: 0, width: '32px', height: '32px', borderRadius: '50%',
+            background: 'rgba(255,255,255,0.7)', border: 'none', cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', color: C.ink
+          }}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+
+        <div style={{ padding: '16px 20px 20px' }}>
+          {outfits.map((o, i) => (
+            <div key={i} style={{
+              display: 'flex', gap: '14px', alignItems: 'flex-start',
+              padding: '14px 0',
+              borderBottom: i < outfits.length - 1 ? `1px solid ${C.line}` : 'none'
+            }}>
+              <div style={{ flexShrink: 0, width: '56px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <div style={{ height: '36px', background: o.topColor, borderRadius: '8px 8px 3px 3px', border: '1px solid rgba(0,0,0,0.08)' }}></div>
+                <div style={{ height: '42px', background: o.bottomColor, borderRadius: '3px 3px 8px 8px', border: '1px solid rgba(0,0,0,0.08)' }}></div>
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '5px', flexWrap: 'wrap' }}>
+                  <span style={{ fontSize: '13.5px', fontWeight: 700, color: C.ink }}>{o.date}</span>
+                  {o.highlight && <span style={{ fontSize: '8.5px', color: C.coral, background: C.coralLight, padding: '2px 7px', borderRadius: '5px', fontWeight: 700, letterSpacing: '0.5px' }}>SNAP</span>}
+                </div>
+                <div style={{ fontSize: '13px', color: C.ink, lineHeight: 1.5, marginBottom: '4px', fontWeight: 500 }}>{o.desc}</div>
+                <div style={{ fontSize: '11px', color: o.highlight ? C.coral : C.inkMid, lineHeight: 1.5, fontWeight: o.highlight ? 600 : 400 }}>{o.note}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ScheduleCard({ day, index, isOpen, onToggle, onShowOutfit }) {
   const isHighlight = day.highlight;
   return (
     <div id={`day-${index}`} style={{
@@ -1052,6 +1211,26 @@ function ScheduleCard({ day, index, isOpen, onToggle }) {
                 ? <NoticeCard key={i} text={detail.notice} />
                 : <DetailItem key={i} detail={detail} />
           ))}
+          {getOutfitsByDate(day.date).length > 0 && (
+            <button onClick={() => onShowOutfit(day.date)} style={{
+              width: '100%',
+              marginTop: '10px',
+              padding: '13px',
+              background: `linear-gradient(135deg, ${C.coralLight} 0%, ${C.sunLight} 100%)`,
+              border: `1px solid ${C.coral}40`,
+              borderRadius: '13px',
+              cursor: 'pointer',
+              fontFamily: 'inherit',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+              color: '#a8392a', fontSize: '13px', fontWeight: 600
+            }}>
+              <span style={{ fontSize: '15px' }}>👗</span>
+              <span>오늘의 코디 보기</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </button>
+          )}
         </div>
       )}
     </div>
@@ -1061,6 +1240,7 @@ function ScheduleCard({ day, index, isOpen, onToggle }) {
 function SchedulePage() {
   const [openIdx, setOpenIdx] = useState(null);
   const [currentIdx, setCurrentIdx] = useState(null);
+  const [outfitDate, setOutfitDate] = useState(null);
   const handleSelect = (idx) => {
     setOpenIdx(idx);
     setCurrentIdx(idx);
@@ -1071,7 +1251,7 @@ function SchedulePage() {
   };
   return (
     <div>
-      <div style={{ position: 'sticky', top: '46px', zIndex: 89 }}>
+      <div style={{ position: 'sticky', top: '54px', zIndex: 90 }}>
         <DateNav schedule={SCHEDULE} onSelect={handleSelect} currentIdx={currentIdx} />
       </div>
       <div style={{ padding: '18px 16px' }}>
@@ -1079,9 +1259,16 @@ function SchedulePage() {
           <ScheduleCard key={i} day={day} index={i} isOpen={openIdx === i} onToggle={() => {
             setOpenIdx(openIdx === i ? null : i);
             setCurrentIdx(i);
-          }} />
+          }} onShowOutfit={(date) => setOutfitDate(date)} />
         ))}
       </div>
+      {outfitDate && (
+        <OutfitModal
+          outfits={getOutfitsByDate(outfitDate)}
+          dateLabel={outfitDate.split(' ')[0]}
+          onClose={() => setOutfitDate(null)}
+        />
+      )}
     </div>
   );
 }
@@ -1496,7 +1683,10 @@ function OutfitsPage() {
             Daily Looks
           </div>
           <div style={{ fontSize: '12px', color: C.inkMid }}>
-            18 outfits · 매일 다른 룩 · 스냅 2회 강조
+            18 looks · 매일 다른 룩 · 스냅 2회(그라나다·세비야) 강조
+          </div>
+          <div style={{ fontSize: '11px', color: C.inkMid, marginTop: '4px', opacity: 0.85 }}>
+            💡 일정 탭에서 각 날짜 펼치면 "오늘의 코디 보기" 버튼으로 바로 확인
           </div>
         </div>
       </div>
@@ -1535,8 +1725,9 @@ function OutfitsPage() {
 function App() {
   const [tab, setTab] = useState('schedule');
   return (
-    <div style={{ background: C.cream, minHeight: '100vh' }}>
-      <Header tab={tab} setTab={setTab} />
+    <div style={{ background: C.cream, minHeight: '100vh', paddingTop: '54px' }}>
+      <TabBar tab={tab} setTab={setTab} />
+      <Header />
       <div>
         {tab === 'schedule' && <SchedulePage />}
         {tab === 'reservations' && <ReservationsPage />}
