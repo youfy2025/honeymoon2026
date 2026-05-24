@@ -200,11 +200,13 @@ const SCHEDULE = [
         { text: "알바이신 답사 (내일 스냅 동선 예습)", map: "Albaicín Granada" },
         { text: "산 니콜라스 일몰 ⭐⭐ (일몰 21:15)", map: "Mirador San Nicolas Granada" }
       ] },
-      { course: "🍻 타파스 (저녁)", items: [
-        { text: "Bar Ávila (하몽 아사도 ⭐)", map: "Bar Avila Granada" },
-        { text: "음료 시키면 타파스 무료!" }
+      { course: "🍻 저녁 (일몰 전후)", items: [
+        { text: "🍴 La Telefónica (평점4.9·그라나다 미식 끝판왕) ⭐⭐", map: "La Telefonica C Salamanca Granada" },
+        { text: "문어·대구·꿀 가지튀김 강추 / 13시-24시 영업" },
+        { text: "🌅 일몰 후 → 집 OR 강변길 타파스 한 곳 더" },
+        { text: "🍷 강변길: Ras Cafe Bar (알람브라뷰)·La Tabernilla del Darro", map: "Ras Cafe Bar Carrera del Darro Granada" }
       ] },
-      { notice: "오늘 챙길 것: 여권원본·티켓PDF·이어폰 (내일 알람브라) / 폭염 32°C 물 필수" }
+      { notice: "오늘 챙길 것: 여권원본·티켓PDF·이어폰 (내일 알람브라 8:00!) / 폭염 32°C 물 필수 / Bar Kiki·Casa Torcuato는 저녁 늦게여니 패스" }
     ] },
   { date: "5/21", day: "Thu", city: "Granada", emoji: "🏰", main: "알람브라 + 웨딩스냅", time: "8:15-21:00", transport: "Walk", stay: "Granada Night 2",
     highlight: true,
@@ -271,6 +273,7 @@ const SCHEDULE = [
       ] }
     ] },
   { date: "5/24", day: "Sun", city: "Sevilla", emoji: "🕌", main: "스페인광장·대성당·야경", time: "8:30-23:00", transport: "Walk", stay: "Sevilla Night 2",
+    outfit: "화이트 반팔 니트가디건 + 네이비 린넨 롱치마 (어깨·무릎 가려 대성당OK·세비야 폭염 대비)",
     details: [
       { course: "📍 시내투어 8:30-13:00 (26€)", items: [
         { text: "🗺️ 스페인 광장 중앙분수", map: "Plaza de España Sevilla" },
@@ -278,34 +281,58 @@ const SCHEDULE = [
         { text: "세비야 대학교", map: "Universidad de Sevilla" },
         { text: "세비야 대성당+히랄다 ⭐", map: "Seville Cathedral" }
       ] },
+      { course: "🍽️ 점심 (13:30~)", items: [
+        { text: "🍔 Goiko (수제버거·C. Albareda 14)", map: "Goiko Albareda Sevilla" }
+      ] },
       { course: "📍 알카사르 15:00-17:00", items: [
         { text: "투어라이브 (70,032원)" },
-        { text: "알카사르 궁전", map: "Real Alcázar Sevilla" }
+        { text: "알카사르 궁전", map: "Real Alcázar Sevilla" },
+        { text: "관람 후 숙소 휴식 (세비야 건조·더위 주의·물 자주!) 💧" }
       ] },
       { course: "📍 야경투어 20:00-23:00", items: [
-        { text: "🗺️ 메트로폴 파라솔 앞 분수대", map: "Metropol Parasol Sevilla" },
+        { text: "🍽️ 저녁: La Malvaloca (메트로폴 앞·도보1분·평점4.6) ⭐", map: "La Malvaloca Sevilla" },
+        { text: "🍽️ 또는 Alcázar Andalusí Tapas (평점4.7·갈릭새우·가지)", map: "Alcazar Andalusi Tapas Sevilla" },
+        { text: "🗺️ 메트로폴 파라솔 앞 분수대 (미팅)", map: "Metropol Parasol Sevilla" },
         { text: "산타크루즈 지구 ⭐", map: "Barrio Santa Cruz Sevilla" }
       ] }
     ] },
   { date: "5/25", day: "Mon", city: "Sevilla", emoji: "📸", main: "스냅 촬영 + 플라멩고", time: "8:00 / 19:00", transport: "Walk", stay: "Sevilla Night 3",
     highlight: true,
+    outfit: "아이보리 롱원피스 (스냅 촬영용·8시 아침 촬영)",
     details: [
       { course: "📸 SEVILLA SNAP ⭐⭐", items: [
         { text: "8:00-9:00 촬영" },
         { text: "스냅: 노미준 (210€)" },
-        { text: "코디: 와인+화이트" }
+        { text: "코디: 아이보리 롱원피스 👗" }
       ] },
       { text: "메트로폴 파라솔", map: "Metropol Parasol Sevilla" },
       { course: "🎭 플라멩고 공연 19:00", items: [
         { text: "Museo del Baile Flamenco", map: "Museo del Baile Flamenco Sevilla" }
       ] }
     ] },
-  { date: "5/26", day: "Tue", city: "Sevilla", emoji: "🌳", main: "트리아나 자유일정", time: "Free", transport: "Walk", stay: "Sevilla Night 4",
+  { date: "5/26", day: "Tue", city: "Cádiz 근교", emoji: "🏖", main: "카디스 당일치기 (근교 바다)", time: "기차 왕복", transport: "Renfe (세비야↔카디스 1h40m)", stay: "Sevilla Night 4",
+    outfit: "화이트 퍼프블라우스 + 브라운 숏팬츠 (바닷가·더위·편한 신발)",
     details: [
-      { text: "스페인광장 재방문", map: "Plaza de España Sevilla" },
-      { text: "트리아나 지구", map: "Triana Sevilla" },
-      { text: "트리아나 도자기 마을", map: "Centro Cerámica Triana" },
-      { text: "과달키비르 강변", map: "Guadalquivir River Sevilla" }
+      { course: "🚆 오전 이동", items: [
+        { text: "7:00 호텔 조식 빨리! (조식 오픈하자마자) 🍳" },
+        { text: "🚆 세비야 Santa Justa역 → 카디스 (Renfe 약 1h40m·미리 예약!)", map: "Sevilla Santa Justa" },
+        { text: "🚆 카디스역 도착", map: "Cadiz Train Station" }
+      ] },
+      { course: "🏖 카디스 관광", items: [
+        { text: "⛪ 카디스 대성당 (황금돔·전망탑 Torre de Poniente·바다뷰) ⭐", map: "Catedral de Cadiz" },
+        { text: "🏖 La Caleta 해변 (구시가·인생샷·007 촬영지) ⭐⭐", map: "La Caleta Cadiz" },
+        { text: "구시가 골목·해안 산책 (바닷바람=건조한 목에 좋음!) 🌊" }
+      ] },
+      { course: "🍽️ 점심 (카디스 명물)", items: [
+        { text: "🦐 Taberna Casa Manteca (새우전 토르티야 카마로네스·차론·평점4.6) ⭐⭐", map: "Taberna Casa Manteca Cadiz" },
+        { text: "🐟 또는 El Tío de la Tiza (해산물·광장 야외석)", map: "Taberna El Tio de la Tiza Cadiz" },
+        { text: "🐟 카디스 명물 참치(Atún)·새우튀김 꼭!" }
+      ] },
+      { course: "🚆 복귀", items: [
+        { text: "오후 카디스 → 세비야 (일몰 보고 늦게 와도 OK)" },
+        { text: "✈ 저녁 Ryanair 온라인 체크인 (오늘밤 미리!) ⭐", map: "" }
+      ] },
+      { notice: "5/27 체크아웃 12시라 5/26 저녁 여유로움 / Ryanair 온라인 체크인 꼭 미리(일주일전부터 가능) / 기차표 Renfe 앱 예약" }
     ] },
   { date: "5/27", day: "Wed", city: "→ Porto", emoji: "✈", main: "포르투 이동·시내", time: "16:20-16:35", transport: "Ryanair FR5466", stay: "Porto Night 1 (Airbnb)",
     details: [
@@ -571,10 +598,10 @@ const OUTFITS = [
   { num: 7, date: "5/21 📸", day: "Thu", desc: "화이트 탑웨딩드레스 (탑+A라인)", note: "📸 알바이신 선셋 웨딩스냅 (피크닉+와인) · 코르셋 조임→점심 가볍게", topColor: "#fafafa", bottomColor: "#fafafa", highlight: true },
   { num: 8, date: "5/22 ☀", day: "Fri", desc: "화이트 페플럼끈나시 + 화이트 오버핏셔츠 + 네이비 린넨롱스커트", note: "마지막날 사크로몬테·타파스 (코르셋 해방·타파스 풀투어)", topColor: "#fafafa", bottomColor: "#1a2845" },
   { num: 9, date: "5/23", day: "Sat", desc: "베이지 니트탑 + 화이트 버뮤다", note: "이동일", topColor: "#c9b896", bottomColor: "#fafafa" },
-  { num: 10, date: "5/24", day: "Sun", desc: "아이보리 셔츠 + 롱스커트 세트", note: "세비야 시내", topColor: "#f5ecd9", bottomColor: "#f5ecd9" },
-  { num: 11, date: "5/25 ☀", day: "Mon", desc: "와인반팔니트 + 화이트레이스롱", note: "📸 세비야 스냅", topColor: "#7a1f2e", bottomColor: "#fafafa", highlight: true },
+  { num: 10, date: "5/24", day: "Sun", desc: "화이트 반팔 니트가디건 + 네이비 린넨 롱치마", note: "세비야 시내·대성당·알카사르 (어깨·무릎 가림)", topColor: "#fafafa", bottomColor: "#1a2845" },
+  { num: 11, date: "5/25 📸", day: "Mon", desc: "아이보리 롱원피스", note: "📸 세비야 스냅 (8시 아침 촬영)", topColor: "#f5ecd9", bottomColor: "#f5ecd9", highlight: true },
   { num: 12, date: "5/25 🌙", day: "Mon", desc: "화이트반팔가디건 + 네이비롱스커트", note: "플라멩고 공연", topColor: "#fafafa", bottomColor: "#1a2845" },
-  { num: 13, date: "5/26", day: "Tue", desc: "화이트퍼프블라우스 + 브라운숏팬츠", note: "트리아나", topColor: "#fafafa", bottomColor: "#5a4838" },
+  { num: 13, date: "5/26", day: "Tue", desc: "화이트퍼프블라우스 + 브라운숏팬츠", note: "🏖 카디스 당일치기 (근교 바다)", topColor: "#fafafa", bottomColor: "#5a4838" },
   { num: 14, date: "5/27", day: "Wed", desc: "블루셔츠 + 화이트나시 + 화이트숏", note: "이동일", topColor: "#a8c4e0", bottomColor: "#fafafa" },
   { num: 15, date: "5/28", day: "Thu", desc: "검정T + 카고팬츠", note: "포르투 도보 7.5h", topColor: "#1a1a1a", bottomColor: "#5a5e5a" },
   { num: 16, date: "5/29", day: "Fri", desc: "블루가디건 + 화이트나시 + 데님숏", note: "리스본 이동", topColor: "#1e3a8a", bottomColor: "#2a3f5f" },
@@ -836,78 +863,157 @@ function TabBar({ tab, setTab }) {
 // 날짜 네비 - 그리드 방식 (가로스크롤 X, 줄바꿈으로 한눈에)
 function DateNav({ schedule, onSelect, currentIdx }) {
   const [expanded, setExpanded] = useState(false);
+  const TODAY = "5/24"; // 오늘 날짜
   // 도시별 색 구분
   const cityColor = (city) => {
     if (city.includes('Barcelona')) return '#7ec0d8';
     if (city.includes('Granada')) return '#86c08a';
-    if (city.includes('Sevilla')) return '#f4a896';
+    if (city.includes('Sevilla') || city.includes('Cádiz')) return '#f4a896';
     if (city.includes('Porto')) return '#b89dd4';
     if (city.includes('Lisboa')) return '#f5d77e';
     return '#c5d0cb';
   };
+  const cityShort = (city) => {
+    if (city.includes('Barcelona')) return 'BCN';
+    if (city.includes('Granada')) return 'GRX';
+    if (city.includes('Sevilla') || city.includes('Cádiz')) return 'SVQ';
+    if (city.includes('Porto')) return 'OPO';
+    if (city.includes('Lisboa')) return 'LIS';
+    return city;
+  };
+  // 도시별 그룹핑 (연속된 같은 도시 묶기)
+  const groups = [];
+  schedule.forEach((day, i) => {
+    const last = groups[groups.length - 1];
+    const cs = cityShort(day.city);
+    if (last && last.cityShort === cs) {
+      last.days.push({ ...day, idx: i });
+    } else {
+      groups.push({ cityShort: cs, color: cityColor(day.city), days: [{ ...day, idx: i }] });
+    }
+  });
+
+  const scrollRef = React.useRef(null);
+  // 현재 선택된 칩으로 가로 스크롤
+  React.useEffect(() => {
+    if (scrollRef.current && !expanded) {
+      const activeEl = scrollRef.current.querySelector('[data-active="true"]');
+      if (activeEl) activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+  }, [currentIdx, expanded]);
+
   return (
     <div style={{
-      padding: '12px 14px',
+      padding: '10px 0 12px',
       background: C.paper,
       borderBottom: `1px solid ${C.line}`
     }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '9px', padding: '0 14px' }}>
         <span className="mono" style={{ fontSize: '10px', color: C.inkLight, fontWeight: 600, letterSpacing: '1.5px', textTransform: 'uppercase' }}>
-          날짜 선택
+          {schedule[currentIdx] && (
+            <span style={{ color: cityColor(schedule[currentIdx].city) === '#f5d77e' ? C.sunDeep : cityColor(schedule[currentIdx].city) }}>
+              ● </span>
+          )}
+          {schedule[currentIdx] ? `${schedule[currentIdx].date} · ${cityShort(schedule[currentIdx].city)}` : '날짜 선택'}
         </span>
         <button onClick={() => setExpanded(!expanded)} style={{
           background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit',
           fontSize: '11px', color: C.leafDeep, fontWeight: 600, display: 'flex', alignItems: 'center', gap: '3px'
         }}>
-          {expanded ? '접기' : '전체 보기'}
+          {expanded ? '한 줄로' : '전체 달력'}
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ transform: expanded ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }}>
             <polyline points="6 9 12 15 18 9"/>
           </svg>
         </button>
       </div>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(5, 1fr)',
-        gap: '6px',
-        maxHeight: expanded ? '500px' : '64px',
-        overflow: 'hidden',
-        transition: 'max-height 0.3s ease'
-      }}>
-        {schedule.map((day, i) => (
-          <button
-            key={i}
-            onClick={() => onSelect(i)}
-            style={{
-              padding: '7px 4px',
-              background: currentIdx === i ? C.leafDeep : C.white,
-              color: currentIdx === i ? C.cream : C.ink,
-              border: currentIdx === i ? 'none' : `1px solid ${C.line}`,
-              borderRadius: '10px',
-              cursor: 'pointer',
-              fontFamily: 'inherit',
-              transition: 'all 0.2s',
-              boxShadow: currentIdx === i ? '0 3px 10px rgba(61, 122, 68, 0.2)' : 'none',
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-          >
-            <div style={{
-              position: 'absolute', top: 0, left: 0, right: 0, height: '3px',
-              background: cityColor(day.city)
-            }}></div>
-            <div className="mono" style={{
-              fontSize: '8px', letterSpacing: '0.5px',
-              opacity: currentIdx === i ? 0.8 : 0.5, fontWeight: 500, textTransform: 'uppercase', marginTop: '2px'
-            }}>
-              {day.day}
+
+      {!expanded ? (
+        // 가로 스크롤 모드 (도시 그룹 + 칩)
+        <div ref={scrollRef} style={{
+          display: 'flex', gap: '14px', overflowX: 'auto', padding: '2px 14px 4px',
+          scrollbarWidth: 'none'
+        }}>
+          {groups.map((g, gi) => (
+            <div key={gi} style={{ display: 'flex', flexDirection: 'column', gap: '5px', flexShrink: 0 }}>
+              <div className="mono" style={{
+                fontSize: '8.5px', fontWeight: 700, letterSpacing: '1px',
+                color: g.color === '#f5d77e' ? C.sunDeep : g.color, paddingLeft: '2px'
+              }}>
+                {g.cityShort}
+              </div>
+              <div style={{ display: 'flex', gap: '5px' }}>
+                {g.days.map((day) => {
+                  const isToday = day.date === TODAY;
+                  const isActive = currentIdx === day.idx;
+                  return (
+                    <button
+                      key={day.idx}
+                      data-active={isActive}
+                      onClick={() => onSelect(day.idx)}
+                      style={{
+                        flexShrink: 0, width: '46px', padding: '6px 2px',
+                        background: isActive ? C.leafDeep : C.white,
+                        color: isActive ? C.cream : C.ink,
+                        border: isActive ? 'none' : isToday ? `1.5px solid ${C.coral}` : `1px solid ${C.line}`,
+                        borderRadius: '11px', cursor: 'pointer', fontFamily: 'inherit',
+                        transition: 'all 0.2s', position: 'relative', overflow: 'hidden',
+                        boxShadow: isActive ? '0 3px 10px rgba(61, 122, 68, 0.2)' : 'none'
+                      }}
+                    >
+                      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: g.color }}></div>
+                      {isToday && !isActive && (
+                        <div style={{ position: 'absolute', top: '4px', right: '4px', width: '5px', height: '5px', borderRadius: '50%', background: C.coral }}></div>
+                      )}
+                      <div className="mono" style={{ fontSize: '7.5px', opacity: isActive ? 0.8 : 0.5, fontWeight: 500, textTransform: 'uppercase', marginTop: '2px' }}>
+                        {day.day}
+                      </div>
+                      <div style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '-0.02em' }}>
+                        {day.date}
+                      </div>
+                      <div style={{ fontSize: '10px', marginTop: '1px' }}>{day.emoji}</div>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-            <div style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '-0.02em' }}>
-              {day.date}
-            </div>
-            <div style={{ fontSize: '11px', marginTop: '1px' }}>{day.emoji}</div>
-          </button>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        // 전체 달력 모드 (5열 그리드)
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '6px', padding: '0 14px' }}>
+          {schedule.map((day, i) => {
+            const isToday = day.date === TODAY;
+            const isActive = currentIdx === i;
+            return (
+              <button
+                key={i}
+                onClick={() => { onSelect(i); setExpanded(false); }}
+                style={{
+                  padding: '7px 4px',
+                  background: isActive ? C.leafDeep : C.white,
+                  color: isActive ? C.cream : C.ink,
+                  border: isActive ? 'none' : isToday ? `1.5px solid ${C.coral}` : `1px solid ${C.line}`,
+                  borderRadius: '10px', cursor: 'pointer', fontFamily: 'inherit',
+                  transition: 'all 0.2s', position: 'relative', overflow: 'hidden',
+                  boxShadow: isActive ? '0 3px 10px rgba(61, 122, 68, 0.2)' : 'none'
+                }}
+              >
+                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: cityColor(day.city) }}></div>
+                {isToday && !isActive && (
+                  <div style={{ position: 'absolute', top: '4px', right: '4px', width: '5px', height: '5px', borderRadius: '50%', background: C.coral }}></div>
+                )}
+                <div className="mono" style={{ fontSize: '8px', letterSpacing: '0.5px', opacity: isActive ? 0.8 : 0.5, fontWeight: 500, textTransform: 'uppercase', marginTop: '2px' }}>
+                  {day.day}
+                </div>
+                <div style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '-0.02em' }}>
+                  {day.date}
+                </div>
+                <div style={{ fontSize: '11px', marginTop: '1px' }}>{day.emoji}</div>
+              </button>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
@@ -1238,8 +1344,10 @@ function ScheduleCard({ day, index, isOpen, onToggle, onShowOutfit }) {
 }
 
 function SchedulePage() {
-  const [openIdx, setOpenIdx] = useState(null);
-  const [currentIdx, setCurrentIdx] = useState(null);
+  const TODAY = "5/24";
+  const todayIdx = SCHEDULE.findIndex(d => d.date === TODAY);
+  const [openIdx, setOpenIdx] = useState(todayIdx >= 0 ? todayIdx : null);
+  const [currentIdx, setCurrentIdx] = useState(todayIdx >= 0 ? todayIdx : null);
   const [outfitDate, setOutfitDate] = useState(null);
   const handleSelect = (idx) => {
     setOpenIdx(idx);
@@ -1249,6 +1357,15 @@ function SchedulePage() {
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 50);
   };
+  // 앱 열면 오늘 카드로 부드럽게 점프
+  React.useEffect(() => {
+    if (todayIdx >= 0) {
+      setTimeout(() => {
+        const el = document.getElementById(`day-${todayIdx}`);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 300);
+    }
+  }, []);
   return (
     <div>
       <div style={{ position: 'sticky', top: '54px', zIndex: 90 }}>
@@ -1262,6 +1379,25 @@ function SchedulePage() {
           }} onShowOutfit={(date) => setOutfitDate(date)} />
         ))}
       </div>
+      {/* 오늘로 가기 플로팅 버튼 */}
+      {todayIdx >= 0 && (
+        <button
+          onClick={() => handleSelect(todayIdx)}
+          style={{
+            position: 'fixed', bottom: '78px', right: '16px', zIndex: 95,
+            background: C.coral, color: '#fff', border: 'none',
+            borderRadius: '24px', padding: '11px 16px', cursor: 'pointer',
+            fontFamily: 'inherit', fontSize: '12.5px', fontWeight: 700,
+            boxShadow: '0 4px 16px rgba(244, 168, 150, 0.5)',
+            display: 'flex', alignItems: 'center', gap: '6px'
+          }}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          오늘 ({TODAY})
+        </button>
+      )}
       {outfitDate && (
         <OutfitModal
           outfits={getOutfitsByDate(outfitDate)}
