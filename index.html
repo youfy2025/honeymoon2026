@@ -273,7 +273,7 @@ const SCHEDULE = [
       ] }
     ] },
   { date: "5/24", day: "Sun", city: "Sevilla", emoji: "🕌", main: "스페인광장·대성당·야경", time: "8:30-23:00", transport: "Walk", stay: "Sevilla Night 2",
-    outfit: "화이트 반팔 니트가디건 + 네이비 린넨 롱치마 (어깨·무릎 가려 대성당OK·세비야 폭염 대비)",
+    outfit: "화이트 프릴 오프숄더 블라우스 + 와이드 진청바지 (세비야 폭염·편하게)",
     details: [
       { course: "📍 시내투어 8:30-13:00 (26€)", items: [
         { text: "🗺️ 스페인 광장 중앙분수", map: "Plaza de España Sevilla" },
@@ -301,8 +301,9 @@ const SCHEDULE = [
     outfit: "아이보리 롱원피스 (스냅 촬영용·8시 아침 촬영)",
     details: [
       { course: "📸 SEVILLA SNAP ⭐⭐", items: [
-        { text: "8:00-9:00 촬영" },
-        { text: "스냅: 노미준 (210€)" },
+        { text: "8:00-9:00 촬영 (스냅: 노미준 210€)" },
+        { text: "📍 미팅: 세비야 대성당 뒤편", map: "Seville Cathedral" },
+        { text: "📸 촬영: 유대인 골목 (산타크루즈 지구) ⭐", map: "Barrio Santa Cruz Sevilla" },
         { text: "코디: 아이보리 롱원피스 👗" }
       ] },
       { text: "메트로폴 파라솔", map: "Metropol Parasol Sevilla" },
@@ -334,26 +335,51 @@ const SCHEDULE = [
       ] },
       { notice: "5/27 체크아웃 12시라 5/26 저녁 여유로움 / Ryanair 온라인 체크인 꼭 미리(일주일전부터 가능) / 기차표 Renfe 앱 예약" }
     ] },
-  { date: "5/27", day: "Wed", city: "→ Porto", emoji: "✈", main: "포르투 이동·시내", time: "16:20-16:35", transport: "Ryanair FR5466", stay: "Porto Night 1 (Airbnb)",
+  { date: "5/27", day: "Wed", city: "→ Porto", emoji: "✈", main: "포르투 이동·도착 저녁", time: "16:35 도착", transport: "Ryanair FR5466", stay: "Porto Night 1 (Airbnb)",
+    outfit: "블루셔츠 + 화이트나시 + 화이트숏 (이동·편하게)",
     details: [
-      { text: "오전 세비야 브런치" },
-      { text: "✈ Ryanair FR5466 16:20-16:35" },
-      { text: "체크인 오픈: 5/26 16:20" },
-      { text: "포르투 공항", map: "Porto Airport OPO" },
-      { text: "에어비앤비 셀프체크인 16:00~", map: "Rua da Vitória 152 Porto" }
+      { course: "✈ 이동", items: [
+        { text: "✈ Ryanair FR5466 16:35 포르투 도착", map: "Porto Airport OPO" },
+        { text: "🚕 짐 찾고 택시 → 숙소 (약 30분)" },
+        { text: "17:30 셀프 체크인·정비 (Rua da Vitória 152)", map: "Rua da Vitória 152 Porto" }
+      ] },
+      { course: "🚶 18:00 도심 워밍업 (도보)", items: [
+        { text: "📍 상 벤투 역 (아줄레주 타일 2만개·무료) ⭐", map: "São Bento Station Porto" },
+        { text: "📍 클레리구스 탑 외관 (내일 투어 미팅장소 미리 확인!)", map: "Torre dos Clérigos Porto" },
+        { text: "🛒 meia.dúzia (Rua das Flores) - 물감잼·포트와인 쇼핑 ⭐ (열려있으면 오늘!)", map: "meia duzia Rua das Flores Porto" }
+      ] },
+      { course: "🍽️ 19:45 히베이라 강변 저녁", items: [
+        { text: "🐟 Muro do Bacalhau (강변뷰·오리밥·먹물요리·바나나케이크·12-22시) ⭐", map: "Muro do Bacalhau Porto" },
+        { text: "🐙 또는 Taberna dos Fernandes (평점4.8·문어·해산물밥·19시오픈·줄서기)", map: "Taberna dos Fernandes Porto" }
+      ] },
+      { course: "🌅 21:00 일몰·야경", items: [
+        { text: "🌉 동 루이스 다리 상층 (도루강 일몰) ⭐⭐", map: "Dom Luís I Bridge Porto" },
+        { text: "🌅 Jardim do Morro (가이아쪽·포르투 최고 일몰·맥주2유로·라이브음악) ⭐⭐", map: "Jardim do Morro Vila Nova de Gaia" },
+        { text: "🛒 복귀길 마트 Pingo Doce (물·간식·8-21시)", map: "Pingo Doce Passos Manuel Porto" }
+      ] },
+      { notice: "일몰 약 21:00 / 마트 21시 마감이라 일몰 전 들르거나 JA AGORA(24시) 이용 / 숙소가 도심 한복판이라 다 도보권" }
     ] },
-  { date: "5/28", day: "Thu", city: "Porto", emoji: "🚶", main: "포르투 시내투어", time: "13:30-21:00", transport: "Walk 7.5h", stay: "Porto Night 2",
+  { date: "5/28", day: "Thu", city: "Porto", emoji: "🚶", main: "오전 자유 + 시내투어", time: "오전자유 / 13:30-21:00", transport: "Walk 7.5h", stay: "Porto Night 2",
+    outfit: "검정T + 카고팬츠 (도보 7.5시간·편한 신발 필수!)",
     details: [
-      { text: "🗺️ Torre dos Clérigos", map: "Torre dos Clérigos Porto" },
-      { text: "투어: 나자르투어 (28€)" },
-      { course: "PORTO COURSE", items: [
-        { text: "클레리구스 탑·성당", map: "Torre dos Clérigos Porto" },
+      { course: "🌅 오전 자유 (투어 전·투어와 안 겹치게)", items: [
+        { text: "🍷 Onwine 와인샵 (볼냥시장 안) - 그린와인·포트와인! 마실거+가져갈거 ⭐", map: "Garrafeira Onwine Mercado do Bolhão Porto" },
+        { text: "🥮 Fábrica da Nata (볼냥시장 안·에그타르트) - 와인 살 때 같이!", map: "Fábrica da Nata Mercado do Bolhão Porto" },
+        { text: "🍷 Porto In a Bottle (Rua das Flores·시음가능·15:30오픈이라 투어후) ⭐", map: "Porto In a Bottle Rua das Flores Porto" },
+        { text: "🛒 meia.dúzia 기념품 마무리 - 물감잼·포트와인·코르크·정어리·Claus Porto비누", map: "meia duzia Rua das Flores Porto" },
+        { text: "🏛️ 볼사 궁전 (Palácio da Bolsa·화려한 내부) ⭐", map: "Palácio da Bolsa Porto" },
+        { text: "🥮 에그타르트 도장깨기: Manteigaria(클레리구스)·Castro(크리미) ⭐", map: "Manteigaria Clerigos Porto" },
+        { text: "🍽️ 가벼운 점심 (프란세지냐 등)" }
+      ] },
+      { course: "🚶 시내투어 13:30-21:00 (나자르투어 28€)", items: [
+        { text: "🗺️ 클레리구스 탑 미팅 13:30", map: "Torre dos Clérigos Porto" },
         { text: "렐루 서점 ⭐", map: "Livraria Lello Porto" },
         { text: "상 벤투 역 ⭐", map: "São Bento Station Porto" },
         { text: "히베이라 지구 ⭐", map: "Ribeira Porto" },
         { text: "동 루이스 1세 다리", map: "Dom Luís I Bridge Porto" },
-        { text: "포트와인 셀러 ⭐", map: "Vila Nova de Gaia Wine Cellars" }
-      ] }
+        { text: "포트와인 셀러 ⭐ (여기서도 포트와인 구매 가능!)", map: "Vila Nova de Gaia Wine Cellars" }
+      ] },
+      { notice: "오전엔 투어에 없는 곳 위주(볼사궁전·카르무·카페)! 렐루·상벤투·히베이라·와인셀러는 투어 포함 / 포트와인은 투어 셀러에서 사도 OK" }
     ] },
   { date: "5/29", day: "Fri", city: "→ Lisboa", emoji: "🚌", main: "포르투갈 중부 이동투어", time: "8:30-19:30", transport: "Bus", stay: "Lisboa Night 1",
     details: [
@@ -540,17 +566,21 @@ const GUIDES = [
       { name: "Bolinhos de Bacalhau", desc: "대구 크로켓", emoji: "🍡" }
     ],
     souvenir: [
-      { name: "포트 와인", desc: "면세 한도 (1L) 활용 ⭐⭐", trendy: true },
+      { name: "포트 와인 ⭐⭐", desc: "가져갈4병: Tawny·Ruby·도루레드 (부모님선물). 인당2병·총4L·$800면세", trendy: true },
+      { name: "그린와인(비뉴베르드) 🌿", desc: "마실2-3병+가져갈1병! 상큼·약발포·한국에 흔치않음. 빨리마실것", trendy: true },
+      { name: "🍷 와인샵: Onwine", desc: "볼냥시장 안·그린와인+포트와인 다양. Fábrica da Nata 에그타르트 같이!" },
+      { name: "🍷 Porto In a Bottle", desc: "Rua das Flores·시음가능·소규모브랜드·15:30오픈·meia.dúzia근처" },
       { name: "코르크 제품", desc: "지갑·노트북 케이스 (포르투갈 1위 생산)", trendy: true },
       { name: "Claus Porto 비누", desc: "1887년 럭셔리 비누 ⭐" },
-      { name: "아줄레주 타일 마그넷", desc: "상 벤투 역 컨셉" },
+      { name: "물감잼 (meia.dúzia)", desc: "튜브형 잼·Rua das Flores ⭐" },
       { name: "Sardine 통조림", desc: "Pinhais 또는 Conserveira (디자인 ⭐)", trendy: true }
     ],
     trendy2026: [
+      "🍷 Onwine 와인샵 (볼냥시장·그린/포트와인) ⭐⭐",
       "📚 Livraria Lello (해리포터 영감) ⭐⭐",
-      "🌅 Miradouro da Vitória 무료 일몰 명소",
-      "🥐 Manteigaria 에그타르트 (리스본·포르투 양쪽)",
-      "🍻 Pipa Velha 현지인 와인바"
+      "🌅 Jardim do Morro 일몰 (맥주2유로·라이브음악) ⭐⭐",
+      "🥮 에그타르트 3대장: Manteigaria·Castro·Fábrica da Nata",
+      "🌉 동 루이스 다리 상층 일몰"
     ]
   },
   {
@@ -598,9 +628,9 @@ const OUTFITS = [
   { num: 7, date: "5/21 📸", day: "Thu", desc: "화이트 탑웨딩드레스 (탑+A라인)", note: "📸 알바이신 선셋 웨딩스냅 (피크닉+와인) · 코르셋 조임→점심 가볍게", topColor: "#fafafa", bottomColor: "#fafafa", highlight: true },
   { num: 8, date: "5/22 ☀", day: "Fri", desc: "화이트 페플럼끈나시 + 화이트 오버핏셔츠 + 네이비 린넨롱스커트", note: "마지막날 사크로몬테·타파스 (코르셋 해방·타파스 풀투어)", topColor: "#fafafa", bottomColor: "#1a2845" },
   { num: 9, date: "5/23", day: "Sat", desc: "베이지 니트탑 + 화이트 버뮤다", note: "이동일", topColor: "#c9b896", bottomColor: "#fafafa" },
-  { num: 10, date: "5/24", day: "Sun", desc: "화이트 반팔 니트가디건 + 네이비 린넨 롱치마", note: "세비야 시내·대성당·알카사르 (어깨·무릎 가림)", topColor: "#fafafa", bottomColor: "#1a2845" },
+  { num: 10, date: "5/24", day: "Sun", desc: "화이트 프릴 오프숄더 블라우스 + 와이드 진청바지", note: "세비야 시내·대성당·알카사르·야경", topColor: "#fafafa", bottomColor: "#5b7a99" },
   { num: 11, date: "5/25 📸", day: "Mon", desc: "아이보리 롱원피스", note: "📸 세비야 스냅 (8시 아침 촬영)", topColor: "#f5ecd9", bottomColor: "#f5ecd9", highlight: true },
-  { num: 12, date: "5/25 🌙", day: "Mon", desc: "화이트반팔가디건 + 네이비롱스커트", note: "플라멩고 공연", topColor: "#fafafa", bottomColor: "#1a2845" },
+  { num: 12, date: "5/25 🌙", day: "Mon", desc: "저녁 코디 미정 (네이비 롱스커트는 세탁중)", note: "플라멩고 공연 (다른 하의로!)", topColor: "#e8e2d5", bottomColor: "#e8e2d5" },
   { num: 13, date: "5/26", day: "Tue", desc: "화이트퍼프블라우스 + 브라운숏팬츠", note: "🏖 카디스 당일치기 (근교 바다)", topColor: "#fafafa", bottomColor: "#5a4838" },
   { num: 14, date: "5/27", day: "Wed", desc: "블루셔츠 + 화이트나시 + 화이트숏", note: "이동일", topColor: "#a8c4e0", bottomColor: "#fafafa" },
   { num: 15, date: "5/28", day: "Thu", desc: "검정T + 카고팬츠", note: "포르투 도보 7.5h", topColor: "#1a1a1a", bottomColor: "#5a5e5a" },
@@ -863,7 +893,7 @@ function TabBar({ tab, setTab }) {
 // 날짜 네비 - 그리드 방식 (가로스크롤 X, 줄바꿈으로 한눈에)
 function DateNav({ schedule, onSelect, currentIdx }) {
   const [expanded, setExpanded] = useState(false);
-  const TODAY = "5/24"; // 오늘 날짜
+  const TODAY = "5/27"; // 오늘 날짜
   // 도시별 색 구분
   const cityColor = (city) => {
     if (city.includes('Barcelona')) return '#7ec0d8';
@@ -1344,7 +1374,7 @@ function ScheduleCard({ day, index, isOpen, onToggle, onShowOutfit }) {
 }
 
 function SchedulePage() {
-  const TODAY = "5/24";
+  const TODAY = "5/27";
   const todayIdx = SCHEDULE.findIndex(d => d.date === TODAY);
   const [openIdx, setOpenIdx] = useState(todayIdx >= 0 ? todayIdx : null);
   const [currentIdx, setCurrentIdx] = useState(todayIdx >= 0 ? todayIdx : null);
