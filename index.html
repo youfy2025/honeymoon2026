@@ -8,21 +8,22 @@
 <title>Honeymoon 2026 · España & Portugal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { margin: 0; padding: 0; }
   body {
-    font-family: 'DM Sans', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #f6f9fc;
-    color: #0f1d2e;
+    font-family: 'Nunito', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(180deg, #f0f6ff 0%, #f5f9ff 100%);
+    background-attachment: fixed;
+    color: #020D33;
     line-height: 1.5;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     letter-spacing: -0.01em;
   }
-  .display { font-family: 'Instrument Serif', serif; font-weight: 400; letter-spacing: -0.02em; }
+  .display { font-family: 'Nunito', sans-serif; font-weight: 700; letter-spacing: -0.025em; }
   .mono { font-family: 'DM Sans', sans-serif; font-feature-settings: 'tnum'; }
   #root { min-height: 100vh; padding-bottom: 90px; }
   ::-webkit-scrollbar { display: none; }
@@ -37,16 +38,16 @@
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    background: #e5ecf3;
-    color: #1e3a5f;
+    background: #e8f3ff;
+    color: #116AF8;
     padding: 4px 10px;
     border-radius: 100px;
     font-size: 11px;
-    font-weight: 500;
+    font-weight: 600;
     text-decoration: none;
     font-family: inherit;
     transition: all 0.15s;
-    border: 1px solid rgba(30, 58, 95, 0.1);
+    border: 1px solid rgba(17, 106, 248, 0.12);
     white-space: nowrap;
   }
   .map-pill:active {
@@ -335,32 +336,32 @@ const SCHEDULE = [
       ] },
       { notice: "5/27 체크아웃 12시라 5/26 저녁 여유로움 / Ryanair 온라인 체크인 꼭 미리(일주일전부터 가능) / 기차표 Renfe 앱 예약" }
     ] },
-  { date: "5/27", day: "Wed", city: "→ Porto", emoji: "✈", main: "포르투 이동·도착 저녁", time: "16:35 도착", transport: "Ryanair FR5466", stay: "Porto Night 1 (Airbnb)",
-    outfit: "블루셔츠 + 화이트나시 + 화이트숏 (이동·편하게)",
+  { date: "5/27", day: "Wed", city: "→ Porto", emoji: "✈", main: "포르투 도착 저녁", time: "18:00 숙소", transport: "Ryanair FR5466", stay: "Porto Night 1 (Airbnb)",
+    outfit: "긴 청치마 + 흰 크롭 반팔티",
     details: [
-      { course: "✈ 이동", items: [
+      { course: "✈ 이동 (택시 지연)", items: [
         { text: "✈ Ryanair FR5466 16:35 포르투 도착", map: "Porto Airport OPO" },
-        { text: "🚕 짐 찾고 택시 → 숙소 (약 30분)" },
-        { text: "17:30 셀프 체크인·정비 (Rua da Vitória 152)", map: "Rua da Vitória 152 Porto" }
+        { text: "🚕 택시 (찾는 시간 포함 약 1.5h)" },
+        { text: "18:00 숙소 셀프 체크인·정비 (Rua da Vitória 152)", map: "Rua da Vitória 152 Porto" }
       ] },
-      { course: "🚶 18:00 도심 워밍업 (도보)", items: [
-        { text: "📍 상 벤투 역 (아줄레주 타일 2만개·무료) ⭐", map: "São Bento Station Porto" },
-        { text: "📍 클레리구스 탑 외관 (내일 투어 미팅장소 미리 확인!)", map: "Torre dos Clérigos Porto" },
-        { text: "🛒 meia.dúzia (Rua das Flores) - 물감잼·포트와인 쇼핑 ⭐ (열려있으면 오늘!)", map: "meia duzia Rua das Flores Porto" }
+      { course: "🚶 18:30 도심 워밍업 (도보)", items: [
+        { text: "📍 상 벤투 역 (아줄레주·도보3분)", map: "São Bento Station Porto" },
+        { text: "🛒 meia.dúzia (~20시 마감 빠듯! 닫혔으면 내일오전) ⭐", map: "meia duzia Rua das Flores Porto" },
+        { text: "📍 클레리구스 탑 외관 (내일 미팅장소 확인)", map: "Torre dos Clérigos Porto" }
       ] },
-      { course: "🍽️ 19:45 히베이라 강변 저녁", items: [
-        { text: "🐟 Muro do Bacalhau (강변뷰·오리밥·먹물요리·바나나케이크·12-22시) ⭐", map: "Muro do Bacalhau Porto" },
-        { text: "🐙 또는 Taberna dos Fernandes (평점4.8·문어·해산물밥·19시오픈·줄서기)", map: "Taberna dos Fernandes Porto" }
+      { course: "🍽️ 19:30 히베이라 강변 저녁", items: [
+        { text: "🐟 Muro do Bacalhau (강변뷰·오리밥·12-22시) ⭐", map: "Muro do Bacalhau Porto" },
+        { text: "🐙 Taberna dos Fernandes (평점4.8·문어·19시오픈)", map: "Taberna dos Fernandes Porto" }
       ] },
       { course: "🌅 21:00 일몰·야경", items: [
         { text: "🌉 동 루이스 다리 상층 (도루강 일몰) ⭐⭐", map: "Dom Luís I Bridge Porto" },
-        { text: "🌅 Jardim do Morro (가이아쪽·포르투 최고 일몰·맥주2유로·라이브음악) ⭐⭐", map: "Jardim do Morro Vila Nova de Gaia" },
-        { text: "🛒 복귀길 마트 Pingo Doce (물·간식·8-21시)", map: "Pingo Doce Passos Manuel Porto" }
+        { text: "🌅 Jardim do Morro (포르투 최고 일몰·라이브음악) ⭐⭐", map: "Jardim do Morro Vila Nova de Gaia" },
+        { text: "🛒 복귀길 Pingo Doce (~21시·물·간식)", map: "Pingo Doce Passos Manuel Porto" }
       ] },
-      { notice: "일몰 약 21:00 / 마트 21시 마감이라 일몰 전 들르거나 JA AGORA(24시) 이용 / 숙소가 도심 한복판이라 다 도보권" }
+      { notice: "택시 1.5h 걸렸음·18시 도착 / meia.dúzia 못 가면 내일 오전에 / 일몰 21시·빠듯하면 저녁 더 짧게" }
     ] },
   { date: "5/28", day: "Thu", city: "Porto", emoji: "🚶", main: "오전 자유 + 시내투어", time: "오전자유 / 13:30-21:00", transport: "Walk 7.5h", stay: "Porto Night 2",
-    outfit: "검정T + 카고팬츠 (도보 7.5시간·편한 신발 필수!)",
+    outfit: "아이보리 블라우스 + 치마 세트 (포르투 도보 7.5h·편한 신발 필수!)",
     details: [
       { course: "🌅 오전 자유 (투어 전·투어와 안 겹치게)", items: [
         { text: "🍷 Onwine 와인샵 (볼냥시장 안) - 그린와인·포트와인! 마실거+가져갈거 ⭐", map: "Garrafeira Onwine Mercado do Bolhão Porto" },
@@ -632,8 +633,8 @@ const OUTFITS = [
   { num: 11, date: "5/25 📸", day: "Mon", desc: "아이보리 롱원피스", note: "📸 세비야 스냅 (8시 아침 촬영)", topColor: "#f5ecd9", bottomColor: "#f5ecd9", highlight: true },
   { num: 12, date: "5/25 🌙", day: "Mon", desc: "저녁 코디 미정 (네이비 롱스커트는 세탁중)", note: "플라멩고 공연 (다른 하의로!)", topColor: "#e8e2d5", bottomColor: "#e8e2d5" },
   { num: 13, date: "5/26", day: "Tue", desc: "화이트퍼프블라우스 + 브라운숏팬츠", note: "🏖 카디스 당일치기 (근교 바다)", topColor: "#fafafa", bottomColor: "#5a4838" },
-  { num: 14, date: "5/27", day: "Wed", desc: "블루셔츠 + 화이트나시 + 화이트숏", note: "이동일", topColor: "#a8c4e0", bottomColor: "#fafafa" },
-  { num: 15, date: "5/28", day: "Thu", desc: "검정T + 카고팬츠", note: "포르투 도보 7.5h", topColor: "#1a1a1a", bottomColor: "#5a5e5a" },
+  { num: 14, date: "5/27", day: "Wed", desc: "긴 청치마 + 흰 크롭 반팔티", note: "포르투 도착 저녁", topColor: "#fafafa", bottomColor: "#5b7a99" },
+  { num: 15, date: "5/28", day: "Thu", desc: "아이보리 블라우스 + 치마 세트", note: "포르투 시내투어 7.5h", topColor: "#f5ecd9", bottomColor: "#f5ecd9" },
   { num: 16, date: "5/29", day: "Fri", desc: "블루가디건 + 화이트나시 + 데님숏", note: "리스본 이동", topColor: "#1e3a8a", bottomColor: "#2a3f5f" },
   { num: 17, date: "5/30", day: "Sat", desc: "핑크셔츠 + 화이트나시 + 베이지롱", note: "호카곶 + 바람막이", topColor: "#f0c6c6", bottomColor: "#c9b896" },
   { num: 18, date: "5/31", day: "Sun", desc: "편한 옷 + 바람막이", note: "귀국", topColor: "#d4cfc4", bottomColor: "#3a3a3a" }
@@ -649,35 +650,35 @@ function getOutfitsByDate(dateStr) {
 
 // ============ 컬러: 5월 햇살 · 맑은 호수 · 연녹색 잎 ============
 const C = {
-  // 메인 - 딥 블루 (calm deep blue) ⭐ 2026
-  leaf: '#5b8db8',          // 미디엄 블루
-  leafDeep: '#1e3a5f',      // 네이비 (진한 텍스트·강조)
-  leafLight: '#e8f1f8',     // 아주 옅은 블루 (배경)
-  leafMint: '#b8d0e0',      // 부드러운 블루
+  // 메인 - 산뜻한 일렉트릭 블루 (2026 트렌드)
+  leaf: '#66a6ff',          // 메인 액션·강조
+  leafDeep: '#116AF8',      // 선명한 딥블루 (텍스트 강조)
+  leafLight: '#e8f3ff',     // 아이스블루 배경
+  leafMint: '#cfe5ff',      // 라이트 액센트
 
-  // 서브 - 시원한 하늘 (sky blue)
-  lake: '#7eb8d8',
-  lakeDeep: '#2a5b85',
-  lakeLight: '#dce8f4',
+  // 서브 - 시원한 아이스 (icy cyan)
+  lake: '#89f7fe',          // 아이스 사이안
+  lakeDeep: '#20BCED',      // 비비드 사이안
+  lakeLight: '#e0f7ff',
 
-  // 액센트 - 소프트 옐로우 (warm point)
-  sun: '#f5e08e',
-  sunLight: '#fdf6d3',
-  sunDeep: '#8a6a1a',
+  // 액센트 - 라이트 라일락 (서브포인트)
+  sun: '#c5cffd',
+  sunLight: '#eef0ff',
+  sunDeep: '#5563d9',
 
-  // 액센트 - 코랄 (스냅데이용·오늘 표시)
-  coral: '#f49a8a',
-  coralLight: '#fdddd0',
+  // 오늘 표시·하이라이트 (코랄 유지 - 따뜻한 포인트)
+  coral: '#ff7a6e',
+  coralLight: '#ffe3df',
 
-  // 뉴트럴 - 화이트·라이트그레이 베이스 (미니멀)
-  cream: '#fcfdfe',
+  // 뉴트럴 - 거의 순백 (cool white base)
+  cream: '#ffffff',
   white: '#ffffff',
-  paper: '#f6f9fc',         // 메인 배경 (살짝 푸른 화이트)
-  ink: '#0f1d2e',           // 진한 네이비-블랙
-  inkMid: '#4a5a6e',
-  inkLight: '#8896a8',
-  line: '#e5ecf3',
-  lineDeep: '#d0dae5'
+  paper: '#f5f9ff',         // 살짝 푸른 화이트
+  ink: '#020D33',           // 미드나잇 블루 (검정 대신)
+  inkMid: '#4a5878',
+  inkLight: '#9aa5c0',
+  line: '#e5ecf7',
+  lineDeep: '#d0dcef'
 };
 
 function getDday(startDate) {
@@ -699,91 +700,80 @@ function MapPill({ query }) {
   );
 }
 
-// 헤더 - 미니멀 블루 (2026)
+// 헤더 - 산뜻한 아이스블루 (2026 트렌드)
 function Header() {
   const dday = getDday(TRIP.startDate);
 
   return (
     <div style={{
-      background: C.white,
+      background: 'linear-gradient(135deg, #e0f7ff 0%, #cfe5ff 50%, #d8d4ff 100%)',
       color: C.ink,
-      padding: '18px 20px 16px',
-      borderBottom: `1px solid ${C.line}`
+      padding: '22px 20px 24px',
+      position: 'relative',
+      overflow: 'hidden'
     }}>
-      {/* 상단 메타 - 연도 + 기간 */}
+      {/* 아이스 글로우 - 우상단 */}
       <div style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginBottom: '10px'
-      }}>
-        <div style={{
-          fontSize: '10.5px',
-          letterSpacing: '1.5px',
-          fontWeight: 600,
-          color: C.inkLight,
-          textTransform: 'uppercase'
-        }}>
-          {TRIP.year} · {TRIP.duration}
-        </div>
-        {dday > 0 && (
-          <div style={{
-            fontSize: '11px',
-            fontWeight: 700,
-            color: C.leafDeep,
-            background: C.leafLight,
-            padding: '3px 10px',
-            borderRadius: '999px',
-            letterSpacing: '-0.01em'
-          }}>
-            D−{dday}
-          </div>
-        )}
-        {dday <= 0 && Math.abs(dday) <= 17 && (
-          <div style={{
-            fontSize: '11px',
-            fontWeight: 700,
-            color: '#c2553f',
-            background: C.coralLight,
-            padding: '3px 10px',
-            borderRadius: '999px',
-            letterSpacing: '-0.01em'
-          }}>
-            Day {Math.abs(dday) + 1}
-          </div>
-        )}
-      </div>
+        position: 'absolute', top: '-50px', right: '-30px',
+        width: '160px', height: '160px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(137, 247, 254, 0.4) 0%, transparent 70%)',
+        pointerEvents: 'none'
+      }}></div>
+      {/* 라일락 글로우 - 좌하단 */}
+      <div style={{
+        position: 'absolute', bottom: '-40px', left: '-20px',
+        width: '140px', height: '140px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(197, 207, 253, 0.5) 0%, transparent 70%)',
+        pointerEvents: 'none'
+      }}></div>
 
-      {/* 타이틀 - 미니멀 */}
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', flexWrap: 'wrap' }}>
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        {/* 상단 - 연도·기간·D-day 한 줄 */}
+        <div style={{
+          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+          marginBottom: '14px'
+        }}>
+          <div style={{
+            fontSize: '11px', letterSpacing: '1px', fontWeight: 700,
+            color: C.leafDeep, textTransform: 'uppercase'
+          }}>
+            {TRIP.year} · {TRIP.duration}
+          </div>
+          {dday > 0 && (
+            <div style={{
+              fontSize: '11px', fontWeight: 800, color: C.white,
+              background: C.leafDeep, padding: '4px 11px',
+              borderRadius: '999px', letterSpacing: '-0.01em',
+              boxShadow: '0 2px 8px rgba(17, 106, 248, 0.3)'
+            }}>
+              D−{dday}
+            </div>
+          )}
+          {dday <= 0 && Math.abs(dday) <= 17 && (
+            <div style={{
+              fontSize: '11px', fontWeight: 800, color: C.white,
+              background: C.coral, padding: '4px 11px',
+              borderRadius: '999px', letterSpacing: '-0.01em',
+              boxShadow: '0 2px 8px rgba(255, 122, 110, 0.35)'
+            }}>
+              DAY {Math.abs(dday) + 1}
+            </div>
+          )}
+        </div>
+
+        {/* 타이틀 - 둥근 고딕 */}
         <div className="display" style={{
-          fontSize: '32px',
-          lineHeight: 1,
-          color: C.ink,
-          fontWeight: 400,
-          letterSpacing: '-0.02em'
+          fontSize: '34px', lineHeight: 1.05, color: C.ink,
+          fontWeight: 800, letterSpacing: '-0.03em', marginBottom: '4px'
         }}>
           {TRIP.title}
         </div>
-        <div className="display" style={{
-          fontSize: '15px',
-          fontStyle: 'italic',
-          color: C.inkLight,
-          fontWeight: 400
+        <div style={{
+          fontSize: '13px', fontWeight: 600, color: C.leafDeep,
+          letterSpacing: '-0.01em', opacity: 0.85
         }}>
-          {TRIP.subtitle}
+          {TRIP.subtitle} · {TRIP.dates}
         </div>
-      </div>
-
-      {/* 날짜 */}
-      <div style={{
-        fontSize: '12px',
-        fontWeight: 500,
-        color: C.inkMid,
-        marginTop: '6px',
-        letterSpacing: '-0.01em'
-      }}>
-        {TRIP.dates}
       </div>
     </div>
   );
@@ -837,18 +827,21 @@ function TabBar({ tab, setTab }) {
   );
 }
 
-// 날짜 네비 - 컴팩트 한 줄 칩 (2026 미니멀)
+// 날짜 네비 - 산뜻한 아이스블루·지난날 흐림
 function DateNav({ schedule, onSelect, currentIdx }) {
   const [expanded, setExpanded] = useState(false);
   const TODAY = "5/27"; // 오늘 날짜
-  // 도시별 색 구분 - 블루톤 그라데이션
+  // 오늘 날짜의 schedule 인덱스 찾기 (지난날 판정용)
+  const todayIdx = schedule.findIndex(d => d.date === TODAY);
+
+  // 도시별 색 - 산뜻한 블루 그라데이션 (도시마다 다른 톤)
   const cityColor = (city) => {
-    if (city.includes('Barcelona')) return '#7eb8d8';   // 라이트블루
-    if (city.includes('Granada')) return '#5b8db8';     // 미디엄블루
-    if (city.includes('Sevilla') || city.includes('Cádiz')) return '#f49a8a'; // 코랄 (안달루시아 따뜻함)
-    if (city.includes('Porto')) return '#2a5b85';       // 딥블루
-    if (city.includes('Lisboa')) return '#1e3a5f';      // 네이비
-    return '#8896a8';
+    if (city.includes('Barcelona')) return '#89f7fe';   // 아이스 사이안
+    if (city.includes('Granada')) return '#66a6ff';     // 메인 블루
+    if (city.includes('Sevilla') || city.includes('Cádiz')) return '#ff7a6e'; // 코랄 (안달루시아 따뜻함)
+    if (city.includes('Porto')) return '#116AF8';       // 일렉트릭 블루
+    if (city.includes('Lisboa')) return '#c5cffd';      // 라일락
+    return '#9aa5c0';
   };
   const cityShort = (city) => {
     if (city.includes('Barcelona')) return 'BCN';
@@ -874,7 +867,7 @@ function DateNav({ schedule, onSelect, currentIdx }) {
     }}>
       {/* 상단 라벨 + 토글 */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 16px 6px' }}>
-        <span style={{ fontSize: '11px', color: C.inkMid, fontWeight: 600, letterSpacing: '-0.01em' }}>
+        <span style={{ fontSize: '11px', color: C.inkMid, fontWeight: 700, letterSpacing: '-0.01em' }}>
           {schedule[currentIdx] && (
             <span style={{ color: cityColor(schedule[currentIdx].city) }}>● </span>
           )}
@@ -882,7 +875,7 @@ function DateNav({ schedule, onSelect, currentIdx }) {
         </span>
         <button onClick={() => setExpanded(!expanded)} style={{
           background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit',
-          fontSize: '11px', color: C.leafDeep, fontWeight: 600, display: 'flex', alignItems: 'center', gap: '3px', padding: 0
+          fontSize: '11px', color: C.leafDeep, fontWeight: 700, display: 'flex', alignItems: 'center', gap: '3px', padding: 0
         }}>
           {expanded ? '접기' : '전체'}
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ transform: expanded ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }}>
@@ -892,7 +885,7 @@ function DateNav({ schedule, onSelect, currentIdx }) {
       </div>
 
       {!expanded ? (
-        // 가로 스크롤 - 한 줄 컴팩트 칩
+        // 가로 스크롤 - 한 줄 컴팩트 알약 칩
         <div ref={scrollRef} style={{
           display: 'flex', gap: '6px', overflowX: 'auto', padding: '4px 16px 12px',
           scrollbarWidth: 'none'
@@ -900,6 +893,7 @@ function DateNav({ schedule, onSelect, currentIdx }) {
           {schedule.map((day, i) => {
             const isToday = day.date === TODAY;
             const isActive = currentIdx === i;
+            const isPast = todayIdx > -1 && i < todayIdx;
             const cColor = cityColor(day.city);
             return (
               <button
@@ -907,34 +901,43 @@ function DateNav({ schedule, onSelect, currentIdx }) {
                 data-active={isActive}
                 onClick={() => onSelect(i)}
                 style={{
-                  flexShrink: 0, padding: '6px 10px',
-                  background: isActive ? C.leafDeep : isToday ? C.coralLight : C.paper,
-                  color: isActive ? C.white : isToday ? '#c2553f' : C.ink,
-                  border: 'none',
+                  flexShrink: 0, padding: '6px 11px',
+                  background: isActive ? C.leafDeep : isToday ? C.coral : isPast ? C.paper : C.white,
+                  color: isActive ? C.white : isToday ? C.white : isPast ? C.inkLight : C.ink,
+                  border: isActive || isToday ? 'none' : `1px solid ${isPast ? C.line : C.leafLight}`,
                   borderRadius: '999px', cursor: 'pointer', fontFamily: 'inherit',
                   transition: 'all 0.15s', display: 'flex', alignItems: 'center', gap: '5px',
-                  fontSize: '12px', fontWeight: isActive || isToday ? 700 : 500,
+                  fontSize: '12px', fontWeight: isActive || isToday ? 800 : isPast ? 500 : 700,
                   letterSpacing: '-0.01em',
-                  boxShadow: isActive ? '0 2px 8px rgba(30, 58, 95, 0.18)' : 'none'
+                  opacity: isPast && !isActive ? 0.55 : 1,
+                  boxShadow: isActive ? '0 3px 10px rgba(17, 106, 248, 0.3)' : isToday ? '0 3px 10px rgba(255, 122, 110, 0.3)' : 'none',
+                  textDecoration: isPast && !isActive ? 'line-through' : 'none'
                 }}
               >
-                <span style={{
-                  width: '5px', height: '5px', borderRadius: '50%',
-                  background: isActive ? C.white : cColor,
-                  flexShrink: 0
-                }}></span>
+                {isPast && !isActive ? (
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                ) : (
+                  <span style={{
+                    width: '5px', height: '5px', borderRadius: '50%',
+                    background: isActive || isToday ? C.white : cColor,
+                    flexShrink: 0
+                  }}></span>
+                )}
                 <span>{day.date}</span>
-                {isToday && <span style={{ fontSize: '9px', opacity: 0.8, fontWeight: 700 }}>·오늘</span>}
+                {isToday && <span style={{ fontSize: '9px', opacity: 0.95, fontWeight: 800 }}>·오늘</span>}
               </button>
             );
           })}
         </div>
       ) : (
-        // 전체 달력 - 깔끔한 5열 그리드 (작게)
+        // 전체 달력 - 깔끔한 5열 그리드
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '5px', padding: '4px 16px 12px' }}>
           {schedule.map((day, i) => {
             const isToday = day.date === TODAY;
             const isActive = currentIdx === i;
+            const isPast = todayIdx > -1 && i < todayIdx;
             const cColor = cityColor(day.city);
             return (
               <button
@@ -942,19 +945,20 @@ function DateNav({ schedule, onSelect, currentIdx }) {
                 onClick={() => { onSelect(i); setExpanded(false); }}
                 style={{
                   padding: '6px 2px',
-                  background: isActive ? C.leafDeep : isToday ? C.coralLight : C.paper,
-                  color: isActive ? C.white : isToday ? '#c2553f' : C.ink,
-                  border: 'none',
+                  background: isActive ? C.leafDeep : isToday ? C.coral : isPast ? C.paper : C.white,
+                  color: isActive ? C.white : isToday ? C.white : isPast ? C.inkLight : C.ink,
+                  border: isActive || isToday ? 'none' : `1px solid ${isPast ? C.line : C.leafLight}`,
                   borderRadius: '10px', cursor: 'pointer', fontFamily: 'inherit',
                   transition: 'all 0.15s', position: 'relative', overflow: 'hidden',
-                  boxShadow: isActive ? '0 2px 8px rgba(30, 58, 95, 0.18)' : 'none'
+                  opacity: isPast && !isActive ? 0.55 : 1,
+                  boxShadow: isActive ? '0 3px 10px rgba(17, 106, 248, 0.3)' : isToday ? '0 3px 10px rgba(255, 122, 110, 0.3)' : 'none'
                 }}
               >
-                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: cColor }}></div>
-                <div style={{ fontSize: '8px', opacity: isActive ? 0.75 : 0.5, fontWeight: 600, textTransform: 'uppercase', marginTop: '2px', letterSpacing: '0.5px' }}>
+                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: cColor, opacity: isPast && !isActive ? 0.3 : 1 }}></div>
+                <div style={{ fontSize: '8px', opacity: isActive || isToday ? 0.85 : 0.5, fontWeight: 700, textTransform: 'uppercase', marginTop: '2px', letterSpacing: '0.5px' }}>
                   {day.day}
                 </div>
-                <div style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '-0.02em', marginTop: '1px' }}>
+                <div style={{ fontSize: '12px', fontWeight: 800, letterSpacing: '-0.02em', marginTop: '1px', textDecoration: isPast && !isActive ? 'line-through' : 'none' }}>
                   {day.date}
                 </div>
               </button>
