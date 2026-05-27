@@ -336,51 +336,157 @@ const SCHEDULE = [
       ] },
       { notice: "5/27 체크아웃 12시라 5/26 저녁 여유로움 / Ryanair 온라인 체크인 꼭 미리(일주일전부터 가능) / 기차표 Renfe 앱 예약" }
     ] },
-  { date: "5/27", day: "Wed", city: "→ Porto", emoji: "✈", main: "포르투 도착 저녁", time: "18:00 숙소", transport: "Ryanair FR5466", stay: "Porto Night 1 (Airbnb)",
-    outfit: "긴 청치마 + 흰 크롭 반팔티",
+  { date: "5/27", day: "Wed", city: "→ Porto", emoji: "✈", main: "포르투 도착·강변 저녁·일몰", time: "16:35-22:30", transport: "Ryanair FR5466", stay: "Porto Night 1 (Airbnb)",
+    outfit: "긴 청치마 + 흰 크롭 반팔티 (밤 강가 쌀쌀·가디건 챙기기)",
     details: [
-      { course: "✈ 이동 (택시 지연)", items: [
+      { course: "✈ 도착 & 정비 (16:35-19:00)", items: [
         { text: "✈ Ryanair FR5466 16:35 포르투 도착", map: "Porto Airport OPO" },
         { text: "🚕 택시 (찾는 시간 포함 약 1.5h)" },
-        { text: "18:00 숙소 셀프 체크인·정비 (Rua da Vitória 152)", map: "Rua da Vitória 152 Porto" }
+        { text: "18:00 숙소 셀프 체크인·정비 (Rua da Vitória 152)", map: "Rua da Vitória 152 Porto" },
+        { text: "🧺 빨래·환복·휴식 (~19:00)" }
       ] },
-      { course: "🚶 18:30 도심 워밍업 (도보)", items: [
-        { text: "📍 상 벤투 역 (아줄레주·도보3분)", map: "São Bento Station Porto" },
-        { text: "🛒 meia.dúzia (~20시 마감 빠듯! 닫혔으면 내일오전) ⭐", map: "meia duzia Rua das Flores Porto" },
-        { text: "📍 클레리구스 탑 외관 (내일 미팅장소 확인)", map: "Torre dos Clérigos Porto" }
+      { course: "🍽 19:30 저녁 — Local Food Experience ⭐", items: [
+        { text: "🚨 Muro do Bacalhau 1시간 웨이팅이라 변경!" },
+        { text: "🍽 Local Food Experience (R. de São João 64·평점4.7·1,309리뷰) ⭐⭐", map: "Local Food Experience Porto",
+          menu: [
+            { kr: "포트와인 샘플러 4잔", pt: "Vinhos do Porto (degustação)", pron: "비뉴스 두 포르투", star: "⭐⭐ 강추", note: "Ruby·Tawny·Rosé·White 4종 비교! 내일 Onwine에서 살 때 참고" },
+            { kr: "쿠베르 (시작 모듬)", pt: "Couvert", pron: "쿠베르", star: "⭐ 가성비", note: "€5.90 빵+버터+올리브+정어리파테+루핀콩 한방에!" },
+            { kr: "올리브", pt: "Azeitonas", pron: "아제이토나스" },
+            { kr: "크림 소스 대구", pt: "Bacalhau com Natas", pron: "바칼랴우 콩 나타스", star: "⭐", note: "regular €17.90·소스에 빵 찍기 좋음" },
+            { kr: "오리밥", pt: "Arroz de Pato", pron: "아호스 드 파투", star: "⭐⭐ 시그니처", note: "regular €14.90·인생음식 후기 多" },
+            { kr: "대구 크로켓 (2개)", pt: "Pastéis de Bacalhau", pron: "파스테이스 드 바칼랴우", note: "€7.20·바삭한 간식" },
+            { kr: "그린와인 한 잔", pt: "Um copo de Vinho Verde", pron: "웅 코푸 드 비뉴 베르드" },
+            { kr: "계산서요", pt: "A conta, por favor", pron: "아 콘타 포르 파보르" }
+          ]
+        },
+        { text: "👨‍🍳 João 직원 친절·테라스 추천받기 OK" },
+        { text: "💡 양 조절: 포르투갈 메인 1개 = 한국 1.5인분 / pequena 작은사이즈 있음" },
+        { text: "⚠️ 작은 사이즈로 시키면 양 부족할 수 있음 — 쿠베르나 크로켓 추가" }
       ] },
-      { course: "🍽️ 19:30 히베이라 강변 저녁", items: [
-        { text: "🐟 Muro do Bacalhau (강변뷰·오리밥·12-22시) ⭐", map: "Muro do Bacalhau Porto" },
-        { text: "🐙 Taberna dos Fernandes (평점4.8·문어·19시오픈)", map: "Taberna dos Fernandes Porto" }
+      { course: "🛒 마트 — SPAR 21시 마감 ⚠️", items: [
+        { text: "❌ SPAR (도보30초·21시까지)는 식사 길어지면 못 감", map: "SPAR Rua de São João Porto" },
+        { text: "✅ 대안: JA AGORA! Supermarket (R. do Sol 134·자정까지·동네가격)", map: "JA AGORA Supermarket Porto" },
+        { text: "💧 추천 생수: Luso 1.5L (한국 삼다수 느낌·부드러움)" },
+        { text: "🏷️ 'Água sem gás' (셍 가스) = 탄산 없는 물·파란/녹색 라벨" },
+        { text: "❌ Pedras·Vitalis는 탄산수or강한 미네랄·피하기" },
+        { text: "❌ 관광지 미니마켓 (Cais da Ribeira·Sao Bento Super) 바가지 주의" },
+        { text: "❌ 와인은 내일 Onwine에서 (지금은 무겁기만)" }
       ] },
-      { course: "🌅 21:00 일몰·야경", items: [
-        { text: "🌉 동 루이스 다리 상층 (도루강 일몰) ⭐⭐", map: "Dom Luís I Bridge Porto" },
-        { text: "🌅 Jardim do Morro (포르투 최고 일몰·라이브음악) ⭐⭐", map: "Jardim do Morro Vila Nova de Gaia" },
-        { text: "🛒 복귀길 Pingo Doce (~21시·물·간식)", map: "Pingo Doce Passos Manuel Porto" }
+      { course: "🌅 다리·일몰·야경 (일몰 21:00)", items: [
+        { text: "🌉 동 루이스 다리 상층 ⭐⭐ (도루강 일몰·도시조명)", map: "Dom Luís I Bridge Porto" },
+        { text: "✨ 블루아워 21:00-21:45 (사진 가장 예쁨!)" },
+        { text: "🌅 Jardim do Morro 추천하지만 🚨 밤엔 치안 위험 — 낮에 다시 오기" },
+        { text: "🌉 대신 다리 위 자체가 최고 야경 스팟 (사람 많고 안전)" }
       ] },
-      { notice: "택시 1.5h 걸렸음·18시 도착 / meia.dúzia 못 가면 내일 오전에 / 일몰 21시·빠듯하면 저녁 더 짧게" }
+      { course: "🌙 22:30 숙소 복귀", items: [
+        { text: "🚶 다리 → JA AGORA! → 숙소 (도보 10-15분)" },
+        { text: "⚠️ 야간: 휴대폰 가방 안에·큰 길로만·둘이 꼭 붙어서" },
+        { text: "🏠 숙소 도착·짐 정리·내일 가방 챙기기 (와인 담을 큰 가방)" },
+        { text: "💤 23:00 취침 → 내일 06:30 기상 (수면 7h+)" }
+      ] },
+      { notice: "🚨 Morro 정원은 밤에 치안 위험·낮에만! / 야경은 다리 위에서 OK / Muro do Bacalhau는 인기로 웨이팅 길어 Local Food Experience로 변경 / SPAR 21시 마감 빠듯하면 JA AGORA(자정까지)" }
     ] },
-  { date: "5/28", day: "Thu", city: "Porto", emoji: "🚶", main: "오전 자유 + 시내투어", time: "오전자유 / 13:30-21:00", transport: "Walk 7.5h", stay: "Porto Night 2",
-    outfit: "아이보리 블라우스 + 치마 세트 (포르투 도보 7.5h·편한 신발 필수!)",
+  { date: "5/28", day: "Thu", city: "Porto", emoji: "🥧", main: "에그타르트·와인·기념품 + 시내투어", time: "06:30-21:00", transport: "Walk 7.5h", stay: "Porto Night 2",
+    outfit: "아이보리 블라우스 + 치마 세트 (포르투 도보 7.5h·편한 신발 필수! 아침 쌀쌀→가디건)",
     details: [
-      { course: "🌅 오전 자유 (투어 전·투어와 안 겹치게)", items: [
-        { text: "🍷 Onwine 와인샵 (볼냥시장 안) - 그린와인·포트와인! 마실거+가져갈거 ⭐", map: "Garrafeira Onwine Mercado do Bolhão Porto" },
-        { text: "🥮 Fábrica da Nata (볼냥시장 안·에그타르트) - 와인 살 때 같이!", map: "Fábrica da Nata Mercado do Bolhão Porto" },
-        { text: "🍷 Porto In a Bottle (Rua das Flores·시음가능·15:30오픈이라 투어후) ⭐", map: "Porto In a Bottle Rua das Flores Porto" },
-        { text: "🛒 meia.dúzia 기념품 마무리 - 물감잼·포트와인·코르크·정어리·Claus Porto비누", map: "meia duzia Rua das Flores Porto" },
-        { text: "🏛️ 볼사 궁전 (Palácio da Bolsa·화려한 내부) ⭐", map: "Palácio da Bolsa Porto" },
-        { text: "🥮 에그타르트 도장깨기: Manteigaria(클레리구스)·Castro(크리미) ⭐", map: "Manteigaria Clerigos Porto" },
-        { text: "🍽️ 가벼운 점심 (프란세지냐 등)" }
+      { course: "🛁 06:30-08:00 기상·준비 (한 번에)", items: [
+        { text: "06:30 기상·세수" },
+        { text: "06:30-07:30 씻고 화장 (1시간)" },
+        { text: "🥐 07:30-08:00 조식 픽업 (7-9시 사이 문앞 바스켓) + 커피" },
+        { text: "📌 조식 없으면 → 산책 중 Manteigaria 볼냥점 (8시 오픈)" },
+        { text: "🎒 가방 챙기기: 와인 4-7병 담을 큰 가방·에코백·카드·현금" }
       ] },
-      { course: "🚶 시내투어 13:30-21:00 (나자르투어 28€)", items: [
-        { text: "🗺️ 클레리구스 탑 미팅 13:30", map: "Torre dos Clérigos Porto" },
-        { text: "렐루 서점 ⭐", map: "Livraria Lello Porto" },
-        { text: "상 벤투 역 ⭐", map: "São Bento Station Porto" },
-        { text: "히베이라 지구 ⭐", map: "Ribeira Porto" },
-        { text: "동 루이스 1세 다리", map: "Dom Luís I Bridge Porto" },
-        { text: "포트와인 셀러 ⭐ (여기서도 포트와인 구매 가능!)", map: "Vila Nova de Gaia Wine Cellars" }
+      { course: "⛪ 08:00-08:45 모닝 산책 (한적한 알마스 성당)", items: [
+        { text: "🚶 08:00 숙소 출발 (가디건 챙기기·아침 쌀쌀)" },
+        { text: "⛪ 08:15 알마스 성당 외벽 ⭐⭐ (파란 아줄레주·아무도 없음)", map: "Capela das Almas Porto" },
+        { text: "📸 산타카타리나 거리 한적한 아침 산책" },
+        { text: "⛪ 08:30 알마스 성당 내부 (7:30 오픈·작지만 자유)" },
+        { text: "✨ 투어에 없는 곳! 아침에 가는 게 정답" }
       ] },
-      { notice: "오전엔 투어에 없는 곳 위주(볼사궁전·카르무·카페)! 렐루·상벤투·히베이라·와인셀러는 투어 포함 / 포트와인은 투어 셀러에서 사도 OK" }
+      { course: "🥧 08:50-09:30 에그타르트 도장 1 + 시장", items: [
+        { text: "🥧 08:50 Manteigaria 볼냥점 — 도장 1 ⭐ (8시 오픈·갓 구운 거)", map: "Manteigaria Alexandre Braga Porto",
+          menu: [
+            { kr: "에그타르트", pt: "Pastel de Nata", pron: "파스텔 드 나타", star: "⭐ 시그니처", note: "1개 €1.5·작아서 도장깨기 OK" },
+            { kr: "에스프레소", pt: "Café / Bica", pron: "카페 / 비카", note: "€1·짧고 진함" },
+            { kr: "카푸치노", pt: "Galão (큰컵) / Meia de Leite", pron: "갈라웅 / 메이아 드 레이트" },
+            { kr: "주세요", pt: "Por favor", pron: "포르 파보르" }
+          ]
+        },
+        { text: "☕ 09:10 살짝 커피 한 잔 (Manteigaria 옆 카페)" },
+        { text: "🛒 09:30 볼냥시장 둘러보기 ⭐ (사르딘 통조림·치즈 구경만)", map: "Mercado do Bolhão Porto" }
+      ] },
+      { course: "🍷 10:00-11:00 Onwine 와인샵 (메인!)", items: [
+        { text: "🍷 10:00 Onwine 오픈! ⭐⭐ (R. Alexandre Braga 129·평점 5.0)", map: "Garrafeira Onwine Mercado do Bolhão Porto",
+          menu: [
+            { kr: "포트와인 (선물·자가용)", pt: "Vinho do Porto", pron: "비뉴 두 포르투", star: "⭐⭐ 2-3병", note: "Tawny(호박색·견과류) / Ruby(루비색·과일) / Douro Red" },
+            { kr: "그린와인 (메인 쇼핑)", pt: "Vinho Verde", pron: "비뉴 베르드", star: "⭐⭐ 메인", note: "마실 + 가져갈! 한국에 흔치 않음" },
+            { kr: "추천 부탁드려요", pt: "Pode recomendar?", pron: "포드 헤코멘다르", note: "Adriana·Carlos 추천 OK" },
+            { kr: "신혼여행 와인", pt: "Vinhos para a lua de mel", pron: "비뉴스 파라 아 루아 드 멜" },
+            { kr: "선물용 4병", pt: "Quatro garrafas para presente", pron: "콰트루 가하파스 파라 프레젠트" }
+          ]
+        },
+        { text: "💬 가서 할 말: \"Honeymoon! 2-3 port wines for us, and green wines to drink + take home — recommend?\"" },
+        { text: "📦 면세: 2인 = 4L (병 5병까지 OK)" }
+      ] },
+      { course: "🥧 11:00-11:25 에그타르트 도장 2 (Fábrica)", items: [
+        { text: "🥧 Fábrica da Nata 볼냥점 — 도장 2 (시장 안·크리미·덜 단맛)", map: "Fábrica da Nata Mercado do Bolhão Porto",
+          menu: [
+            { kr: "에그타르트", pt: "Pastel de Nata", pron: "파스텔 드 나타", star: "⭐", note: "Manteigaria보다 크리미·덜 단 맛" },
+            { kr: "에그타르트 밀크쉐이크", pt: "Batido de Pastel de Nata", pron: "바티두 드 파스텔 드 나타", note: "여름엔 이것도!" }
+          ]
+        },
+        { text: "🛒 시장 살 거 있으면 여기서 (Pinhais 사르딘·치즈·꿀)" }
+      ] },
+      { course: "🎁 11:30-12:05 meia.dúzia (잼·기념품)", items: [
+        { text: "🎁 meia.dúzia (R. das Flores 171·평점 4.7) ⭐⭐", map: "meia duzia Rua das Flores Porto",
+          menu: [
+            { kr: "물감잼 (튜브형)", pt: "Compota em tubo", pron: "콤포타 엥 투부", star: "⭐⭐ 시그니처", note: "호박잼·무화과·로즈·포트와인잼 / 1개 €6·3개 묶음 할인" },
+            { kr: "Claus Porto 비누", pt: "Sabonete Claus Porto", pron: "사보네트 클라우스 포르투", star: "⭐", note: "1887년 럭셔리·향 다양" },
+            { kr: "포트와인 초콜릿", pt: "Chocolate com Vinho do Porto", pron: "쇼콜라트 콩 비뉴 두 포르투" },
+            { kr: "코르크 제품", pt: "Produtos de Cortiça", pron: "프로두투스 드 코르티사", note: "지갑·소품" },
+            { kr: "시식 가능한가요?", pt: "Posso provar?", pron: "포수 프로바르", note: "Diogo·Miguel이 잘 챙겨줌" }
+          ]
+        },
+        { text: "💡 호박잼·치즈·빵 같이 시식 가능 — 천천히 즐기기" }
+      ] },
+      { course: "🥧 12:05-12:25 에그타르트 도장 3 (Castro)", items: [
+        { text: "🥧 Castro — 도장 3 ⭐ (R. Mouzinho da Silveira·평점 4.8·가장 진함)", map: "Castro Pastry Porto",
+          menu: [
+            { kr: "에그타르트", pt: "Pastel de Nata", pron: "파스텔 드 나타", star: "⭐⭐ 우승후보", note: "€1.7·진하고 크리미·평점 4.8" },
+            { kr: "핫초코", pt: "Chocolate Quente", pron: "쇼콜라트 켄트", note: "함께 추천" },
+            { kr: "포장 박스 6개", pt: "Caixa de seis para levar", pron: "카이샤 드 세이스 파라 레바르" }
+          ]
+        },
+        { text: "💡 둘이 1개 나눠 — 3대장 비교 끝!" }
+      ] },
+      { course: "🏠 12:30-13:30 짐·점심·출발", items: [
+        { text: "🏠 12:30 숙소 짐 두기 (와인+기념품 무거움)·화장실" },
+        { text: "🥪 12:40-13:20 점심 (40분 여유)" },
+        { text: "🍔 Conga (비파나·돼지바게트·현지 인기) ⭐", map: "Conga Porto bifana",
+          menu: [
+            { kr: "비파나 (돼지바게트)", pt: "Bifana", pron: "비파나", star: "⭐ 시그니처", note: "Conga가 포르투 1위 비파나" },
+            { kr: "프란세지냐 (포르투 명물)", pt: "Francesinha", pron: "프란세지냐", note: "치즈+소스+고기 샌드위치·양많음" },
+            { kr: "맥주 한 잔", pt: "Uma cerveja / Imperial", pron: "우마 세르베자 / 임페리알", note: "Imperial = 작은 생맥주" }
+          ]
+        },
+        { text: "🚶 13:25 클레리구스탑으로 (도보 3분)", map: "Torre dos Clérigos Porto" },
+        { text: "✅ 13:30 시내투어 미팅" }
+      ] },
+      { course: "🚶 시내투어 13:30-21:00 (나자르투어 28€·가이드 따라)", items: [
+        { text: "🗺️ 13:30 클레리구스 탑·성당 (30분·바로크양식)", map: "Torre dos Clérigos Porto" },
+        { text: "📚 14:00 렐루서점 ⭐⭐ (30분·해리포터 영감·미리 티켓 구매)", map: "Livraria Lello Porto" },
+        { text: "🦁 14:30 사자분수대 (20분·해리포터 숨은 스팟·알로호모라!)", map: "Leões Fountain Porto" },
+        { text: "⛪ 14:50 카르무 성당 (10분·푸른 아줄레주 외벽 인증샷)", map: "Igreja do Carmo Porto" },
+        { text: "🍟 임페리얼 맥도날드 (세계에서 가장 아름다운 맥도날드)" },
+        { text: "🏛 상벤투 기차역 ⭐ (30분·2만개 아줄레주)", map: "São Bento Station Porto" },
+        { text: "🌉 동 루이스 1세 다리 (20분·도우루강뷰)", map: "Dom Luís I Bridge Porto" },
+        { text: "⛪ 포르투 대성당 (40분·하절기 외부설명·뷰 사진)", map: "Sé do Porto" },
+        { text: "🌊 히베이라 광장 (30분·비긴 어게인 촬영지·버스킹)", map: "Ribeira Porto" },
+        { text: "🍷 포트와인 와이너리 추천 (20분·가이드한테 셀러 추천 받기)" },
+        { text: "🍽 저녁 자유시간 (가이드가 식당·메뉴 소개해줌)" },
+        { text: "🌅 세하 두 필라르 수도원 ⭐⭐ (30분·일몰·야경 맛집·일몰 21시)", map: "Mosteiro da Serra do Pilar" }
+      ] },
+      { notice: "🎯 핵심: 알마스→Manteigaria→Onwine→Fábrica→meia.dúzia→Castro→짐두기→점심→투어 / 투어에 상벤투·대성당·다리·렐루·카르무·히베이라 다 포함! / 포트와인은 Onwine에서 사두기 (투어에선 추천만)" }
     ] },
   { date: "5/29", day: "Fri", city: "→ Lisboa", emoji: "🚌", main: "포르투갈 중부 이동투어", time: "8:30-19:30", transport: "Bus", stay: "Lisboa Night 1",
     details: [
@@ -567,8 +673,8 @@ const GUIDES = [
       { name: "Bolinhos de Bacalhau", desc: "대구 크로켓", emoji: "🍡" }
     ],
     souvenir: [
-      { name: "포트 와인 ⭐⭐", desc: "가져갈4병: Tawny·Ruby·도루레드 (부모님선물). 인당2병·총4L·$800면세", trendy: true },
-      { name: "그린와인(비뉴베르드) 🌿", desc: "마실2-3병+가져갈1병! 상큼·약발포·한국에 흔치않음. 빨리마실것", trendy: true },
+      { name: "포트 와인 ⭐⭐", desc: "2-3병: 우리가 마실 + 1-2병은 부모님선물. Tawny(호박·견과)·Ruby(과일)·Douro Red", trendy: true },
+      { name: "그린와인(비뉴베르드) 🌿 메인쇼핑", desc: "마실 + 가져갈 = 메인! 상큼·약발포·한국에 흔치않음 / 면세 2인 4L까지 OK", trendy: true },
       { name: "🍷 와인샵: Onwine", desc: "볼냥시장 안·그린와인+포트와인 다양. Fábrica da Nata 에그타르트 같이!" },
       { name: "🍷 Porto In a Bottle", desc: "Rua das Flores·시음가능·소규모브랜드·15:30오픈·meia.dúzia근처" },
       { name: "코르크 제품", desc: "지갑·노트북 케이스 (포르투갈 1위 생산)", trendy: true },
@@ -579,9 +685,10 @@ const GUIDES = [
     trendy2026: [
       "🍷 Onwine 와인샵 (볼냥시장·그린/포트와인) ⭐⭐",
       "📚 Livraria Lello (해리포터 영감) ⭐⭐",
-      "🌅 Jardim do Morro 일몰 (맥주2유로·라이브음악) ⭐⭐",
+      "🌅 Jardim do Morro 일몰 ⭐⭐ (낮에만! 밤엔 치안 위험)",
+      "🌉 동 루이스 다리 상층 야경·블루아워 ⭐⭐ (밤에도 안전)",
       "🥮 에그타르트 3대장: Manteigaria·Castro·Fábrica da Nata",
-      "🌉 동 루이스 다리 상층 일몰"
+      "💧 생수: Luso (한국 삼다수 느낌·부드러움) / 'Sem gás' 라벨 확인"
     ]
   },
   {
@@ -633,7 +740,7 @@ const OUTFITS = [
   { num: 11, date: "5/25 📸", day: "Mon", desc: "아이보리 롱원피스", note: "📸 세비야 스냅 (8시 아침 촬영)", topColor: "#f5ecd9", bottomColor: "#f5ecd9", highlight: true },
   { num: 12, date: "5/25 🌙", day: "Mon", desc: "저녁 코디 미정 (네이비 롱스커트는 세탁중)", note: "플라멩고 공연 (다른 하의로!)", topColor: "#e8e2d5", bottomColor: "#e8e2d5" },
   { num: 13, date: "5/26", day: "Tue", desc: "화이트퍼프블라우스 + 브라운숏팬츠", note: "🏖 카디스 당일치기 (근교 바다)", topColor: "#fafafa", bottomColor: "#5a4838" },
-  { num: 14, date: "5/27", day: "Wed", desc: "긴 청치마 + 흰 크롭 반팔티", note: "포르투 도착 저녁", topColor: "#fafafa", bottomColor: "#5b7a99" },
+  { num: 14, date: "5/27", day: "Wed", desc: "긴 청치마 + 흰 크롭 반팔티", note: "포르투 도착 저녁·다리 일몰 (밤 강가 쌀쌀→가디건!)", topColor: "#fafafa", bottomColor: "#5b7a99" },
   { num: 15, date: "5/28", day: "Thu", desc: "아이보리 블라우스 + 치마 세트", note: "포르투 시내투어 7.5h", topColor: "#f5ecd9", bottomColor: "#f5ecd9" },
   { num: 16, date: "5/29", day: "Fri", desc: "블루가디건 + 화이트나시 + 데님숏", note: "리스본 이동", topColor: "#1e3a8a", bottomColor: "#2a3f5f" },
   { num: 17, date: "5/30", day: "Sat", desc: "핑크셔츠 + 화이트나시 + 베이지롱", note: "호카곶 + 바람막이", topColor: "#f0c6c6", bottomColor: "#c9b896" },
@@ -971,18 +1078,14 @@ function DateNav({ schedule, onSelect, currentIdx }) {
 }
 
 function DetailItem({ detail }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const hasMenu = detail.menu && detail.menu.length > 0;
   return (
     <div style={{
-      fontSize: '13.5px',
-      color: C.ink,
       padding: '7px 0',
       paddingLeft: '14px',
       position: 'relative',
-      lineHeight: 1.55,
-      display: 'flex',
-      alignItems: 'center',
-      flexWrap: 'wrap',
-      gap: '6px'
+      lineHeight: 1.55
     }}>
       <span style={{
         position: 'absolute',
@@ -991,10 +1094,75 @@ function DetailItem({ detail }) {
         width: '5px',
         height: '5px',
         borderRadius: '50%',
-        background: C.leaf
+        background: hasMenu ? C.coral : C.leaf
       }}></span>
-      <span>{detail.text}</span>
-      {detail.map && <MapPill query={detail.map} />}
+      <div style={{
+        fontSize: '13.5px',
+        color: C.ink,
+        display: 'flex',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '6px'
+      }}>
+        <span>{detail.text}</span>
+        {detail.map && <MapPill query={detail.map} />}
+        {hasMenu && (
+          <button onClick={() => setMenuOpen(!menuOpen)} style={{
+            display: 'inline-flex', alignItems: 'center', gap: '3px',
+            background: menuOpen ? C.coral : C.coralLight,
+            color: menuOpen ? '#fff' : '#9a3a28',
+            padding: '3px 9px', borderRadius: '100px',
+            fontSize: '10.5px', fontWeight: 700,
+            border: 'none', cursor: 'pointer',
+            fontFamily: 'inherit', whiteSpace: 'nowrap',
+            transition: 'all 0.15s'
+          }}>
+            🍽 메뉴
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ transform: menuOpen ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }}>
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+        )}
+      </div>
+      {hasMenu && menuOpen && (
+        <div className="fade-up" style={{
+          marginTop: '8px',
+          background: `linear-gradient(135deg, ${C.coralLight}40 0%, ${C.sunLight}60 100%)`,
+          borderRadius: '12px',
+          padding: '10px 12px',
+          border: `1px solid ${C.coralLight}`
+        }}>
+          {detail.menu.map((m, i) => (
+            <div key={i} style={{
+              padding: '7px 0',
+              borderBottom: i < detail.menu.length - 1 ? `1px solid ${C.coralLight}80` : 'none'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '3px', flexWrap: 'wrap' }}>
+                <span style={{ fontSize: '13px', fontWeight: 700, color: C.ink }}>{m.kr}</span>
+                {m.star && <span style={{ fontSize: '10px', color: C.coral }}>{m.star}</span>}
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
+                <span style={{
+                  fontSize: '12.5px', color: '#8a3a28', fontWeight: 600,
+                  fontFamily: 'DM Sans, sans-serif', fontStyle: 'italic',
+                  background: '#fff', padding: '2px 8px', borderRadius: '6px',
+                  border: `1px solid ${C.coralLight}`
+                }}>
+                  {m.pt}
+                </span>
+                <span style={{ fontSize: '11px', color: C.inkMid }}>
+                  [{m.pron}]
+                </span>
+              </div>
+              {m.note && (
+                <div style={{ fontSize: '10.5px', color: C.inkMid, marginTop: '3px', fontStyle: 'italic' }}>
+                  💡 {m.note}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -1016,23 +1184,86 @@ function CourseBox({ course }) {
         {course.course}
       </div>
       {course.items.map((item, i) => (
-        <div key={i} style={{
-          fontSize: '12.5px',
-          color: C.ink,
-          padding: '4px 0',
-          paddingLeft: '14px',
-          position: 'relative',
-          lineHeight: 1.55,
-          display: 'flex',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '5px'
-        }}>
-          <span style={{ position: 'absolute', left: 0, top: '11px', width: '4px', height: '4px', borderRadius: '50%', background: C.leafMint }}></span>
-          <span>{item.text}</span>
-          {item.map && <MapPill query={item.map} />}
-        </div>
+        <CourseItem key={i} item={item} />
       ))}
+    </div>
+  );
+}
+
+function CourseItem({ item }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const hasMenu = item.menu && item.menu.length > 0;
+  return (
+    <div style={{
+      padding: '4px 0',
+      paddingLeft: '14px',
+      position: 'relative',
+      lineHeight: 1.55
+    }}>
+      <span style={{ position: 'absolute', left: 0, top: '11px', width: '4px', height: '4px', borderRadius: '50%', background: hasMenu ? C.coral : C.leafMint }}></span>
+      <div style={{
+        fontSize: '12.5px', color: C.ink,
+        display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '5px'
+      }}>
+        <span>{item.text}</span>
+        {item.map && <MapPill query={item.map} />}
+        {hasMenu && (
+          <button onClick={() => setMenuOpen(!menuOpen)} style={{
+            display: 'inline-flex', alignItems: 'center', gap: '3px',
+            background: menuOpen ? C.coral : C.coralLight,
+            color: menuOpen ? '#fff' : '#9a3a28',
+            padding: '2px 8px', borderRadius: '100px',
+            fontSize: '10px', fontWeight: 700,
+            border: 'none', cursor: 'pointer',
+            fontFamily: 'inherit', whiteSpace: 'nowrap',
+            transition: 'all 0.15s'
+          }}>
+            🍽 메뉴
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ transform: menuOpen ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }}>
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+        )}
+      </div>
+      {hasMenu && menuOpen && (
+        <div className="fade-up" style={{
+          marginTop: '6px',
+          background: `linear-gradient(135deg, ${C.coralLight}40 0%, ${C.sunLight}60 100%)`,
+          borderRadius: '10px',
+          padding: '8px 10px',
+          border: `1px solid ${C.coralLight}`
+        }}>
+          {item.menu.map((m, i) => (
+            <div key={i} style={{
+              padding: '6px 0',
+              borderBottom: i < item.menu.length - 1 ? `1px solid ${C.coralLight}80` : 'none'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginBottom: '2px', flexWrap: 'wrap' }}>
+                <span style={{ fontSize: '12.5px', fontWeight: 700, color: C.ink }}>{m.kr}</span>
+                {m.star && <span style={{ fontSize: '9.5px', color: C.coral }}>{m.star}</span>}
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '5px', flexWrap: 'wrap' }}>
+                <span style={{
+                  fontSize: '12px', color: '#8a3a28', fontWeight: 600,
+                  fontFamily: 'DM Sans, sans-serif', fontStyle: 'italic',
+                  background: '#fff', padding: '1.5px 7px', borderRadius: '5px',
+                  border: `1px solid ${C.coralLight}`
+                }}>
+                  {m.pt}
+                </span>
+                <span style={{ fontSize: '10.5px', color: C.inkMid }}>
+                  [{m.pron}]
+                </span>
+              </div>
+              {m.note && (
+                <div style={{ fontSize: '10px', color: C.inkMid, marginTop: '2px', fontStyle: 'italic' }}>
+                  💡 {m.note}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
